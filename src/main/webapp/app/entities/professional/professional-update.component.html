@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-professional-heading" jhiTranslate="silvousplaitApp.professional.home.createOrEditLabel">Create or edit a Professional</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!professional.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                           formControlName="firstName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.lastName" for="field_lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                           formControlName="lastName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="input-group">
+                        <input id="field_creationDate" type="text" class="form-control" name="creationDate" ngbDatepicker  #creationDateDp="ngbDatepicker" formControlName="creationDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="creationDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.up" for="field_up">Up</label>
+                    <input type="checkbox" class="form-control" name="up" id="field_up"
+                           formControlName="up"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.active" for="field_active">Active</label>
+                    <input type="checkbox" class="form-control" name="active" id="field_active"
+                           formControlName="active"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.details" for="field_details">Details</label>
+                    <select class="form-control" id="field_details" name="details" formControlName="detailsId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="professionalDetailsOption.id" *ngFor="let professionalDetailsOption of details; trackBy: trackProfessionalDetailsById">{{professionalDetailsOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.professional.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" formControlName="locationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="companyLocationOption.id" *ngFor="let companyLocationOption of companylocations; trackBy: trackCompanyLocationById">{{companyLocationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

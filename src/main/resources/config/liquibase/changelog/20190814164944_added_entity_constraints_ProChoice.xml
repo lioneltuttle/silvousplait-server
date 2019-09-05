@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ProChoice.
+    -->
+    <changeSet id="20190814164944-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="choice_id"
+                                 baseTableName="pro_choice"
+                                 constraintName="fk_pro_choice_choice_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professional"/>
+
+        <addForeignKeyConstraint baseColumnNames="request_id"
+                                 baseTableName="pro_choice"
+                                 constraintName="fk_pro_choice_request_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pro_request"/>
+
+        <addForeignKeyConstraint baseColumnNames="rating_id"
+                                 baseTableName="pro_choice"
+                                 constraintName="fk_pro_choice_rating_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rating"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="pro_choice"
+                                 constraintName="fk_pro_choice_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+    </changeSet>
+</databaseChangeLog>

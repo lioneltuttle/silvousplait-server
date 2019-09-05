@@ -1,0 +1,48 @@
+{
+    "name": "Customer",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deviceRegistrationId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "proRequest",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "requests"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "proChoice",
+            "otherEntityRelationshipName": "customer",
+            "relationshipName": "choices"
+        }
+    ],
+    "changelogDate": "20190814164938",
+    "entityTableName": "customer",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

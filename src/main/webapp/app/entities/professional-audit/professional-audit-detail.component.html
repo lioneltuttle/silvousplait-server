@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="professionalAudit">
+            <h2><span jhiTranslate="silvousplaitApp.professionalAudit.detail.title">Professional Audit</span> {{professionalAudit.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.professionalAudit.date">Date</span></dt>
+                <dd>
+                    <span>{{professionalAudit.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professionalAudit.message">Message</span></dt>
+                <dd>
+                    <span>{{professionalAudit.message}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professionalAudit.event">Event</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'silvousplaitApp.ProfessionalEvent.' + professionalAudit.event}}">{{professionalAudit.event}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professionalAudit.professional">Professional</span></dt>
+                <dd>
+                    <div *ngIf="professionalAudit.professionalId">
+                        <a [routerLink]="['/professional', professionalAudit.professionalId, 'view']">{{professionalAudit.professionalId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/professional-audit', professionalAudit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

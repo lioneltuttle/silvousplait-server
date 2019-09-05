@@ -1,0 +1,25 @@
+{
+  "silvousplaitApp": {
+    "proRequest": {
+      "home": {
+        "title": "Pro Requests",
+        "createLabel": "Create a new Pro Request",
+        "createOrEditLabel": "Create or edit a Pro Request"
+      },
+      "created": "A new Pro Request is created with identifier {{ param }}",
+      "updated": "A Pro Request is updated with identifier {{ param }}",
+      "deleted": "A Pro Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pro Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Pro Request"
+      },
+      "location": "Location",
+      "deviceRegistrationId": "Device Registration Id",
+      "date": "Date",
+      "companyType": "Company Type",
+      "customer": "Customer"
+    }
+  }
+}

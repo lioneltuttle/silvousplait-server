@@ -1,0 +1,14 @@
+{
+  "silvousplaitApp": {
+    "BillEvent": {
+      "null": "",
+      "START": "START",
+      "END": "END",
+      "SEND": "SEND",
+      "RESEND": "RESEND",
+      "PAID": "PAID",
+      "ERROR": "ERROR",
+      "CANCEL": "CANCEL"
+    }
+  }
+}

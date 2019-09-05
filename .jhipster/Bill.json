@@ -1,0 +1,36 @@
+{
+    "name": "Bill",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "amountDue",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "BillStatus",
+            "fieldValues": "RUN,SEND,DUE,LATE,PAID,ERROR,CANCEL"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "company",
+            "otherEntityRelationshipName": "bill",
+            "relationshipName": "company",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190814164947",
+    "entityTableName": "bill",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

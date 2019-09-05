@@ -1,0 +1,21 @@
+{
+  "silvousplaitApp": {
+    "subscriptionType": {
+      "home": {
+        "title": "Subscription Types",
+        "createLabel": "Create a new Subscription Type",
+        "createOrEditLabel": "Create or edit a Subscription Type"
+      },
+      "created": "A new Subscription Type is created with identifier {{ param }}",
+      "updated": "A Subscription Type is updated with identifier {{ param }}",
+      "deleted": "A Subscription Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Subscription Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Subscription Type"
+      },
+      "type": "Type"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "silvousplaitApp": {
+    "proChoice": {
+      "home": {
+        "title": "Pro Choices",
+        "createLabel": "Create a new Pro Choice",
+        "createOrEditLabel": "Create or edit a Pro Choice"
+      },
+      "created": "A new Pro Choice is created with identifier {{ param }}",
+      "updated": "A Pro Choice is updated with identifier {{ param }}",
+      "deleted": "A Pro Choice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pro Choice {{ id }}?"
+      },
+      "detail": {
+        "title": "Pro Choice"
+      },
+      "location": "Location",
+      "deviceRegistrationId": "Device Registration Id",
+      "date": "Date",
+      "choice": "Choice",
+      "request": "Request",
+      "rating": "Rating",
+      "customer": "Customer"
+    }
+  }
+}

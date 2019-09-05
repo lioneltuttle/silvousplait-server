@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-bill-heading" jhiTranslate="silvousplaitApp.bill.home.createOrEditLabel">Create or edit a Bill</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!bill.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.bill.date" for="field_date">Date</label>
+                    <div class="input-group">
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" formControlName="date"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.bill.amountDue" for="field_amountDue">Amount Due</label>
+                    <input type="number" class="form-control" name="amountDue" id="field_amountDue"
+                           formControlName="amountDue"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.bill.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="RUN">{{'silvousplaitApp.BillStatus.RUN' | translate}}</option>
+                        <option value="SEND">{{'silvousplaitApp.BillStatus.SEND' | translate}}</option>
+                        <option value="DUE">{{'silvousplaitApp.BillStatus.DUE' | translate}}</option>
+                        <option value="LATE">{{'silvousplaitApp.BillStatus.LATE' | translate}}</option>
+                        <option value="PAID">{{'silvousplaitApp.BillStatus.PAID' | translate}}</option>
+                        <option value="ERROR">{{'silvousplaitApp.BillStatus.ERROR' | translate}}</option>
+                        <option value="CANCEL">{{'silvousplaitApp.BillStatus.CANCEL' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.bill.company" for="field_company">Company</label>
+                    <select class="form-control" id="field_company" name="company" formControlName="companyId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

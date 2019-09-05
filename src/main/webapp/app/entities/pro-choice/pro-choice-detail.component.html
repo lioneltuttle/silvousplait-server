@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="proChoice">
+            <h2><span jhiTranslate="silvousplaitApp.proChoice.detail.title">Pro Choice</span> {{proChoice.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.location">Location</span></dt>
+                <dd>
+                    <span>{{proChoice.location}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.deviceRegistrationId">Device Registration Id</span></dt>
+                <dd>
+                    <span>{{proChoice.deviceRegistrationId}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.date">Date</span></dt>
+                <dd>
+                    <span>{{proChoice.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.choice">Choice</span></dt>
+                <dd>
+                    <div *ngIf="proChoice.choiceId">
+                        <a [routerLink]="['/professional', proChoice.choiceId, 'view']">{{proChoice.choiceId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.request">Request</span></dt>
+                <dd>
+                    <div *ngIf="proChoice.requestId">
+                        <a [routerLink]="['/pro-request', proChoice.requestId, 'view']">{{proChoice.requestId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.rating">Rating</span></dt>
+                <dd>
+                    <div *ngIf="proChoice.ratingId">
+                        <a [routerLink]="['/rating', proChoice.ratingId, 'view']">{{proChoice.ratingId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proChoice.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="proChoice.customerId">
+                        <a [routerLink]="['/customer', proChoice.customerId, 'view']">{{proChoice.customerId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pro-choice', proChoice.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
