@@ -4,7 +4,8 @@
       "home": {
         "title": "Pro Requests",
         "createLabel": "Create a new Pro Request",
-        "createOrEditLabel": "Create or edit a Pro Request"
+        "createOrEditLabel": "Create or edit a Pro Request",
+        "notFound": "No Pro Requests found"
       },
       "created": "A new Pro Request is created with identifier {{ param }}",
       "updated": "A Pro Request is updated with identifier {{ param }}",

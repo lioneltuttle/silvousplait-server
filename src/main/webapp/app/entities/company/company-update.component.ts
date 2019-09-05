@@ -18,7 +18,6 @@ import { SubscriptionTypeService } from 'app/entities/subscription-type';
   templateUrl: './company-update.component.html'
 })
 export class CompanyUpdateComponent implements OnInit {
-  company: ICompany;
   isSaving: boolean;
 
   companytypes: ICompanyType[];
@@ -47,7 +46,6 @@ export class CompanyUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ company }) => {
       this.updateForm(company);
-      this.company = company;
     });
     this.companyTypeService
       .query()
@@ -90,7 +88,7 @@ export class CompanyUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ICompany {
-    const entity = {
+    return {
       ...new Company(),
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
@@ -98,11 +96,10 @@ export class CompanyUpdateComponent implements OnInit {
       companyTypeId: this.editForm.get(['companyTypeId']).value,
       subscriptionTypeId: this.editForm.get(['subscriptionTypeId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompany>>) {
-    result.subscribe((res: HttpResponse<ICompany>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

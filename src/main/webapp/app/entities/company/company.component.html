@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-company" [routerLink]="['/company/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.company.home.createLabel">
-            Create new Company
+            Create a new Company
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="companies">
+    <div class="alert alert-warning" *ngIf="companies?.length === 0">
+        <span jhiTranslate="silvousplaitApp.company.home.notFound">No companies found</span>
+    </div>
+    <div class="table-responsive" *ngIf="companies?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -29,12 +32,12 @@
                 <td>{{company.creationDate | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="company.companyTypeId">
-                        <a [routerLink]="['../company-type', company.companyTypeId , 'view' ]" >{{company.companyTypeId}}</a>
+                        <a [routerLink]="['/company-type', company.companyTypeId , 'view' ]" >{{company.companyTypeId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="company.subscriptionTypeId">
-                        <a [routerLink]="['../subscription-type', company.subscriptionTypeId , 'view' ]" >{{company.subscriptionTypeId}}</a>
+                        <a [routerLink]="['/subscription-type', company.subscriptionTypeId , 'view' ]" >{{company.subscriptionTypeId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -52,7 +55,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'company', { outlets: { popup: company.id + '/delete'} }]"
+                                [routerLink]="['/company', { outlets: { popup: company.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

@@ -81,6 +81,7 @@ public class CompanyResource {
     /**
      * {@code GET  /companies} : get all the companies.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of companies in body.
      */
     @GetMapping("/companies")

@@ -4,7 +4,8 @@
       "home": {
         "title": "Professional Details",
         "createLabel": "Create a new Professional Details",
-        "createOrEditLabel": "Create or edit a Professional Details"
+        "createOrEditLabel": "Create or edit a Professional Details",
+        "notFound": "No Professional Details found"
       },
       "created": "A new Professional Details is created with identifier {{ param }}",
       "updated": "A Professional Details is updated with identifier {{ param }}",

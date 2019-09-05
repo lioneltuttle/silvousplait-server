@@ -4,7 +4,8 @@
       "home": {
         "title": "Subscription Types",
         "createLabel": "Create a new Subscription Type",
-        "createOrEditLabel": "Create or edit a Subscription Type"
+        "createOrEditLabel": "Create or edit a Subscription Type",
+        "notFound": "No Subscription Types found"
       },
       "created": "A new Subscription Type is created with identifier {{ param }}",
       "updated": "A Subscription Type is updated with identifier {{ param }}",

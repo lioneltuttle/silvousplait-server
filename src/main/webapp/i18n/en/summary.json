@@ -4,7 +4,8 @@
       "home": {
         "title": "Summaries",
         "createLabel": "Create a new Summary",
-        "createOrEditLabel": "Create or edit a Summary"
+        "createOrEditLabel": "Create or edit a Summary",
+        "notFound": "No Summaries found"
       },
       "created": "A new Summary is created with identifier {{ param }}",
       "updated": "A Summary is updated with identifier {{ param }}",

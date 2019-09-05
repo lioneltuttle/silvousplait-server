@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-hit" [routerLink]="['/hit/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.hit.home.createLabel">
-            Create new Hit
+            Create a new Hit
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="hits">
+    <div class="alert alert-warning" *ngIf="hits?.length === 0">
+        <span jhiTranslate="silvousplaitApp.hit.home.notFound">No hits found</span>
+    </div>
+    <div class="table-responsive" *ngIf="hits?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -31,12 +34,12 @@
                 <td>{{hit.transformed}}</td>
                 <td>
                     <div *ngIf="hit.professionalId">
-                        <a [routerLink]="['../professional', hit.professionalId , 'view' ]" >{{hit.professionalId}}</a>
+                        <a [routerLink]="['/professional', hit.professionalId , 'view' ]" >{{hit.professionalId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="hit.customerId">
-                        <a [routerLink]="['../customer', hit.customerId , 'view' ]" >{{hit.customerId}}</a>
+                        <a [routerLink]="['/customer', hit.customerId , 'view' ]" >{{hit.customerId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -54,7 +57,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'hit', { outlets: { popup: hit.id + '/delete'} }]"
+                                [routerLink]="['/hit', { outlets: { popup: hit.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

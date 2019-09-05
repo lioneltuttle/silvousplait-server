@@ -1,6 +1,4 @@
 package com.svp.domain;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * A ProChoice.
@@ -32,7 +29,7 @@ public class ProChoice implements Serializable {
     @Column(name = "device_registration_id")
     private String deviceRegistrationId;
 
-    @Column(name = "jhi_date")
+    @Column(name = "date")
     private LocalDate date;
 
     @OneToOne

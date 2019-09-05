@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link CustomerResource} REST controller.
+ * Integration tests for the {@link CustomerResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class CustomerResourceIT {
@@ -283,7 +283,7 @@ public class CustomerResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Customer> customerList = customerRepository.findAll();
         assertThat(customerList).hasSize(databaseSizeBeforeDelete - 1);
     }

@@ -17,7 +17,7 @@ export class ProChoiceResolve implements Resolve<IProChoice> {
   constructor(private service: ProChoiceService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProChoice> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<ProChoice>) => response.ok),

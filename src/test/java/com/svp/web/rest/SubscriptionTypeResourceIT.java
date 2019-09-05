@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link SubscriptionTypeResource} REST controller.
+ * Integration tests for the {@link SubscriptionTypeResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class SubscriptionTypeResourceIT {
@@ -243,7 +243,7 @@ public class SubscriptionTypeResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<SubscriptionType> subscriptionTypeList = subscriptionTypeRepository.findAll();
         assertThat(subscriptionTypeList).hasSize(databaseSizeBeforeDelete - 1);
     }

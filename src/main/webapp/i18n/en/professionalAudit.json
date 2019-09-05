@@ -4,7 +4,8 @@
       "home": {
         "title": "Professional Audits",
         "createLabel": "Create a new Professional Audit",
-        "createOrEditLabel": "Create or edit a Professional Audit"
+        "createOrEditLabel": "Create or edit a Professional Audit",
+        "notFound": "No Professional Audits found"
       },
       "created": "A new Professional Audit is created with identifier {{ param }}",
       "updated": "A Professional Audit is updated with identifier {{ param }}",

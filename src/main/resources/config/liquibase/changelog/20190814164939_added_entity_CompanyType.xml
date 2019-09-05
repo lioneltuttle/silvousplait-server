@@ -15,7 +15,7 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="jhi_type" type="varchar(255)">
+            <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -23,6 +23,11 @@
         </createTable>
 
     </changeSet>
+
+    <changeSet id="20190814164939-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
     <!--
         Load sample data generated with Faker.js
@@ -34,17 +39,13 @@
     -->
     <changeSet id="20190814164939-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/company_type.csv"
+                  file="config/liquibase/fake-data/company_type.csv"
                   separator=";"
-                  tableName="company_type"
-                  context="dev">
+                  tableName="company_type">
             <column name="id" type="numeric"/>
-            <column name="jhi_type" type="string"/>
+            <column name="type" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>
 
-    <changeSet id="20190814164939-1-relations" author="jhipster">
-
-    </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

@@ -81,6 +81,7 @@ public class ProfessionalAuditResource {
     /**
      * {@code GET  /professional-audits} : get all the professionalAudits.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of professionalAudits in body.
      */
     @GetMapping("/professional-audits")

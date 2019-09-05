@@ -4,7 +4,8 @@
       "home": {
         "title": "Hits",
         "createLabel": "Create a new Hit",
-        "createOrEditLabel": "Create or edit a Hit"
+        "createOrEditLabel": "Create or edit a Hit",
+        "notFound": "No Hits found"
       },
       "created": "A new Hit is created with identifier {{ param }}",
       "updated": "A Hit is updated with identifier {{ param }}",

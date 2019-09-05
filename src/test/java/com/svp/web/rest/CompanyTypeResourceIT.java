@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link CompanyTypeResource} REST controller.
+ * Integration tests for the {@link CompanyTypeResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class CompanyTypeResourceIT {
@@ -243,7 +243,7 @@ public class CompanyTypeResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<CompanyType> companyTypeList = companyTypeRepository.findAll();
         assertThat(companyTypeList).hasSize(databaseSizeBeforeDelete - 1);
     }

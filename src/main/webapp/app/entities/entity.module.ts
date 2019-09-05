@@ -6,63 +6,63 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: 'company',
-        loadChildren: './company/company.module#SilvousplaitCompanyModule'
+        loadChildren: () => import('./company/company.module').then(m => m.SilvousplaitCompanyModule)
       },
       {
         path: 'professional',
-        loadChildren: './professional/professional.module#SilvousplaitProfessionalModule'
+        loadChildren: () => import('./professional/professional.module').then(m => m.SilvousplaitProfessionalModule)
       },
       {
         path: 'customer',
-        loadChildren: './customer/customer.module#SilvousplaitCustomerModule'
+        loadChildren: () => import('./customer/customer.module').then(m => m.SilvousplaitCustomerModule)
       },
       {
         path: 'company-type',
-        loadChildren: './company-type/company-type.module#SilvousplaitCompanyTypeModule'
+        loadChildren: () => import('./company-type/company-type.module').then(m => m.SilvousplaitCompanyTypeModule)
       },
       {
         path: 'subscription-type',
-        loadChildren: './subscription-type/subscription-type.module#SilvousplaitSubscriptionTypeModule'
+        loadChildren: () => import('./subscription-type/subscription-type.module').then(m => m.SilvousplaitSubscriptionTypeModule)
       },
       {
         path: 'professional-details',
-        loadChildren: './professional-details/professional-details.module#SilvousplaitProfessionalDetailsModule'
+        loadChildren: () => import('./professional-details/professional-details.module').then(m => m.SilvousplaitProfessionalDetailsModule)
       },
       {
         path: 'company-location',
-        loadChildren: './company-location/company-location.module#SilvousplaitCompanyLocationModule'
+        loadChildren: () => import('./company-location/company-location.module').then(m => m.SilvousplaitCompanyLocationModule)
       },
       {
         path: 'pro-request',
-        loadChildren: './pro-request/pro-request.module#SilvousplaitProRequestModule'
+        loadChildren: () => import('./pro-request/pro-request.module').then(m => m.SilvousplaitProRequestModule)
       },
       {
         path: 'pro-choice',
-        loadChildren: './pro-choice/pro-choice.module#SilvousplaitProChoiceModule'
+        loadChildren: () => import('./pro-choice/pro-choice.module').then(m => m.SilvousplaitProChoiceModule)
       },
       {
         path: 'rating',
-        loadChildren: './rating/rating.module#SilvousplaitRatingModule'
+        loadChildren: () => import('./rating/rating.module').then(m => m.SilvousplaitRatingModule)
       },
       {
         path: 'professional-audit',
-        loadChildren: './professional-audit/professional-audit.module#SilvousplaitProfessionalAuditModule'
+        loadChildren: () => import('./professional-audit/professional-audit.module').then(m => m.SilvousplaitProfessionalAuditModule)
       },
       {
         path: 'bill',
-        loadChildren: './bill/bill.module#SilvousplaitBillModule'
+        loadChildren: () => import('./bill/bill.module').then(m => m.SilvousplaitBillModule)
       },
       {
         path: 'bill-audit',
-        loadChildren: './bill-audit/bill-audit.module#SilvousplaitBillAuditModule'
+        loadChildren: () => import('./bill-audit/bill-audit.module').then(m => m.SilvousplaitBillAuditModule)
       },
       {
         path: 'hit',
-        loadChildren: './hit/hit.module#SilvousplaitHitModule'
+        loadChildren: () => import('./hit/hit.module').then(m => m.SilvousplaitHitModule)
       },
       {
         path: 'summary',
-        loadChildren: './summary/summary.module#SilvousplaitSummaryModule'
+        loadChildren: () => import('./summary/summary.module').then(m => m.SilvousplaitSummaryModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

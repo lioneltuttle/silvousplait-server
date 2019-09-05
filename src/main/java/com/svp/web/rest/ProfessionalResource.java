@@ -81,6 +81,7 @@ public class ProfessionalResource {
     /**
      * {@code GET  /professionals} : get all the professionals.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of professionals in body.
      */
     @GetMapping("/professionals")

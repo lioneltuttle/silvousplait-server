@@ -11,7 +11,6 @@ import { CompanyTypeService } from './company-type.service';
   templateUrl: './company-type-update.component.html'
 })
 export class CompanyTypeUpdateComponent implements OnInit {
-  companyType: ICompanyType;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -25,7 +24,6 @@ export class CompanyTypeUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ companyType }) => {
       this.updateForm(companyType);
-      this.companyType = companyType;
     });
   }
 
@@ -51,16 +49,15 @@ export class CompanyTypeUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ICompanyType {
-    const entity = {
+    return {
       ...new CompanyType(),
       id: this.editForm.get(['id']).value,
       type: this.editForm.get(['type']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompanyType>>) {
-    result.subscribe((res: HttpResponse<ICompanyType>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

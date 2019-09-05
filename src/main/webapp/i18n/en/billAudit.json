@@ -4,7 +4,8 @@
       "home": {
         "title": "Bill Audits",
         "createLabel": "Create a new Bill Audit",
-        "createOrEditLabel": "Create or edit a Bill Audit"
+        "createOrEditLabel": "Create or edit a Bill Audit",
+        "notFound": "No Bill Audits found"
       },
       "created": "A new Bill Audit is created with identifier {{ param }}",
       "updated": "A Bill Audit is updated with identifier {{ param }}",

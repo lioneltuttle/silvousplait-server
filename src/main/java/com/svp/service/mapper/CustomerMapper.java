@@ -13,7 +13,9 @@ public interface CustomerMapper extends EntityMapper<CustomerDTO, Customer> {
 
 
     @Mapping(target = "requests", ignore = true)
+    @Mapping(target = "removeRequests", ignore = true)
     @Mapping(target = "choices", ignore = true)
+    @Mapping(target = "removeChoices", ignore = true)
     Customer toEntity(CustomerDTO customerDTO);
 
     default Customer fromId(Long id) {

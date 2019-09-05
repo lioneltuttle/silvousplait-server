@@ -81,6 +81,7 @@ public class BillAuditResource {
     /**
      * {@code GET  /bill-audits} : get all the billAudits.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of billAudits in body.
      */
     @GetMapping("/bill-audits")

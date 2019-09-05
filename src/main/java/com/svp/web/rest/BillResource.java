@@ -81,6 +81,7 @@ public class BillResource {
     /**
      * {@code GET  /bills} : get all the bills.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bills in body.
      */
     @GetMapping("/bills")

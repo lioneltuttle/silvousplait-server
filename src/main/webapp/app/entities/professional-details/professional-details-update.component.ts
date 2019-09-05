@@ -11,7 +11,6 @@ import { ProfessionalDetailsService } from './professional-details.service';
   templateUrl: './professional-details-update.component.html'
 })
 export class ProfessionalDetailsUpdateComponent implements OnInit {
-  professionalDetails: IProfessionalDetails;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -31,7 +30,6 @@ export class ProfessionalDetailsUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ professionalDetails }) => {
       this.updateForm(professionalDetails);
-      this.professionalDetails = professionalDetails;
     });
   }
 
@@ -59,18 +57,17 @@ export class ProfessionalDetailsUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IProfessionalDetails {
-    const entity = {
+    return {
       ...new ProfessionalDetails(),
       id: this.editForm.get(['id']).value,
       phoneNumber: this.editForm.get(['phoneNumber']).value,
       hourlyRate: this.editForm.get(['hourlyRate']).value,
       onMobility: this.editForm.get(['onMobility']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProfessionalDetails>>) {
-    result.subscribe((res: HttpResponse<IProfessionalDetails>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

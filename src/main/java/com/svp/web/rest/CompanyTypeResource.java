@@ -81,6 +81,7 @@ public class CompanyTypeResource {
     /**
      * {@code GET  /company-types} : get all the companyTypes.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of companyTypes in body.
      */
     @GetMapping("/company-types")

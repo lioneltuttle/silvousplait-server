@@ -16,7 +16,6 @@ import { ProfessionalService } from 'app/entities/professional';
   templateUrl: './professional-audit-update.component.html'
 })
 export class ProfessionalAuditUpdateComponent implements OnInit {
-  professionalAudit: IProfessionalAudit;
   isSaving: boolean;
 
   professionals: IProfessional[];
@@ -42,7 +41,6 @@ export class ProfessionalAuditUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ professionalAudit }) => {
       this.updateForm(professionalAudit);
-      this.professionalAudit = professionalAudit;
     });
     this.professionalService
       .query()
@@ -78,7 +76,7 @@ export class ProfessionalAuditUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IProfessionalAudit {
-    const entity = {
+    return {
       ...new ProfessionalAudit(),
       id: this.editForm.get(['id']).value,
       date: this.editForm.get(['date']).value,
@@ -86,11 +84,10 @@ export class ProfessionalAuditUpdateComponent implements OnInit {
       event: this.editForm.get(['event']).value,
       professionalId: this.editForm.get(['professionalId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProfessionalAudit>>) {
-    result.subscribe((res: HttpResponse<IProfessionalAudit>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

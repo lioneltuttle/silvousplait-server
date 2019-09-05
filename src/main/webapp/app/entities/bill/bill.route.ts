@@ -17,7 +17,7 @@ export class BillResolve implements Resolve<IBill> {
   constructor(private service: BillService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBill> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Bill>) => response.ok),

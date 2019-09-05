@@ -81,6 +81,7 @@ public class HitResource {
     /**
      * {@code GET  /hits} : get all the hits.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of hits in body.
      */
     @GetMapping("/hits")

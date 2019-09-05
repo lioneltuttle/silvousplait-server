@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bill" [routerLink]="['/bill/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.bill.home.createLabel">
-            Create new Bill
+            Create a new Bill
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="bills">
+    <div class="alert alert-warning" *ngIf="bills?.length === 0">
+        <span jhiTranslate="silvousplaitApp.bill.home.notFound">No bills found</span>
+    </div>
+    <div class="table-responsive" *ngIf="bills?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -30,7 +33,7 @@
                 <td jhiTranslate="{{'silvousplaitApp.BillStatus.' + bill.status}}">{{bill.status}}</td>
                 <td>
                     <div *ngIf="bill.companyId">
-                        <a [routerLink]="['../company', bill.companyId , 'view' ]" >{{bill.companyId}}</a>
+                        <a [routerLink]="['/company', bill.companyId , 'view' ]" >{{bill.companyId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -48,7 +51,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'bill', { outlets: { popup: bill.id + '/delete'} }]"
+                                [routerLink]="['/bill', { outlets: { popup: bill.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

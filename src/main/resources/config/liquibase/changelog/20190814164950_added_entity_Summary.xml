@@ -36,6 +36,11 @@
 
     </changeSet>
 
+    <changeSet id="20190814164950-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
     <!--
         Load sample data generated with Faker.js
         - This data can be easily edited using a CSV editor (or even MS Excel) and
@@ -46,20 +51,16 @@
     -->
     <changeSet id="20190814164950-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/summary.csv"
+                  file="config/liquibase/fake-data/summary.csv"
                   separator=";"
-                  tableName="summary"
-                  context="dev">
+                  tableName="summary">
             <column name="id" type="numeric"/>
             <column name="hits" type="numeric"/>
             <column name="missed" type="numeric"/>
             <column name="current_bill" type="numeric"/>
             <column name="rating" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>
 
-    <changeSet id="20190814164950-1-relations" author="jhipster">
-
-    </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

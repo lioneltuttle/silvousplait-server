@@ -18,7 +18,6 @@ import { CustomerService } from 'app/entities/customer';
   templateUrl: './hit-update.component.html'
 })
 export class HitUpdateComponent implements OnInit {
-  hit: IHit;
   isSaving: boolean;
 
   professionals: IProfessional[];
@@ -48,7 +47,6 @@ export class HitUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ hit }) => {
       this.updateForm(hit);
-      this.hit = hit;
     });
     this.professionalService
       .query()
@@ -92,7 +90,7 @@ export class HitUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IHit {
-    const entity = {
+    return {
       ...new Hit(),
       id: this.editForm.get(['id']).value,
       date: this.editForm.get(['date']).value,
@@ -101,11 +99,10 @@ export class HitUpdateComponent implements OnInit {
       professionalId: this.editForm.get(['professionalId']).value,
       customerId: this.editForm.get(['customerId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IHit>>) {
-    result.subscribe((res: HttpResponse<IHit>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

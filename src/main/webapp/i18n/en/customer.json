@@ -4,7 +4,8 @@
       "home": {
         "title": "Customers",
         "createLabel": "Create a new Customer",
-        "createOrEditLabel": "Create or edit a Customer"
+        "createOrEditLabel": "Create or edit a Customer",
+        "notFound": "No Customers found"
       },
       "created": "A new Customer is created with identifier {{ param }}",
       "updated": "A Customer is updated with identifier {{ param }}",

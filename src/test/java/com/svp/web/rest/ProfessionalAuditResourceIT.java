@@ -34,13 +34,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.svp.domain.enumeration.ProfessionalEvent;
 /**
- * Integration tests for the {@Link ProfessionalAuditResource} REST controller.
+ * Integration tests for the {@link ProfessionalAuditResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class ProfessionalAuditResourceIT {
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final String DEFAULT_MESSAGE = "AAAAAAAAAA";
     private static final String UPDATED_MESSAGE = "BBBBBBBBBB";
@@ -266,7 +267,7 @@ public class ProfessionalAuditResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<ProfessionalAudit> professionalAuditList = professionalAuditRepository.findAll();
         assertThat(professionalAuditList).hasSize(databaseSizeBeforeDelete - 1);
     }

@@ -81,6 +81,7 @@ public class ProfessionalDetailsResource {
     /**
      * {@code GET  /professional-details} : get all the professionalDetails.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of professionalDetails in body.
      */
     @GetMapping("/professional-details")

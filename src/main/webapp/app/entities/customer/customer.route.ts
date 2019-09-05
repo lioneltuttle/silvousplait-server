@@ -17,7 +17,7 @@ export class CustomerResolve implements Resolve<ICustomer> {
   constructor(private service: CustomerService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICustomer> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Customer>) => response.ok),
