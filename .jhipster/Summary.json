@@ -1,0 +1,31 @@
+{
+    "name": "Summary",
+    "fields": [
+        {
+            "fieldName": "hits",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "missed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currentBill",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "rating",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190814164950",
+    "entityTableName": "summary",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

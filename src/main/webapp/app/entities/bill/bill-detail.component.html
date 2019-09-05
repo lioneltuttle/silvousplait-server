@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bill">
+            <h2><span jhiTranslate="silvousplaitApp.bill.detail.title">Bill</span> {{bill.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.bill.date">Date</span></dt>
+                <dd>
+                    <span>{{bill.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.bill.amountDue">Amount Due</span></dt>
+                <dd>
+                    <span>{{bill.amountDue}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.bill.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'silvousplaitApp.BillStatus.' + bill.status}}">{{bill.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.bill.company">Company</span></dt>
+                <dd>
+                    <div *ngIf="bill.companyId">
+                        <a [routerLink]="['/company', bill.companyId, 'view']">{{bill.companyId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bill', bill.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

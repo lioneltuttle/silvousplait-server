@@ -1,0 +1,42 @@
+{
+    "name": "Hit",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "answered",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "transformed",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "professional",
+            "otherEntityRelationshipName": "hit",
+            "relationshipName": "professional",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "customer",
+            "otherEntityRelationshipName": "hit",
+            "relationshipName": "customer",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190814164949",
+    "entityTableName": "hit",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

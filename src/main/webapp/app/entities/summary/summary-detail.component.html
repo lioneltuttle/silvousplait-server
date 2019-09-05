@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="summary">
+            <h2><span jhiTranslate="silvousplaitApp.summary.detail.title">Summary</span> {{summary.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.summary.hits">Hits</span></dt>
+                <dd>
+                    <span>{{summary.hits}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.summary.missed">Missed</span></dt>
+                <dd>
+                    <span>{{summary.missed}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.summary.currentBill">Current Bill</span></dt>
+                <dd>
+                    <span>{{summary.currentBill}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.summary.rating">Rating</span></dt>
+                <dd>
+                    <span>{{summary.rating}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/summary', summary.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

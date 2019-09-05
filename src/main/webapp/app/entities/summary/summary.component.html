@@ -1,0 +1,60 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="silvousplaitApp.summary.home.title">Summaries</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-summary" [routerLink]="['/summary/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="silvousplaitApp.summary.home.createLabel">
+            Create new Summary
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="summaries">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="silvousplaitApp.summary.hits">Hits</span></th>
+            <th><span jhiTranslate="silvousplaitApp.summary.missed">Missed</span></th>
+            <th><span jhiTranslate="silvousplaitApp.summary.currentBill">Current Bill</span></th>
+            <th><span jhiTranslate="silvousplaitApp.summary.rating">Rating</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let summary of summaries ;trackBy: trackId">
+                <td><a [routerLink]="['/summary', summary.id, 'view' ]">{{summary.id}}</a></td>
+                <td>{{summary.hits}}</td>
+                <td>{{summary.missed}}</td>
+                <td>{{summary.currentBill}}</td>
+                <td>{{summary.rating}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/summary', summary.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/summary', summary.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'summary', { outlets: { popup: summary.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

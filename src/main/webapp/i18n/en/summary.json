@@ -1,0 +1,24 @@
+{
+  "silvousplaitApp": {
+    "summary": {
+      "home": {
+        "title": "Summaries",
+        "createLabel": "Create a new Summary",
+        "createOrEditLabel": "Create or edit a Summary"
+      },
+      "created": "A new Summary is created with identifier {{ param }}",
+      "updated": "A Summary is updated with identifier {{ param }}",
+      "deleted": "A Summary is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Summary {{ id }}?"
+      },
+      "detail": {
+        "title": "Summary"
+      },
+      "hits": "Hits",
+      "missed": "Missed",
+      "currentBill": "Current Bill",
+      "rating": "Rating"
+    }
+  }
+}

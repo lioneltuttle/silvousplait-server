@@ -1,0 +1,33 @@
+{
+    "name": "CompanyLocation",
+    "fields": [
+        {
+            "fieldName": "adresse",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "professional",
+            "otherEntityRelationshipName": "location",
+            "relationshipName": "professionals"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "company",
+            "otherEntityRelationshipName": "locations",
+            "relationshipName": "professional",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190814164942",
+    "entityTableName": "company_location",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

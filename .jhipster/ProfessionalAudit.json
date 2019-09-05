@@ -1,0 +1,36 @@
+{
+    "name": "ProfessionalAudit",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "event",
+            "fieldType": "ProfessionalEvent",
+            "fieldValues": "AVAILABLE,NOT_AVAILABLE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "professional",
+            "otherEntityRelationshipName": "professionalAudit",
+            "relationshipName": "professional",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190814164946",
+    "entityTableName": "professional_audit",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

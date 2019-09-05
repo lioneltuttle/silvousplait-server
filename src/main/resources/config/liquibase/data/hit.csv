@@ -1,0 +1,11 @@
+id;jhi_date;answered;transformed
+1;2019-08-14T08:28:09;true;true
+2;2019-08-14T06:00:20;true;true
+3;2019-08-14T07:18:37;false;true
+4;2019-08-14T04:15:40;true;true
+5;2019-08-13T18:02:21;true;false
+6;2019-08-14T05:48:11;true;true
+7;2019-08-14T05:01:00;true;false
+8;2019-08-14T15:14:16;false;false
+9;2019-08-13T17:18:24;true;false
+10;2019-08-14T08:29:22;false;false

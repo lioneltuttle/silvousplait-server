@@ -1,0 +1,27 @@
+{
+  "silvousplaitApp": {
+    "professional": {
+      "home": {
+        "title": "Professionals",
+        "createLabel": "Create a new Professional",
+        "createOrEditLabel": "Create or edit a Professional"
+      },
+      "created": "A new Professional is created with identifier {{ param }}",
+      "updated": "A Professional is updated with identifier {{ param }}",
+      "deleted": "A Professional is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Professional {{ id }}?"
+      },
+      "detail": {
+        "title": "Professional"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "creationDate": "Creation Date",
+      "up": "Up",
+      "active": "Active",
+      "details": "Details",
+      "location": "Location"
+    }
+  }
+}

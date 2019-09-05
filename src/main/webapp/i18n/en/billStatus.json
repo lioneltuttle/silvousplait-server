@@ -1,0 +1,14 @@
+{
+  "silvousplaitApp": {
+    "BillStatus": {
+      "null": "",
+      "RUN": "RUN",
+      "SEND": "SEND",
+      "DUE": "DUE",
+      "LATE": "LATE",
+      "PAID": "PAID",
+      "ERROR": "ERROR",
+      "CANCEL": "CANCEL"
+    }
+  }
+}

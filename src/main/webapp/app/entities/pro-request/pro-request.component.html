@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="silvousplaitApp.proRequest.home.title">Pro Requests</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pro-request" [routerLink]="['/pro-request/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="silvousplaitApp.proRequest.home.createLabel">
+            Create new Pro Request
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="proRequests">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proRequest.location">Location</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proRequest.deviceRegistrationId">Device Registration Id</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proRequest.date">Date</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proRequest.companyType">Company Type</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proRequest.customer">Customer</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let proRequest of proRequests ;trackBy: trackId">
+                <td><a [routerLink]="['/pro-request', proRequest.id, 'view' ]">{{proRequest.id}}</a></td>
+                <td>{{proRequest.location}}</td>
+                <td>{{proRequest.deviceRegistrationId}}</td>
+                <td>{{proRequest.date | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="proRequest.companyTypeId">
+                        <a [routerLink]="['../company-type', proRequest.companyTypeId , 'view' ]" >{{proRequest.companyTypeId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="proRequest.customerId">
+                        <a [routerLink]="['../customer', proRequest.customerId , 'view' ]" >{{proRequest.customerId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/pro-request', proRequest.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pro-request', proRequest.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'pro-request', { outlets: { popup: proRequest.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

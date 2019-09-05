@@ -1,0 +1,44 @@
+{
+    "name": "Company",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "companyLocation",
+            "otherEntityRelationshipName": "professional",
+            "relationshipName": "locations"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "companyType",
+            "otherEntityRelationshipName": "company",
+            "relationshipName": "companyType",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "subscriptionType",
+            "otherEntityRelationshipName": "company",
+            "relationshipName": "subscriptionType",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190814164936",
+    "entityTableName": "company",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

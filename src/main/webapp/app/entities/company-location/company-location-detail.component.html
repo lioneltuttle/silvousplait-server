@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="companyLocation">
+            <h2><span jhiTranslate="silvousplaitApp.companyLocation.detail.title">Company Location</span> {{companyLocation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.companyLocation.adresse">Adresse</span></dt>
+                <dd>
+                    <span>{{companyLocation.adresse}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.companyLocation.professional">Professional</span></dt>
+                <dd>
+                    <div *ngIf="companyLocation.professionalId">
+                        <a [routerLink]="['/company', companyLocation.professionalId, 'view']">{{companyLocation.professionalId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/company-location', companyLocation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

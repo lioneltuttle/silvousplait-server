@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="proRequest">
+            <h2><span jhiTranslate="silvousplaitApp.proRequest.detail.title">Pro Request</span> {{proRequest.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.proRequest.location">Location</span></dt>
+                <dd>
+                    <span>{{proRequest.location}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proRequest.deviceRegistrationId">Device Registration Id</span></dt>
+                <dd>
+                    <span>{{proRequest.deviceRegistrationId}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proRequest.date">Date</span></dt>
+                <dd>
+                    <span>{{proRequest.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proRequest.companyType">Company Type</span></dt>
+                <dd>
+                    <div *ngIf="proRequest.companyTypeId">
+                        <a [routerLink]="['/company-type', proRequest.companyTypeId, 'view']">{{proRequest.companyTypeId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proRequest.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="proRequest.customerId">
+                        <a [routerLink]="['/customer', proRequest.customerId, 'view']">{{proRequest.customerId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pro-request', proRequest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
