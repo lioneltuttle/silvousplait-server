@@ -95,33 +95,32 @@ public class ProfessionalResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Professional createEntity(EntityManager em) {
-        Professional professional = new Professional()
+        return Professional.builder()
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .creationDate(DEFAULT_CREATION_DATE)
             .up(DEFAULT_UP)
-            .active(DEFAULT_ACTIVE);
-        return professional;
+            .active(DEFAULT_ACTIVE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Professional createUpdatedEntity(EntityManager em) {
-        Professional professional = new Professional()
+        return Professional.builder()
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .creationDate(UPDATED_CREATION_DATE)
             .up(UPDATED_UP)
-            .active(UPDATED_ACTIVE);
-        return professional;
+            .active(UPDATED_ACTIVE).build();
     }
 
     @BeforeEach
@@ -148,8 +147,8 @@ public class ProfessionalResourceIT {
         assertThat(testProfessional.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testProfessional.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testProfessional.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
-        assertThat(testProfessional.isUp()).isEqualTo(DEFAULT_UP);
-        assertThat(testProfessional.isActive()).isEqualTo(DEFAULT_ACTIVE);
+        assertThat(testProfessional.getUp()).isEqualTo(DEFAULT_UP);
+        assertThat(testProfessional.getActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -190,7 +189,7 @@ public class ProfessionalResourceIT {
             .andExpect(jsonPath("$.[*].up").value(hasItem(DEFAULT_UP.booleanValue())))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getProfessional() throws Exception {
@@ -229,12 +228,11 @@ public class ProfessionalResourceIT {
         Professional updatedProfessional = professionalRepository.findById(professional.getId()).get();
         // Disconnect from session so that the updates on updatedProfessional are not directly saved in db
         em.detach(updatedProfessional);
-        updatedProfessional
-            .firstName(UPDATED_FIRST_NAME)
-            .lastName(UPDATED_LAST_NAME)
-            .creationDate(UPDATED_CREATION_DATE)
-            .up(UPDATED_UP)
-            .active(UPDATED_ACTIVE);
+        updatedProfessional.setFirstName(UPDATED_FIRST_NAME);
+        updatedProfessional.setLastName(UPDATED_LAST_NAME);
+        updatedProfessional.setCreationDate(UPDATED_CREATION_DATE);
+        updatedProfessional.setUp(UPDATED_UP);
+        updatedProfessional.setActive(UPDATED_ACTIVE);
         ProfessionalDTO professionalDTO = professionalMapper.toDto(updatedProfessional);
 
         restProfessionalMockMvc.perform(put("/api/professionals")
@@ -249,8 +247,8 @@ public class ProfessionalResourceIT {
         assertThat(testProfessional.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testProfessional.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testProfessional.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
-        assertThat(testProfessional.isUp()).isEqualTo(UPDATED_UP);
-        assertThat(testProfessional.isActive()).isEqualTo(UPDATED_ACTIVE);
+        assertThat(testProfessional.getUp()).isEqualTo(UPDATED_UP);
+        assertThat(testProfessional.getActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test

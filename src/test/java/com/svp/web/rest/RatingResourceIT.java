@@ -89,29 +89,28 @@ public class RatingResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Rating createEntity(EntityManager em) {
-        Rating rating = new Rating()
+        return Rating.builder()
             .value(DEFAULT_VALUE)
             .date(DEFAULT_DATE)
-            .comment(DEFAULT_COMMENT);
-        return rating;
+            .comment(DEFAULT_COMMENT).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Rating createUpdatedEntity(EntityManager em) {
-        Rating rating = new Rating()
+        return Rating.builder()
             .value(UPDATED_VALUE)
             .date(UPDATED_DATE)
-            .comment(UPDATED_COMMENT);
-        return rating;
+            .comment(UPDATED_COMMENT).build();
     }
 
     @BeforeEach
@@ -176,7 +175,7 @@ public class RatingResourceIT {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getRating() throws Exception {
@@ -213,10 +212,9 @@ public class RatingResourceIT {
         Rating updatedRating = ratingRepository.findById(rating.getId()).get();
         // Disconnect from session so that the updates on updatedRating are not directly saved in db
         em.detach(updatedRating);
-        updatedRating
-            .value(UPDATED_VALUE)
-            .date(UPDATED_DATE)
-            .comment(UPDATED_COMMENT);
+        updatedRating.setValue(UPDATED_VALUE);
+        updatedRating.setDate(UPDATED_DATE);
+        updatedRating.setComment(UPDATED_COMMENT);
         RatingDTO ratingDTO = ratingMapper.toDto(updatedRating);
 
         restRatingMockMvc.perform(put("/api/ratings")

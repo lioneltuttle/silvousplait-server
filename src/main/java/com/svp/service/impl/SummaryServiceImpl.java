@@ -5,6 +5,7 @@ import com.svp.domain.Summary;
 import com.svp.repository.SummaryRepository;
 import com.svp.service.dto.SummaryDTO;
 import com.svp.service.mapper.SummaryMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class SummaryServiceImpl implements SummaryService {
-
-    private final Logger log = LoggerFactory.getLogger(SummaryServiceImpl.class);
 
     private final SummaryRepository summaryRepository;
 

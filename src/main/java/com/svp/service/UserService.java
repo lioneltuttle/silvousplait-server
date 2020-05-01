@@ -11,6 +11,7 @@ import com.svp.service.dto.UserDTO;
 import com.svp.service.util.RandomUtil;
 import com.svp.web.rest.errors.*;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -31,9 +32,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class UserService {
-
-    private final Logger log = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
 
@@ -78,7 +78,7 @@ public class UserService {
 
     public Optional<User> requestPasswordReset(String mail) {
         return userRepository.findOneByEmailIgnoreCase(mail)
-            .filter(User::getActivated)
+            .filter(User::isActivated)
             .map(user -> {
                 user.setResetKey(RandomUtil.generateResetKey());
                 user.setResetDate(Instant.now());
@@ -124,7 +124,7 @@ public class UserService {
     }
 
     private boolean removeNonActivatedUser(User existingUser){
-        if (existingUser.getActivated()) {
+        if (existingUser.isActivated()) {
              return false;
         }
         userRepository.delete(existingUser);

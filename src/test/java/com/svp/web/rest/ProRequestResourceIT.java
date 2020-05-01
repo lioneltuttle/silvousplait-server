@@ -89,29 +89,28 @@ public class ProRequestResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static ProRequest createEntity(EntityManager em) {
-        ProRequest proRequest = new ProRequest()
+        return ProRequest.builder()
             .location(DEFAULT_LOCATION)
             .deviceRegistrationId(DEFAULT_DEVICE_REGISTRATION_ID)
-            .date(DEFAULT_DATE);
-        return proRequest;
+            .date(DEFAULT_DATE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static ProRequest createUpdatedEntity(EntityManager em) {
-        ProRequest proRequest = new ProRequest()
+        return ProRequest.builder()
             .location(UPDATED_LOCATION)
             .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
-        return proRequest;
+            .date(UPDATED_DATE).build();
     }
 
     @BeforeEach
@@ -176,7 +175,7 @@ public class ProRequestResourceIT {
             .andExpect(jsonPath("$.[*].deviceRegistrationId").value(hasItem(DEFAULT_DEVICE_REGISTRATION_ID.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProRequest() throws Exception {
@@ -213,10 +212,9 @@ public class ProRequestResourceIT {
         ProRequest updatedProRequest = proRequestRepository.findById(proRequest.getId()).get();
         // Disconnect from session so that the updates on updatedProRequest are not directly saved in db
         em.detach(updatedProRequest);
-        updatedProRequest
-            .location(UPDATED_LOCATION)
-            .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
+        updatedProRequest.setLocation(UPDATED_LOCATION);
+        updatedProRequest.setDeviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID);
+        updatedProRequest.setDate(UPDATED_DATE);
         ProRequestDTO proRequestDTO = proRequestMapper.toDto(updatedProRequest);
 
         restProRequestMockMvc.perform(put("/api/pro-requests")

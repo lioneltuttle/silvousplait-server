@@ -5,6 +5,7 @@ import com.svp.domain.ProfessionalAudit;
 import com.svp.repository.ProfessionalAuditRepository;
 import com.svp.service.dto.ProfessionalAuditDTO;
 import com.svp.service.mapper.ProfessionalAuditMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class ProfessionalAuditServiceImpl implements ProfessionalAuditService {
-
-    private final Logger log = LoggerFactory.getLogger(ProfessionalAuditServiceImpl.class);
 
     private final ProfessionalAuditRepository professionalAuditRepository;
 

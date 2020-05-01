@@ -5,6 +5,7 @@ import com.svp.domain.ProChoice;
 import com.svp.repository.ProChoiceRepository;
 import com.svp.service.dto.ProChoiceDTO;
 import com.svp.service.mapper.ProChoiceMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class ProChoiceServiceImpl implements ProChoiceService {
-
-    private final Logger log = LoggerFactory.getLogger(ProChoiceServiceImpl.class);
 
     private final ProChoiceRepository proChoiceRepository;
 

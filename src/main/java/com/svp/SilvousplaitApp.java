@@ -5,7 +5,9 @@ import com.svp.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.index.qual.SameLenBottom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -21,10 +23,9 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
+@Slf4j
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 public class SilvousplaitApp implements InitializingBean {
-
-    private static final Logger log = LoggerFactory.getLogger(SilvousplaitApp.class);
 
     private final Environment env;
 

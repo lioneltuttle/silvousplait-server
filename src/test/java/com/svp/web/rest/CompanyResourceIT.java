@@ -86,27 +86,26 @@ public class CompanyResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Company createEntity(EntityManager em) {
-        Company company = new Company()
+        return Company.builder()
             .name(DEFAULT_NAME)
-            .creationDate(DEFAULT_CREATION_DATE);
-        return company;
+            .creationDate(DEFAULT_CREATION_DATE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Company createUpdatedEntity(EntityManager em) {
-        Company company = new Company()
+        return Company.builder()
             .name(UPDATED_NAME)
-            .creationDate(UPDATED_CREATION_DATE);
-        return company;
+            .creationDate(UPDATED_CREATION_DATE).build();
     }
 
     @BeforeEach
@@ -169,7 +168,7 @@ public class CompanyResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCompany() throws Exception {
@@ -205,9 +204,8 @@ public class CompanyResourceIT {
         Company updatedCompany = companyRepository.findById(company.getId()).get();
         // Disconnect from session so that the updates on updatedCompany are not directly saved in db
         em.detach(updatedCompany);
-        updatedCompany
-            .name(UPDATED_NAME)
-            .creationDate(UPDATED_CREATION_DATE);
+        updatedCompany.setName(UPDATED_NAME);
+        updatedCompany.setCreationDate(UPDATED_CREATION_DATE);
         CompanyDTO companyDTO = companyMapper.toDto(updatedCompany);
 
         restCompanyMockMvc.perform(put("/api/companies")

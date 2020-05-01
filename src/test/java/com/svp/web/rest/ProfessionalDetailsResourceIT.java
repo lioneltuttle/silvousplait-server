@@ -92,11 +92,10 @@ public class ProfessionalDetailsResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfessionalDetails createEntity(EntityManager em) {
-        ProfessionalDetails professionalDetails = new ProfessionalDetails()
+        return ProfessionalDetails.builder()
             .phoneNumber(DEFAULT_PHONE_NUMBER)
             .hourlyRate(DEFAULT_HOURLY_RATE)
-            .onMobility(DEFAULT_ON_MOBILITY);
-        return professionalDetails;
+            .onMobility(DEFAULT_ON_MOBILITY).build();
     }
     /**
      * Create an updated entity for this test.
@@ -105,11 +104,10 @@ public class ProfessionalDetailsResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfessionalDetails createUpdatedEntity(EntityManager em) {
-        ProfessionalDetails professionalDetails = new ProfessionalDetails()
+        return ProfessionalDetails.builder()
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .hourlyRate(UPDATED_HOURLY_RATE)
-            .onMobility(UPDATED_ON_MOBILITY);
-        return professionalDetails;
+            .onMobility(UPDATED_ON_MOBILITY).build();
     }
 
     @BeforeEach
@@ -135,7 +133,7 @@ public class ProfessionalDetailsResourceIT {
         ProfessionalDetails testProfessionalDetails = professionalDetailsList.get(professionalDetailsList.size() - 1);
         assertThat(testProfessionalDetails.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
         assertThat(testProfessionalDetails.getHourlyRate()).isEqualTo(DEFAULT_HOURLY_RATE);
-        assertThat(testProfessionalDetails.isOnMobility()).isEqualTo(DEFAULT_ON_MOBILITY);
+        assertThat(testProfessionalDetails.getOnMobility()).isEqualTo(DEFAULT_ON_MOBILITY);
     }
 
     @Test
@@ -174,7 +172,7 @@ public class ProfessionalDetailsResourceIT {
             .andExpect(jsonPath("$.[*].hourlyRate").value(hasItem(DEFAULT_HOURLY_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].onMobility").value(hasItem(DEFAULT_ON_MOBILITY.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getProfessionalDetails() throws Exception {
@@ -211,10 +209,9 @@ public class ProfessionalDetailsResourceIT {
         ProfessionalDetails updatedProfessionalDetails = professionalDetailsRepository.findById(professionalDetails.getId()).get();
         // Disconnect from session so that the updates on updatedProfessionalDetails are not directly saved in db
         em.detach(updatedProfessionalDetails);
-        updatedProfessionalDetails
-            .phoneNumber(UPDATED_PHONE_NUMBER)
-            .hourlyRate(UPDATED_HOURLY_RATE)
-            .onMobility(UPDATED_ON_MOBILITY);
+        updatedProfessionalDetails.setPhoneNumber(UPDATED_PHONE_NUMBER);
+        updatedProfessionalDetails.setHourlyRate(UPDATED_HOURLY_RATE);
+        updatedProfessionalDetails.setOnMobility(UPDATED_ON_MOBILITY);
         ProfessionalDetailsDTO professionalDetailsDTO = professionalDetailsMapper.toDto(updatedProfessionalDetails);
 
         restProfessionalDetailsMockMvc.perform(put("/api/professional-details")
@@ -228,7 +225,7 @@ public class ProfessionalDetailsResourceIT {
         ProfessionalDetails testProfessionalDetails = professionalDetailsList.get(professionalDetailsList.size() - 1);
         assertThat(testProfessionalDetails.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
         assertThat(testProfessionalDetails.getHourlyRate()).isEqualTo(UPDATED_HOURLY_RATE);
-        assertThat(testProfessionalDetails.isOnMobility()).isEqualTo(UPDATED_ON_MOBILITY);
+        assertThat(testProfessionalDetails.getOnMobility()).isEqualTo(UPDATED_ON_MOBILITY);
     }
 
     @Test

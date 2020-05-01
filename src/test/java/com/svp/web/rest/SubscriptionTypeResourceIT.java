@@ -81,25 +81,24 @@ public class SubscriptionTypeResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static SubscriptionType createEntity(EntityManager em) {
-        SubscriptionType subscriptionType = new SubscriptionType()
-            .type(DEFAULT_TYPE);
-        return subscriptionType;
+        return SubscriptionType.builder()
+            .type(DEFAULT_TYPE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static SubscriptionType createUpdatedEntity(EntityManager em) {
-        SubscriptionType subscriptionType = new SubscriptionType()
-            .type(UPDATED_TYPE);
-        return subscriptionType;
+        return SubscriptionType.builder()
+            .type(UPDATED_TYPE).build();
     }
 
     @BeforeEach
@@ -160,7 +159,7 @@ public class SubscriptionTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(subscriptionType.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getSubscriptionType() throws Exception {
@@ -196,7 +195,7 @@ public class SubscriptionTypeResourceIT {
         // Disconnect from session so that the updates on updatedSubscriptionType are not directly saved in db
         em.detach(updatedSubscriptionType);
         updatedSubscriptionType
-            .type(UPDATED_TYPE);
+            .setType(UPDATED_TYPE);
         SubscriptionTypeDTO subscriptionTypeDTO = subscriptionTypeMapper.toDto(updatedSubscriptionType);
 
         restSubscriptionTypeMockMvc.perform(put("/api/subscription-types")

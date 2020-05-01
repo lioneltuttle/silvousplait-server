@@ -6,6 +6,7 @@ import com.svp.service.dto.ProRequestDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,9 +24,8 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class ProRequestResource {
-
-    private final Logger log = LoggerFactory.getLogger(ProRequestResource.class);
 
     private static final String ENTITY_NAME = "proRequest";
 

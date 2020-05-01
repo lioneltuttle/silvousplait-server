@@ -89,29 +89,28 @@ public class ProChoiceResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static ProChoice createEntity(EntityManager em) {
-        ProChoice proChoice = new ProChoice()
+        return ProChoice.builder()
             .location(DEFAULT_LOCATION)
             .deviceRegistrationId(DEFAULT_DEVICE_REGISTRATION_ID)
-            .date(DEFAULT_DATE);
-        return proChoice;
+            .date(DEFAULT_DATE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static ProChoice createUpdatedEntity(EntityManager em) {
-        ProChoice proChoice = new ProChoice()
+        return ProChoice.builder()
             .location(UPDATED_LOCATION)
             .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
-        return proChoice;
+            .date(UPDATED_DATE).build();
     }
 
     @BeforeEach
@@ -176,7 +175,7 @@ public class ProChoiceResourceIT {
             .andExpect(jsonPath("$.[*].deviceRegistrationId").value(hasItem(DEFAULT_DEVICE_REGISTRATION_ID.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProChoice() throws Exception {
@@ -213,10 +212,9 @@ public class ProChoiceResourceIT {
         ProChoice updatedProChoice = proChoiceRepository.findById(proChoice.getId()).get();
         // Disconnect from session so that the updates on updatedProChoice are not directly saved in db
         em.detach(updatedProChoice);
-        updatedProChoice
-            .location(UPDATED_LOCATION)
-            .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
+        updatedProChoice.setLocation(UPDATED_LOCATION);
+        updatedProChoice.setDeviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID);
+        updatedProChoice.setDate(UPDATED_DATE);
         ProChoiceDTO proChoiceDTO = proChoiceMapper.toDto(updatedProChoice);
 
         restProChoiceMockMvc.perform(put("/api/pro-choices")

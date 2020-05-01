@@ -1,16 +1,15 @@
 package com.svp.service.util;
 
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Utility class for generating random Strings.
  */
+@UtilityClass
 public final class RandomUtil {
 
     private static final int DEF_COUNT = 20;
-
-    private RandomUtil() {
-    }
 
     /**
      * Generate a password.

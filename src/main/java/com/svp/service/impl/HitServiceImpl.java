@@ -5,6 +5,7 @@ import com.svp.domain.Hit;
 import com.svp.repository.HitRepository;
 import com.svp.service.dto.HitDTO;
 import com.svp.service.mapper.HitMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class HitServiceImpl implements HitService {
-
-    private final Logger log = LoggerFactory.getLogger(HitServiceImpl.class);
 
     private final HitRepository hitRepository;
 

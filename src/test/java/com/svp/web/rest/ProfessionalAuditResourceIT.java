@@ -95,11 +95,10 @@ public class ProfessionalAuditResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfessionalAudit createEntity(EntityManager em) {
-        ProfessionalAudit professionalAudit = new ProfessionalAudit()
+        return ProfessionalAudit.builder()
             .date(DEFAULT_DATE)
             .message(DEFAULT_MESSAGE)
-            .event(DEFAULT_EVENT);
-        return professionalAudit;
+            .event(DEFAULT_EVENT).build();
     }
     /**
      * Create an updated entity for this test.
@@ -108,11 +107,10 @@ public class ProfessionalAuditResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProfessionalAudit createUpdatedEntity(EntityManager em) {
-        ProfessionalAudit professionalAudit = new ProfessionalAudit()
+        return ProfessionalAudit.builder()
             .date(UPDATED_DATE)
             .message(UPDATED_MESSAGE)
-            .event(UPDATED_EVENT);
-        return professionalAudit;
+            .event(UPDATED_EVENT).build();
     }
 
     @BeforeEach
@@ -177,7 +175,7 @@ public class ProfessionalAuditResourceIT {
             .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].event").value(hasItem(DEFAULT_EVENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProfessionalAudit() throws Exception {
@@ -214,10 +212,9 @@ public class ProfessionalAuditResourceIT {
         ProfessionalAudit updatedProfessionalAudit = professionalAuditRepository.findById(professionalAudit.getId()).get();
         // Disconnect from session so that the updates on updatedProfessionalAudit are not directly saved in db
         em.detach(updatedProfessionalAudit);
-        updatedProfessionalAudit
-            .date(UPDATED_DATE)
-            .message(UPDATED_MESSAGE)
-            .event(UPDATED_EVENT);
+        updatedProfessionalAudit.setDate(UPDATED_DATE);
+        updatedProfessionalAudit.setMessage(UPDATED_MESSAGE);
+        updatedProfessionalAudit.setEvent(UPDATED_EVENT);
         ProfessionalAuditDTO professionalAuditDTO = professionalAuditMapper.toDto(updatedProfessionalAudit);
 
         restProfessionalAuditMockMvc.perform(put("/api/professional-audits")
