@@ -5,6 +5,7 @@ import com.svp.domain.Rating;
 import com.svp.repository.RatingRepository;
 import com.svp.service.dto.RatingDTO;
 import com.svp.service.mapper.RatingMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class RatingServiceImpl implements RatingService {
-
-    private final Logger log = LoggerFactory.getLogger(RatingServiceImpl.class);
 
     private final RatingRepository ratingRepository;
 

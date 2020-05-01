@@ -93,33 +93,32 @@ public class CustomerResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Customer createEntity(EntityManager em) {
-        Customer customer = new Customer()
+        return Customer.builder()
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .deviceRegistrationId(DEFAULT_DEVICE_REGISTRATION_ID)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
-            .location(DEFAULT_LOCATION);
-        return customer;
+            .location(DEFAULT_LOCATION).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Customer createUpdatedEntity(EntityManager em) {
-        Customer customer = new Customer()
+        return Customer.builder()
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
             .phoneNumber(UPDATED_PHONE_NUMBER)
-            .location(UPDATED_LOCATION);
-        return customer;
+            .location(UPDATED_LOCATION).build();
     }
 
     @BeforeEach
@@ -188,7 +187,7 @@ public class CustomerResourceIT {
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCustomer() throws Exception {
@@ -227,12 +226,11 @@ public class CustomerResourceIT {
         Customer updatedCustomer = customerRepository.findById(customer.getId()).get();
         // Disconnect from session so that the updates on updatedCustomer are not directly saved in db
         em.detach(updatedCustomer);
-        updatedCustomer
-            .firstName(UPDATED_FIRST_NAME)
-            .lastName(UPDATED_LAST_NAME)
-            .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .phoneNumber(UPDATED_PHONE_NUMBER)
-            .location(UPDATED_LOCATION);
+        updatedCustomer.setFirstName(UPDATED_FIRST_NAME);
+        updatedCustomer.setLastName(UPDATED_LAST_NAME);
+        updatedCustomer.setDeviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID);
+        updatedCustomer.setPhoneNumber(UPDATED_PHONE_NUMBER);
+        updatedCustomer.setLocation(UPDATED_LOCATION);
         CustomerDTO customerDTO = customerMapper.toDto(updatedCustomer);
 
         restCustomerMockMvc.perform(put("/api/customers")

@@ -81,25 +81,24 @@ public class CompanyLocationResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static CompanyLocation createEntity(EntityManager em) {
-        CompanyLocation companyLocation = new CompanyLocation()
-            .adresse(DEFAULT_ADRESSE);
-        return companyLocation;
+        return CompanyLocation.builder()
+            .adresse(DEFAULT_ADRESSE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static CompanyLocation createUpdatedEntity(EntityManager em) {
-        CompanyLocation companyLocation = new CompanyLocation()
-            .adresse(UPDATED_ADRESSE);
-        return companyLocation;
+        return CompanyLocation.builder()
+            .adresse(UPDATED_ADRESSE).build();
     }
 
     @BeforeEach
@@ -160,7 +159,7 @@ public class CompanyLocationResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(companyLocation.getId().intValue())))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCompanyLocation() throws Exception {
@@ -195,8 +194,7 @@ public class CompanyLocationResourceIT {
         CompanyLocation updatedCompanyLocation = companyLocationRepository.findById(companyLocation.getId()).get();
         // Disconnect from session so that the updates on updatedCompanyLocation are not directly saved in db
         em.detach(updatedCompanyLocation);
-        updatedCompanyLocation
-            .adresse(UPDATED_ADRESSE);
+        updatedCompanyLocation.setAdresse(UPDATED_ADRESSE);
         CompanyLocationDTO companyLocationDTO = companyLocationMapper.toDto(updatedCompanyLocation);
 
         restCompanyLocationMockMvc.perform(put("/api/company-locations")

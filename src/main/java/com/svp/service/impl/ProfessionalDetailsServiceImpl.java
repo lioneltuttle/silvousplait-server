@@ -5,6 +5,7 @@ import com.svp.domain.ProfessionalDetails;
 import com.svp.repository.ProfessionalDetailsRepository;
 import com.svp.service.dto.ProfessionalDetailsDTO;
 import com.svp.service.mapper.ProfessionalDetailsMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class ProfessionalDetailsServiceImpl implements ProfessionalDetailsService {
-
-    private final Logger log = LoggerFactory.getLogger(ProfessionalDetailsServiceImpl.class);
 
     private final ProfessionalDetailsRepository professionalDetailsRepository;
 

@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.internet.MimeMessage;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -24,9 +25,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
  * We use the {@link Async} annotation to send emails asynchronously.
  */
 @Service
+@Slf4j
 public class MailService {
-
-    private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
 

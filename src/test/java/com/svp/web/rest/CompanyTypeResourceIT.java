@@ -81,25 +81,24 @@ public class CompanyTypeResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static CompanyType createEntity(EntityManager em) {
-        CompanyType companyType = new CompanyType()
-            .type(DEFAULT_TYPE);
-        return companyType;
+        return CompanyType.builder()
+            .type(DEFAULT_TYPE).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static CompanyType createUpdatedEntity(EntityManager em) {
-        CompanyType companyType = new CompanyType()
-            .type(UPDATED_TYPE);
-        return companyType;
+        return CompanyType.builder()
+            .type(UPDATED_TYPE).build();
     }
 
     @BeforeEach
@@ -160,7 +159,7 @@ public class CompanyTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(companyType.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCompanyType() throws Exception {
@@ -195,8 +194,7 @@ public class CompanyTypeResourceIT {
         CompanyType updatedCompanyType = companyTypeRepository.findById(companyType.getId()).get();
         // Disconnect from session so that the updates on updatedCompanyType are not directly saved in db
         em.detach(updatedCompanyType);
-        updatedCompanyType
-            .type(UPDATED_TYPE);
+        updatedCompanyType.setType(UPDATED_TYPE);
         CompanyTypeDTO companyTypeDTO = companyTypeMapper.toDto(updatedCompanyType);
 
         restCompanyTypeMockMvc.perform(put("/api/company-types")

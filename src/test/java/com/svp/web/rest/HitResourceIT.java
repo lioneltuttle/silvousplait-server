@@ -89,29 +89,28 @@ public class HitResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Hit createEntity(EntityManager em) {
-        Hit hit = new Hit()
+        return Hit.builder()
             .date(DEFAULT_DATE)
             .answered(DEFAULT_ANSWERED)
-            .transformed(DEFAULT_TRANSFORMED);
-        return hit;
+            .transformed(DEFAULT_TRANSFORMED).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Hit createUpdatedEntity(EntityManager em) {
-        Hit hit = new Hit()
+        return Hit.builder()
             .date(UPDATED_DATE)
             .answered(UPDATED_ANSWERED)
-            .transformed(UPDATED_TRANSFORMED);
-        return hit;
+            .transformed(UPDATED_TRANSFORMED).build();
     }
 
     @BeforeEach
@@ -136,8 +135,8 @@ public class HitResourceIT {
         assertThat(hitList).hasSize(databaseSizeBeforeCreate + 1);
         Hit testHit = hitList.get(hitList.size() - 1);
         assertThat(testHit.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testHit.isAnswered()).isEqualTo(DEFAULT_ANSWERED);
-        assertThat(testHit.isTransformed()).isEqualTo(DEFAULT_TRANSFORMED);
+        assertThat(testHit.getAnswered()).isEqualTo(DEFAULT_ANSWERED);
+        assertThat(testHit.getTransformed()).isEqualTo(DEFAULT_TRANSFORMED);
     }
 
     @Test
@@ -176,7 +175,7 @@ public class HitResourceIT {
             .andExpect(jsonPath("$.[*].answered").value(hasItem(DEFAULT_ANSWERED.booleanValue())))
             .andExpect(jsonPath("$.[*].transformed").value(hasItem(DEFAULT_TRANSFORMED.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getHit() throws Exception {
@@ -213,10 +212,9 @@ public class HitResourceIT {
         Hit updatedHit = hitRepository.findById(hit.getId()).get();
         // Disconnect from session so that the updates on updatedHit are not directly saved in db
         em.detach(updatedHit);
-        updatedHit
-            .date(UPDATED_DATE)
-            .answered(UPDATED_ANSWERED)
-            .transformed(UPDATED_TRANSFORMED);
+        updatedHit.setDate(UPDATED_DATE);
+        updatedHit.setAnswered(UPDATED_ANSWERED);
+        updatedHit.setTransformed(UPDATED_TRANSFORMED);
         HitDTO hitDTO = hitMapper.toDto(updatedHit);
 
         restHitMockMvc.perform(put("/api/hits")
@@ -229,8 +227,8 @@ public class HitResourceIT {
         assertThat(hitList).hasSize(databaseSizeBeforeUpdate);
         Hit testHit = hitList.get(hitList.size() - 1);
         assertThat(testHit.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testHit.isAnswered()).isEqualTo(UPDATED_ANSWERED);
-        assertThat(testHit.isTransformed()).isEqualTo(UPDATED_TRANSFORMED);
+        assertThat(testHit.getAnswered()).isEqualTo(UPDATED_ANSWERED);
+        assertThat(testHit.getTransformed()).isEqualTo(UPDATED_TRANSFORMED);
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.svp.domain.Bill;
 import com.svp.repository.BillRepository;
 import com.svp.service.dto.BillDTO;
 import com.svp.service.mapper.BillMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class BillServiceImpl implements BillService {
-
-    private final Logger log = LoggerFactory.getLogger(BillServiceImpl.class);
 
     private final BillRepository billRepository;
 

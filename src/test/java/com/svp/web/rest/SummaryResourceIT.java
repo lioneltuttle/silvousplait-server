@@ -95,12 +95,11 @@ public class SummaryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Summary createEntity(EntityManager em) {
-        Summary summary = new Summary()
+        return Summary.builder()
             .hits(DEFAULT_HITS)
             .missed(DEFAULT_MISSED)
             .currentBill(DEFAULT_CURRENT_BILL)
-            .rating(DEFAULT_RATING);
-        return summary;
+            .rating(DEFAULT_RATING).build();
     }
     /**
      * Create an updated entity for this test.
@@ -109,12 +108,11 @@ public class SummaryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Summary createUpdatedEntity(EntityManager em) {
-        Summary summary = new Summary()
+        return Summary.builder()
             .hits(UPDATED_HITS)
             .missed(UPDATED_MISSED)
             .currentBill(UPDATED_CURRENT_BILL)
-            .rating(UPDATED_RATING);
-        return summary;
+            .rating(UPDATED_RATING).build();
     }
 
     @BeforeEach
@@ -181,7 +179,7 @@ public class SummaryResourceIT {
             .andExpect(jsonPath("$.[*].currentBill").value(hasItem(DEFAULT_CURRENT_BILL.doubleValue())))
             .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getSummary() throws Exception {
@@ -219,11 +217,10 @@ public class SummaryResourceIT {
         Summary updatedSummary = summaryRepository.findById(summary.getId()).get();
         // Disconnect from session so that the updates on updatedSummary are not directly saved in db
         em.detach(updatedSummary);
-        updatedSummary
-            .hits(UPDATED_HITS)
-            .missed(UPDATED_MISSED)
-            .currentBill(UPDATED_CURRENT_BILL)
-            .rating(UPDATED_RATING);
+        updatedSummary.setHits(UPDATED_HITS);
+        updatedSummary.setMissed(UPDATED_MISSED);
+        updatedSummary.setCurrentBill(UPDATED_CURRENT_BILL);
+        updatedSummary.setRating(UPDATED_RATING);
         SummaryDTO summaryDTO = summaryMapper.toDto(updatedSummary);
 
         restSummaryMockMvc.perform(put("/api/summaries")

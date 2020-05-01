@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.svp.domain.enumeration.BillStatus;
+
 /**
  * Integration tests for the {@Link BillResource} REST controller.
  */
@@ -90,29 +91,28 @@ public class BillResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Bill createEntity(EntityManager em) {
-        Bill bill = new Bill()
+        return Bill.builder()
             .date(DEFAULT_DATE)
             .amountDue(DEFAULT_AMOUNT_DUE)
-            .status(DEFAULT_STATUS);
-        return bill;
+            .status(DEFAULT_STATUS).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Bill createUpdatedEntity(EntityManager em) {
-        Bill bill = new Bill()
+        return Bill.builder()
             .date(UPDATED_DATE)
             .amountDue(UPDATED_AMOUNT_DUE)
-            .status(UPDATED_STATUS);
-        return bill;
+            .status(UPDATED_STATUS).build();
     }
 
     @BeforeEach
@@ -177,7 +177,7 @@ public class BillResourceIT {
             .andExpect(jsonPath("$.[*].amountDue").value(hasItem(DEFAULT_AMOUNT_DUE.doubleValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getBill() throws Exception {
@@ -214,10 +214,9 @@ public class BillResourceIT {
         Bill updatedBill = billRepository.findById(bill.getId()).get();
         // Disconnect from session so that the updates on updatedBill are not directly saved in db
         em.detach(updatedBill);
-        updatedBill
-            .date(UPDATED_DATE)
-            .amountDue(UPDATED_AMOUNT_DUE)
-            .status(UPDATED_STATUS);
+        updatedBill.setDate(UPDATED_DATE);
+        updatedBill.setAmountDue(UPDATED_AMOUNT_DUE);
+        updatedBill.setStatus(UPDATED_STATUS);
         BillDTO billDTO = billMapper.toDto(updatedBill);
 
         restBillMockMvc.perform(put("/api/bills")

@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.svp.domain.enumeration.BillEvent;
+
 /**
  * Integration tests for the {@Link BillAuditResource} REST controller.
  */
@@ -90,29 +91,28 @@ public class BillAuditResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static BillAudit createEntity(EntityManager em) {
-        BillAudit billAudit = new BillAudit()
+        return BillAudit.builder()
             .date(DEFAULT_DATE)
             .message(DEFAULT_MESSAGE)
-            .event(DEFAULT_EVENT);
-        return billAudit;
+            .event(DEFAULT_EVENT).build();
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static BillAudit createUpdatedEntity(EntityManager em) {
-        BillAudit billAudit = new BillAudit()
+        return BillAudit.builder()
             .date(UPDATED_DATE)
             .message(UPDATED_MESSAGE)
-            .event(UPDATED_EVENT);
-        return billAudit;
+            .event(UPDATED_EVENT).build();
     }
 
     @BeforeEach
@@ -177,7 +177,7 @@ public class BillAuditResourceIT {
             .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].event").value(hasItem(DEFAULT_EVENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getBillAudit() throws Exception {
@@ -214,10 +214,10 @@ public class BillAuditResourceIT {
         BillAudit updatedBillAudit = billAuditRepository.findById(billAudit.getId()).get();
         // Disconnect from session so that the updates on updatedBillAudit are not directly saved in db
         em.detach(updatedBillAudit);
-        updatedBillAudit
-            .date(UPDATED_DATE)
-            .message(UPDATED_MESSAGE)
-            .event(UPDATED_EVENT);
+
+        updatedBillAudit.setDate(UPDATED_DATE);
+        updatedBillAudit.setMessage(UPDATED_MESSAGE);
+        updatedBillAudit.setEvent(UPDATED_EVENT);
         BillAuditDTO billAuditDTO = billAuditMapper.toDto(updatedBillAudit);
 
         restBillAuditMockMvc.perform(put("/api/bill-audits")

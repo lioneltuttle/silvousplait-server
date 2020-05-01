@@ -2,6 +2,7 @@ package com.svp.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,6 +20,12 @@ import com.svp.domain.enumeration.BillStatus;
 @Entity
 @Table(name = "bill")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@ToString
+@EqualsAndHashCode
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Bill implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,91 +49,4 @@ public class Bill implements Serializable {
     @JsonIgnoreProperties("bills")
     private Company company;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public Bill date(LocalDate date) {
-        this.date = date;
-        return this;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Double getAmountDue() {
-        return amountDue;
-    }
-
-    public Bill amountDue(Double amountDue) {
-        this.amountDue = amountDue;
-        return this;
-    }
-
-    public void setAmountDue(Double amountDue) {
-        this.amountDue = amountDue;
-    }
-
-    public BillStatus getStatus() {
-        return status;
-    }
-
-    public Bill status(BillStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(BillStatus status) {
-        this.status = status;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public Bill company(Company company) {
-        this.company = company;
-        return this;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Bill)) {
-            return false;
-        }
-        return id != null && id.equals(((Bill) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
-    }
-
-    @Override
-    public String toString() {
-        return "Bill{" +
-            "id=" + getId() +
-            ", date='" + getDate() + "'" +
-            ", amountDue=" + getAmountDue() +
-            ", status='" + getStatus() + "'" +
-            "}";
-    }
 }

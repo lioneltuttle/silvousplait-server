@@ -5,6 +5,7 @@ import com.svp.domain.CompanyLocation;
 import com.svp.repository.CompanyLocationRepository;
 import com.svp.service.dto.CompanyLocationDTO;
 import com.svp.service.mapper.CompanyLocationMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class CompanyLocationServiceImpl implements CompanyLocationService {
-
-    private final Logger log = LoggerFactory.getLogger(CompanyLocationServiceImpl.class);
 
     private final CompanyLocationRepository companyLocationRepository;
 

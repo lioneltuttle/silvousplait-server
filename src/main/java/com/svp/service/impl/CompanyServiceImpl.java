@@ -5,6 +5,7 @@ import com.svp.domain.Company;
 import com.svp.repository.CompanyRepository;
 import com.svp.service.dto.CompanyDTO;
 import com.svp.service.mapper.CompanyMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class CompanyServiceImpl implements CompanyService {
-
-    private final Logger log = LoggerFactory.getLogger(CompanyServiceImpl.class);
 
     private final CompanyRepository companyRepository;
 
