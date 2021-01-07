@@ -39,6 +39,14 @@ public class CompanyLocationResourceIT {
     private static final String DEFAULT_ADRESSE = "AAAAAAAAAA";
     private static final String UPDATED_ADRESSE = "BBBBBBBBBB";
 
+    private static final Double DEFAULT_LAT = 1D;
+    private static final Double UPDATED_LAT = 2D;
+    private static final Double SMALLER_LAT = 1D - 1D;
+
+    private static final Double DEFAULT_LNG = 1D;
+    private static final Double UPDATED_LNG = 2D;
+    private static final Double SMALLER_LNG = 1D - 1D;
+
     @Autowired
     private CompanyLocationRepository companyLocationRepository;
 
@@ -87,7 +95,9 @@ public class CompanyLocationResourceIT {
      */
     public static CompanyLocation createEntity(EntityManager em) {
         CompanyLocation companyLocation = new CompanyLocation()
-            .adresse(DEFAULT_ADRESSE);
+            .adresse(DEFAULT_ADRESSE)
+            .lat(DEFAULT_LAT)
+            .lng(DEFAULT_LNG);
         return companyLocation;
     }
     /**
@@ -98,7 +108,9 @@ public class CompanyLocationResourceIT {
      */
     public static CompanyLocation createUpdatedEntity(EntityManager em) {
         CompanyLocation companyLocation = new CompanyLocation()
-            .adresse(UPDATED_ADRESSE);
+            .adresse(UPDATED_ADRESSE)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG);
         return companyLocation;
     }
 
@@ -124,6 +136,8 @@ public class CompanyLocationResourceIT {
         assertThat(companyLocationList).hasSize(databaseSizeBeforeCreate + 1);
         CompanyLocation testCompanyLocation = companyLocationList.get(companyLocationList.size() - 1);
         assertThat(testCompanyLocation.getAdresse()).isEqualTo(DEFAULT_ADRESSE);
+        assertThat(testCompanyLocation.getLat()).isEqualTo(DEFAULT_LAT);
+        assertThat(testCompanyLocation.getLng()).isEqualTo(DEFAULT_LNG);
     }
 
     @Test
@@ -158,7 +172,9 @@ public class CompanyLocationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(companyLocation.getId().intValue())))
-            .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())));
+            .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE.toString())))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())));
     }
     
     @Test
@@ -172,7 +188,9 @@ public class CompanyLocationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(companyLocation.getId().intValue()))
-            .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE.toString()));
+            .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE.toString()))
+            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.doubleValue()))
+            .andExpect(jsonPath("$.lng").value(DEFAULT_LNG.doubleValue()));
     }
 
     @Test
@@ -196,7 +214,9 @@ public class CompanyLocationResourceIT {
         // Disconnect from session so that the updates on updatedCompanyLocation are not directly saved in db
         em.detach(updatedCompanyLocation);
         updatedCompanyLocation
-            .adresse(UPDATED_ADRESSE);
+            .adresse(UPDATED_ADRESSE)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG);
         CompanyLocationDTO companyLocationDTO = companyLocationMapper.toDto(updatedCompanyLocation);
 
         restCompanyLocationMockMvc.perform(put("/api/company-locations")
@@ -209,6 +229,8 @@ public class CompanyLocationResourceIT {
         assertThat(companyLocationList).hasSize(databaseSizeBeforeUpdate);
         CompanyLocation testCompanyLocation = companyLocationList.get(companyLocationList.size() - 1);
         assertThat(testCompanyLocation.getAdresse()).isEqualTo(UPDATED_ADRESSE);
+        assertThat(testCompanyLocation.getLat()).isEqualTo(UPDATED_LAT);
+        assertThat(testCompanyLocation.getLng()).isEqualTo(UPDATED_LNG);
     }
 
     @Test

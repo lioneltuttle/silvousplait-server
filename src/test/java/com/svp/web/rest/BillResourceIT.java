@@ -2,12 +2,12 @@ package com.svp.web.rest;
 
 import com.svp.SilvousplaitApp;
 import com.svp.domain.Bill;
+import com.svp.domain.enumeration.BillStatus;
 import com.svp.repository.BillRepository;
 import com.svp.service.BillService;
 import com.svp.service.dto.BillDTO;
 import com.svp.service.mapper.BillMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -31,8 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.svp.domain.enumeration.BillStatus;
 /**
  * Integration tests for the {@link BillResource} REST controller.
  */
@@ -179,7 +177,7 @@ public class BillResourceIT {
             .andExpect(jsonPath("$.[*].amountDue").value(hasItem(DEFAULT_AMOUNT_DUE.doubleValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getBill() throws Exception {

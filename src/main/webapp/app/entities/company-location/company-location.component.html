@@ -19,7 +19,9 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="silvousplaitApp.companyLocation.adresse">Adresse</span></th>
-            <th><span jhiTranslate="silvousplaitApp.companyLocation.professional">Professional</span></th>
+            <th><span jhiTranslate="silvousplaitApp.companyLocation.lat">Lat</span></th>
+            <th><span jhiTranslate="silvousplaitApp.companyLocation.lng">Lng</span></th>
+            <th><span jhiTranslate="silvousplaitApp.companyLocation.company">Company</span></th>
             <th></th>
             </tr>
             </thead>
@@ -27,9 +29,11 @@
             <tr *ngFor="let companyLocation of companyLocations ;trackBy: trackId">
                 <td><a [routerLink]="['/company-location', companyLocation.id, 'view' ]">{{companyLocation.id}}</a></td>
                 <td>{{companyLocation.adresse}}</td>
+                <td>{{companyLocation.lat}}</td>
+                <td>{{companyLocation.lng}}</td>
                 <td>
-                    <div *ngIf="companyLocation.professionalId">
-                        <a [routerLink]="['/company', companyLocation.professionalId , 'view' ]" >{{companyLocation.professionalId}}</a>
+                    <div *ngIf="companyLocation.companyId">
+                        <a [routerLink]="['/company', companyLocation.companyId , 'view' ]" >{{companyLocation.companyId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -7,7 +7,6 @@ import com.svp.service.CompanyTypeService;
 import com.svp.service.dto.CompanyTypeDTO;
 import com.svp.service.mapper.CompanyTypeMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -160,7 +159,7 @@ public class CompanyTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(companyType.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCompanyType() throws Exception {

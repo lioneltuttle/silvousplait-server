@@ -7,7 +7,6 @@ import com.svp.service.ProfessionalService;
 import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.mapper.ProfessionalMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -191,7 +190,7 @@ public class ProfessionalResourceIT {
             .andExpect(jsonPath("$.[*].up").value(hasItem(DEFAULT_UP.booleanValue())))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getProfessional() throws Exception {

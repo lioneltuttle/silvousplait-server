@@ -9,10 +9,18 @@
                 <dd>
                     <span>{{companyLocation.adresse}}</span>
                 </dd>
-                <dt><span jhiTranslate="silvousplaitApp.companyLocation.professional">Professional</span></dt>
+                <dt><span jhiTranslate="silvousplaitApp.companyLocation.lat">Lat</span></dt>
                 <dd>
-                    <div *ngIf="companyLocation.professionalId">
-                        <a [routerLink]="['/company', companyLocation.professionalId, 'view']">{{companyLocation.professionalId}}</a>
+                    <span>{{companyLocation.lat}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.companyLocation.lng">Lng</span></dt>
+                <dd>
+                    <span>{{companyLocation.lng}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.companyLocation.company">Company</span></dt>
+                <dd>
+                    <div *ngIf="companyLocation.companyId">
+                        <a [routerLink]="['/company', companyLocation.companyId, 'view']">{{companyLocation.companyId}}</a>
                     </div>
                 </dd>
             </dl>

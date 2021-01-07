@@ -7,7 +7,6 @@ import com.svp.service.HitService;
 import com.svp.service.dto.HitDTO;
 import com.svp.service.mapper.HitMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -177,7 +176,7 @@ public class HitResourceIT {
             .andExpect(jsonPath("$.[*].answered").value(hasItem(DEFAULT_ANSWERED.booleanValue())))
             .andExpect(jsonPath("$.[*].transformed").value(hasItem(DEFAULT_TRANSFORMED.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getHit() throws Exception {

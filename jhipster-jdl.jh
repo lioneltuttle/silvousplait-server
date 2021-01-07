@@ -35,6 +35,8 @@ entity ProfessionalDetails{
 
 entity CompanyLocation{
 	adresse String
+    lat Double
+    lng Double
 }
 
 entity ProRequest{
@@ -113,7 +115,7 @@ relationship ManyToOne {
 relationship OneToMany {
 	Customer{requests} to ProRequest{customer}
     Customer{choices} to ProChoice{customer}
-    Company{locations} to CompanyLocation{professional}
+    Company{locations} to CompanyLocation{company}
     CompanyLocation{professionals} to Professional{location}
     
     

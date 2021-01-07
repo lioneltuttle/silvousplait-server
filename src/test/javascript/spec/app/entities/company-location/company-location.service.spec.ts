@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(CompanyLocationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new CompanyLocation(0, 'AAAAAAA');
+      elemDefault = new CompanyLocation(0, 'AAAAAAA', 0, 0);
     });
 
     describe('Service methods', () => {
@@ -59,7 +59,9 @@ describe('Service Tests', () => {
       it('should update a CompanyLocation', async () => {
         const returnedFromService = Object.assign(
           {
-            adresse: 'BBBBBB'
+            adresse: 'BBBBBB',
+            lat: 1,
+            lng: 1
           },
           elemDefault
         );
@@ -77,7 +79,9 @@ describe('Service Tests', () => {
       it('should return a list of CompanyLocation', async () => {
         const returnedFromService = Object.assign(
           {
-            adresse: 'BBBBBB'
+            adresse: 'BBBBBB',
+            lat: 1,
+            lng: 1
           },
           elemDefault
         );

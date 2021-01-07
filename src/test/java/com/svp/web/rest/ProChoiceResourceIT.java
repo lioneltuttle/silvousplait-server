@@ -7,7 +7,6 @@ import com.svp.service.ProChoiceService;
 import com.svp.service.dto.ProChoiceDTO;
 import com.svp.service.mapper.ProChoiceMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -177,7 +176,7 @@ public class ProChoiceResourceIT {
             .andExpect(jsonPath("$.[*].deviceRegistrationId").value(hasItem(DEFAULT_DEVICE_REGISTRATION_ID.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProChoice() throws Exception {

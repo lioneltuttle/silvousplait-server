@@ -7,7 +7,6 @@ import com.svp.service.RatingService;
 import com.svp.service.dto.RatingDTO;
 import com.svp.service.mapper.RatingMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -178,7 +177,7 @@ public class RatingResourceIT {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getRating() throws Exception {

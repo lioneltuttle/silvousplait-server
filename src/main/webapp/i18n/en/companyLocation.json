@@ -17,8 +17,10 @@
         "title": "Company Location"
       },
       "adresse": "Adresse",
+      "lat": "Lat",
+      "lng": "Lng",
       "professionals": "Professionals",
-      "professional": "Professional"
+      "company": "Company"
     }
   }
 }

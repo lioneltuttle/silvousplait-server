@@ -1,8 +1,7 @@
 package com.svp.service;
 
-import com.svp.config.Constants;
-
 import com.svp.SilvousplaitApp;
+import com.svp.config.Constants;
 import com.svp.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +28,6 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

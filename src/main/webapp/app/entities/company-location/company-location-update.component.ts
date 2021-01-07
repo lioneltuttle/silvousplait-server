@@ -22,7 +22,9 @@ export class CompanyLocationUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     adresse: [],
-    professionalId: []
+    lat: [],
+    lng: [],
+    companyId: []
   });
 
   constructor(
@@ -51,7 +53,9 @@ export class CompanyLocationUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: companyLocation.id,
       adresse: companyLocation.adresse,
-      professionalId: companyLocation.professionalId
+      lat: companyLocation.lat,
+      lng: companyLocation.lng,
+      companyId: companyLocation.companyId
     });
   }
 
@@ -74,7 +78,9 @@ export class CompanyLocationUpdateComponent implements OnInit {
       ...new CompanyLocation(),
       id: this.editForm.get(['id']).value,
       adresse: this.editForm.get(['adresse']).value,
-      professionalId: this.editForm.get(['professionalId']).value
+      lat: this.editForm.get(['lat']).value,
+      lng: this.editForm.get(['lng']).value,
+      companyId: this.editForm.get(['companyId']).value
     };
   }
 

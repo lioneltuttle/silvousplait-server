@@ -2,12 +2,12 @@ package com.svp.web.rest;
 
 import com.svp.SilvousplaitApp;
 import com.svp.domain.ProfessionalAudit;
+import com.svp.domain.enumeration.ProfessionalEvent;
 import com.svp.repository.ProfessionalAuditRepository;
 import com.svp.service.ProfessionalAuditService;
 import com.svp.service.dto.ProfessionalAuditDTO;
 import com.svp.service.mapper.ProfessionalAuditMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -31,8 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.svp.domain.enumeration.ProfessionalEvent;
 /**
  * Integration tests for the {@link ProfessionalAuditResource} REST controller.
  */
@@ -178,7 +176,7 @@ public class ProfessionalAuditResourceIT {
             .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())))
             .andExpect(jsonPath("$.[*].event").value(hasItem(DEFAULT_EVENT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProfessionalAudit() throws Exception {

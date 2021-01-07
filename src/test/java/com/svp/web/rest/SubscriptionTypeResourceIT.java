@@ -7,7 +7,6 @@ import com.svp.service.SubscriptionTypeService;
 import com.svp.service.dto.SubscriptionTypeDTO;
 import com.svp.service.mapper.SubscriptionTypeMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -160,7 +159,7 @@ public class SubscriptionTypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(subscriptionType.getId().intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getSubscriptionType() throws Exception {

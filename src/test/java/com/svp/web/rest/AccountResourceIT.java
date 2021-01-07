@@ -15,7 +15,6 @@ import com.svp.web.rest.errors.ExceptionTranslator;
 import com.svp.web.rest.vm.KeyAndPasswordVM;
 import com.svp.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

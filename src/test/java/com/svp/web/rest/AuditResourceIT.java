@@ -4,7 +4,6 @@ import com.svp.SilvousplaitApp;
 import com.svp.config.audit.AuditEventConverter;
 import com.svp.domain.PersistentAuditEvent;
 import com.svp.repository.PersistenceAuditEventRepository;
-
 import com.svp.service.AuditEventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

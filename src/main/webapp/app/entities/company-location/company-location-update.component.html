@@ -14,10 +14,20 @@
                     <input type="text" class="form-control" name="adresse" id="field_adresse"
                            formControlName="adresse"/>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.companyLocation.lat" for="field_lat">Lat</label>
+                    <input type="number" class="form-control" name="lat" id="field_lat"
+                           formControlName="lat"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.companyLocation.lng" for="field_lng">Lng</label>
+                    <input type="number" class="form-control" name="lng" id="field_lng"
+                           formControlName="lng"/>
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="silvousplaitApp.companyLocation.professional" for="field_professional">Professional</label>
-                    <select class="form-control" id="field_professional" name="professional" formControlName="professionalId">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.companyLocation.company" for="field_company">Company</label>
+                    <select class="form-control" id="field_company" name="company" formControlName="companyId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="companyOption.id" *ngFor="let companyOption of companies; trackBy: trackCompanyById">{{companyOption.id}}</option>
                     </select>

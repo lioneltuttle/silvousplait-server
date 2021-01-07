@@ -7,7 +7,6 @@ import com.svp.service.SummaryService;
 import com.svp.service.dto.SummaryDTO;
 import com.svp.service.mapper.SummaryMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -185,7 +184,7 @@ public class SummaryResourceIT {
             .andExpect(jsonPath("$.[*].currentBill").value(hasItem(DEFAULT_CURRENT_BILL.doubleValue())))
             .andExpect(jsonPath("$.[*].rating").value(hasItem(DEFAULT_RATING.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getSummary() throws Exception {

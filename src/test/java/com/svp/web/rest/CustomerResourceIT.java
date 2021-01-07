@@ -7,7 +7,6 @@ import com.svp.service.CustomerService;
 import com.svp.service.dto.CustomerDTO;
 import com.svp.service.mapper.CustomerMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -188,7 +187,7 @@ public class CustomerResourceIT {
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getCustomer() throws Exception {

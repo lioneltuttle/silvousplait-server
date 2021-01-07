@@ -4,6 +4,14 @@
         {
             "fieldName": "adresse",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Double"
         }
     ],
     "relationships": [
@@ -17,7 +25,7 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "company",
             "otherEntityRelationshipName": "locations",
-            "relationshipName": "professional",
+            "relationshipName": "company",
             "otherEntityField": "id"
         }
     ],
