@@ -81,6 +81,7 @@ public class ProChoiceResource {
     /**
      * {@code GET  /pro-choices} : get all the proChoices.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of proChoices in body.
      */
     @GetMapping("/pro-choices")

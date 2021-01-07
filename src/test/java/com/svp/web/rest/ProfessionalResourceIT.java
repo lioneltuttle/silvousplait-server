@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link ProfessionalResource} REST controller.
+ * Integration tests for the {@link ProfessionalResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class ProfessionalResourceIT {
@@ -46,6 +46,7 @@ public class ProfessionalResourceIT {
 
     private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_CREATION_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final Boolean DEFAULT_UP = false;
     private static final Boolean UPDATED_UP = true;
@@ -285,7 +286,7 @@ public class ProfessionalResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Professional> professionalList = professionalRepository.findAll();
         assertThat(professionalList).hasSize(databaseSizeBeforeDelete - 1);
     }

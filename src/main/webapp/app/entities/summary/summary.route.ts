@@ -17,7 +17,7 @@ export class SummaryResolve implements Resolve<ISummary> {
   constructor(private service: SummaryService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISummary> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Summary>) => response.ok),

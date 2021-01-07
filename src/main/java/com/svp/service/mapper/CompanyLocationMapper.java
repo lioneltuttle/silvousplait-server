@@ -15,6 +15,7 @@ public interface CompanyLocationMapper extends EntityMapper<CompanyLocationDTO, 
     CompanyLocationDTO toDto(CompanyLocation companyLocation);
 
     @Mapping(target = "professionals", ignore = true)
+    @Mapping(target = "removeProfessionals", ignore = true)
     @Mapping(source = "professionalId", target = "professional")
     CompanyLocation toEntity(CompanyLocationDTO companyLocationDTO);
 

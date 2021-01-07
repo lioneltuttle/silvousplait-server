@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link CompanyLocationResource} REST controller.
+ * Integration tests for the {@link CompanyLocationResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class CompanyLocationResourceIT {
@@ -243,7 +243,7 @@ public class CompanyLocationResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<CompanyLocation> companyLocationList = companyLocationRepository.findAll();
         assertThat(companyLocationList).hasSize(databaseSizeBeforeDelete - 1);
     }

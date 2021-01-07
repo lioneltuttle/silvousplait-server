@@ -17,7 +17,7 @@ export class ProfessionalResolve implements Resolve<IProfessional> {
   constructor(private service: ProfessionalService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProfessional> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Professional>) => response.ok),

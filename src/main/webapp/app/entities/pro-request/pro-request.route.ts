@@ -17,7 +17,7 @@ export class ProRequestResolve implements Resolve<IProRequest> {
   constructor(private service: ProRequestService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProRequest> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<ProRequest>) => response.ok),

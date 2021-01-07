@@ -37,7 +37,7 @@ const ENTITY_STATES = [...companyLocationRoute, ...companyLocationPopupRoute];
 export class SilvousplaitCompanyLocationModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
-      if (languageKey !== undefined) {
+      if (languageKey) {
         this.languageService.changeLanguage(languageKey);
       }
     });

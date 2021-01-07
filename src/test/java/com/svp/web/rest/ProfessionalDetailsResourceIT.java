@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link ProfessionalDetailsResource} REST controller.
+ * Integration tests for the {@link ProfessionalDetailsResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class ProfessionalDetailsResourceIT {
@@ -41,6 +41,7 @@ public class ProfessionalDetailsResourceIT {
 
     private static final Double DEFAULT_HOURLY_RATE = 1D;
     private static final Double UPDATED_HOURLY_RATE = 2D;
+    private static final Double SMALLER_HOURLY_RATE = 1D - 1D;
 
     private static final Boolean DEFAULT_ON_MOBILITY = false;
     private static final Boolean UPDATED_ON_MOBILITY = true;
@@ -263,7 +264,7 @@ public class ProfessionalDetailsResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<ProfessionalDetails> professionalDetailsList = professionalDetailsRepository.findAll();
         assertThat(professionalDetailsList).hasSize(databaseSizeBeforeDelete - 1);
     }

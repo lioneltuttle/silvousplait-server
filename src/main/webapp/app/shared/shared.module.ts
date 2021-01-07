@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SilvousplaitSharedLibsModule, SilvousplaitSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
+import { SilvousplaitSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
 
 @NgModule({
-  imports: [SilvousplaitSharedLibsModule, SilvousplaitSharedCommonModule],
+  imports: [SilvousplaitSharedCommonModule],
   declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
   entryComponents: [JhiLoginModalComponent],
   exports: [SilvousplaitSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],

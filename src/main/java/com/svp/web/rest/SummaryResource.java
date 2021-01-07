@@ -81,6 +81,7 @@ public class SummaryResource {
     /**
      * {@code GET  /summaries} : get all the summaries.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of summaries in body.
      */
     @GetMapping("/summaries")

@@ -11,7 +11,6 @@ import { SummaryService } from './summary.service';
   templateUrl: './summary-update.component.html'
 })
 export class SummaryUpdateComponent implements OnInit {
-  summary: ISummary;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -28,7 +27,6 @@ export class SummaryUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ summary }) => {
       this.updateForm(summary);
-      this.summary = summary;
     });
   }
 
@@ -57,7 +55,7 @@ export class SummaryUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ISummary {
-    const entity = {
+    return {
       ...new Summary(),
       id: this.editForm.get(['id']).value,
       hits: this.editForm.get(['hits']).value,
@@ -65,11 +63,10 @@ export class SummaryUpdateComponent implements OnInit {
       currentBill: this.editForm.get(['currentBill']).value,
       rating: this.editForm.get(['rating']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISummary>>) {
-    result.subscribe((res: HttpResponse<ISummary>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link ProRequestResource} REST controller.
+ * Integration tests for the {@link ProRequestResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class ProRequestResourceIT {
@@ -46,6 +46,7 @@ public class ProRequestResourceIT {
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     @Autowired
     private ProRequestRepository proRequestRepository;
@@ -265,7 +266,7 @@ public class ProRequestResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<ProRequest> proRequestList = proRequestRepository.findAll();
         assertThat(proRequestList).hasSize(databaseSizeBeforeDelete - 1);
     }

@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link CompanyResource} REST controller.
+ * Integration tests for the {@link CompanyResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class CompanyResourceIT {
@@ -43,6 +43,7 @@ public class CompanyResourceIT {
 
     private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_CREATION_DATE = LocalDate.ofEpochDay(-1L);
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -255,7 +256,7 @@ public class CompanyResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Company> companyList = companyRepository.findAll();
         assertThat(companyList).hasSize(databaseSizeBeforeDelete - 1);
     }

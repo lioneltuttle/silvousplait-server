@@ -18,7 +18,6 @@ import { CustomerService } from 'app/entities/customer';
   templateUrl: './pro-request-update.component.html'
 })
 export class ProRequestUpdateComponent implements OnInit {
-  proRequest: IProRequest;
   isSaving: boolean;
 
   companytypes: ICompanyType[];
@@ -48,7 +47,6 @@ export class ProRequestUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ proRequest }) => {
       this.updateForm(proRequest);
-      this.proRequest = proRequest;
     });
     this.companyTypeService
       .query()
@@ -92,7 +90,7 @@ export class ProRequestUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IProRequest {
-    const entity = {
+    return {
       ...new ProRequest(),
       id: this.editForm.get(['id']).value,
       location: this.editForm.get(['location']).value,
@@ -101,11 +99,10 @@ export class ProRequestUpdateComponent implements OnInit {
       companyTypeId: this.editForm.get(['companyTypeId']).value,
       customerId: this.editForm.get(['customerId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProRequest>>) {
-    result.subscribe((res: HttpResponse<IProRequest>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

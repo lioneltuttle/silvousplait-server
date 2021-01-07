@@ -1,13 +1,10 @@
 package com.svp.domain;
-
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A CompanyType.
@@ -24,7 +21,7 @@ public class CompanyType implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "jhi_type")
+    @Column(name = "type")
     private String type;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

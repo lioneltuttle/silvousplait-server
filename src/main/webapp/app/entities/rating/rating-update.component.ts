@@ -16,7 +16,6 @@ import { ProfessionalService } from 'app/entities/professional';
   templateUrl: './rating-update.component.html'
 })
 export class RatingUpdateComponent implements OnInit {
-  rating: IRating;
   isSaving: boolean;
 
   professionals: IProfessional[];
@@ -42,7 +41,6 @@ export class RatingUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ rating }) => {
       this.updateForm(rating);
-      this.rating = rating;
     });
     this.professionalService
       .query()
@@ -78,7 +76,7 @@ export class RatingUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IRating {
-    const entity = {
+    return {
       ...new Rating(),
       id: this.editForm.get(['id']).value,
       value: this.editForm.get(['value']).value,
@@ -86,11 +84,10 @@ export class RatingUpdateComponent implements OnInit {
       comment: this.editForm.get(['comment']).value,
       companyId: this.editForm.get(['companyId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IRating>>) {
-    result.subscribe((res: HttpResponse<IRating>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

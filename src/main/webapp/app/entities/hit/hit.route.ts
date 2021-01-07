@@ -17,7 +17,7 @@ export class HitResolve implements Resolve<IHit> {
   constructor(private service: HitService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IHit> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Hit>) => response.ok),

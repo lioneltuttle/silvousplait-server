@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-customer" [routerLink]="['/customer/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.customer.home.createLabel">
-            Create new Customer
+            Create a new Customer
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="customers">
+    <div class="alert alert-warning" *ngIf="customers?.length === 0">
+        <span jhiTranslate="silvousplaitApp.customer.home.notFound">No customers found</span>
+    </div>
+    <div class="table-responsive" *ngIf="customers?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -46,7 +49,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'customer', { outlets: { popup: customer.id + '/delete'} }]"
+                                [routerLink]="['/customer', { outlets: { popup: customer.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

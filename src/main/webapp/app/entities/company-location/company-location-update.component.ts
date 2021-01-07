@@ -15,7 +15,6 @@ import { CompanyService } from 'app/entities/company';
   templateUrl: './company-location-update.component.html'
 })
 export class CompanyLocationUpdateComponent implements OnInit {
-  companyLocation: ICompanyLocation;
   isSaving: boolean;
 
   companies: ICompany[];
@@ -38,7 +37,6 @@ export class CompanyLocationUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ companyLocation }) => {
       this.updateForm(companyLocation);
-      this.companyLocation = companyLocation;
     });
     this.companyService
       .query()
@@ -72,17 +70,16 @@ export class CompanyLocationUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ICompanyLocation {
-    const entity = {
+    return {
       ...new CompanyLocation(),
       id: this.editForm.get(['id']).value,
       adresse: this.editForm.get(['adresse']).value,
       professionalId: this.editForm.get(['professionalId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICompanyLocation>>) {
-    result.subscribe((res: HttpResponse<ICompanyLocation>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

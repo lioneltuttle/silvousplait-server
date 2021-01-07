@@ -81,6 +81,7 @@ public class RatingResource {
     /**
      * {@code GET  /ratings} : get all the ratings.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ratings in body.
      */
     @GetMapping("/ratings")

@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-professional-audit" [routerLink]="['/professional-audit/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.professionalAudit.home.createLabel">
-            Create new Professional Audit
+            Create a new Professional Audit
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="professionalAudits">
+    <div class="alert alert-warning" *ngIf="professionalAudits?.length === 0">
+        <span jhiTranslate="silvousplaitApp.professionalAudit.home.notFound">No professionalAudits found</span>
+    </div>
+    <div class="table-responsive" *ngIf="professionalAudits?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -30,7 +33,7 @@
                 <td jhiTranslate="{{'silvousplaitApp.ProfessionalEvent.' + professionalAudit.event}}">{{professionalAudit.event}}</td>
                 <td>
                     <div *ngIf="professionalAudit.professionalId">
-                        <a [routerLink]="['../professional', professionalAudit.professionalId , 'view' ]" >{{professionalAudit.professionalId}}</a>
+                        <a [routerLink]="['/professional', professionalAudit.professionalId , 'view' ]" >{{professionalAudit.professionalId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -48,7 +51,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'professional-audit', { outlets: { popup: professionalAudit.id + '/delete'} }]"
+                                [routerLink]="['/professional-audit', { outlets: { popup: professionalAudit.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

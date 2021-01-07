@@ -1,0 +1,11 @@
+id;date;answered;transformed
+1;2019-09-05;true;true
+2;2019-09-05;true;true
+3;2019-09-05;false;true
+4;2019-09-05;true;true
+5;2019-09-04;true;false
+6;2019-09-05;true;true
+7;2019-09-05;true;false
+8;2019-09-05;false;false
+9;2019-09-04;true;false
+10;2019-09-05;false;false

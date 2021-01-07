@@ -4,7 +4,8 @@
       "home": {
         "title": "Company Locations",
         "createLabel": "Create a new Company Location",
-        "createOrEditLabel": "Create or edit a Company Location"
+        "createOrEditLabel": "Create or edit a Company Location",
+        "notFound": "No Company Locations found"
       },
       "created": "A new Company Location is created with identifier {{ param }}",
       "updated": "A Company Location is updated with identifier {{ param }}",

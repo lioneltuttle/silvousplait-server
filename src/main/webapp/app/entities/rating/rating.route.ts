@@ -17,7 +17,7 @@ export class RatingResolve implements Resolve<IRating> {
   constructor(private service: RatingService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IRating> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Rating>) => response.ok),

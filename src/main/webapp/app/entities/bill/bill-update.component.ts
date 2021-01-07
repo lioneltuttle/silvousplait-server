@@ -16,7 +16,6 @@ import { CompanyService } from 'app/entities/company';
   templateUrl: './bill-update.component.html'
 })
 export class BillUpdateComponent implements OnInit {
-  bill: IBill;
   isSaving: boolean;
 
   companies: ICompany[];
@@ -42,7 +41,6 @@ export class BillUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ bill }) => {
       this.updateForm(bill);
-      this.bill = bill;
     });
     this.companyService
       .query()
@@ -78,7 +76,7 @@ export class BillUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IBill {
-    const entity = {
+    return {
       ...new Bill(),
       id: this.editForm.get(['id']).value,
       date: this.editForm.get(['date']).value,
@@ -86,11 +84,10 @@ export class BillUpdateComponent implements OnInit {
       status: this.editForm.get(['status']).value,
       companyId: this.editForm.get(['companyId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBill>>) {
-    result.subscribe((res: HttpResponse<IBill>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

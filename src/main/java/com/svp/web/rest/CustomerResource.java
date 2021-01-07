@@ -81,6 +81,7 @@ public class CustomerResource {
     /**
      * {@code GET  /customers} : get all the customers.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of customers in body.
      */
     @GetMapping("/customers")

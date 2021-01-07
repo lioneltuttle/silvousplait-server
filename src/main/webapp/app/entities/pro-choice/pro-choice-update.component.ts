@@ -22,7 +22,6 @@ import { CustomerService } from 'app/entities/customer';
   templateUrl: './pro-choice-update.component.html'
 })
 export class ProChoiceUpdateComponent implements OnInit {
-  proChoice: IProChoice;
   isSaving: boolean;
 
   choices: IProfessional[];
@@ -60,7 +59,6 @@ export class ProChoiceUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ proChoice }) => {
       this.updateForm(proChoice);
-      this.proChoice = proChoice;
     });
     this.professionalService
       .query({ filter: 'prochoice-is-null' })
@@ -70,11 +68,11 @@ export class ProChoiceUpdateComponent implements OnInit {
       )
       .subscribe(
         (res: IProfessional[]) => {
-          if (!this.proChoice.choiceId) {
+          if (!this.editForm.get('choiceId').value) {
             this.choices = res;
           } else {
             this.professionalService
-              .find(this.proChoice.choiceId)
+              .find(this.editForm.get('choiceId').value)
               .pipe(
                 filter((subResMayBeOk: HttpResponse<IProfessional>) => subResMayBeOk.ok),
                 map((subResponse: HttpResponse<IProfessional>) => subResponse.body)
@@ -95,11 +93,11 @@ export class ProChoiceUpdateComponent implements OnInit {
       )
       .subscribe(
         (res: IProRequest[]) => {
-          if (!this.proChoice.requestId) {
+          if (!this.editForm.get('requestId').value) {
             this.requests = res;
           } else {
             this.proRequestService
-              .find(this.proChoice.requestId)
+              .find(this.editForm.get('requestId').value)
               .pipe(
                 filter((subResMayBeOk: HttpResponse<IProRequest>) => subResMayBeOk.ok),
                 map((subResponse: HttpResponse<IProRequest>) => subResponse.body)
@@ -120,11 +118,11 @@ export class ProChoiceUpdateComponent implements OnInit {
       )
       .subscribe(
         (res: IRating[]) => {
-          if (!this.proChoice.ratingId) {
+          if (!this.editForm.get('ratingId').value) {
             this.ratings = res;
           } else {
             this.ratingService
-              .find(this.proChoice.ratingId)
+              .find(this.editForm.get('ratingId').value)
               .pipe(
                 filter((subResMayBeOk: HttpResponse<IRating>) => subResMayBeOk.ok),
                 map((subResponse: HttpResponse<IRating>) => subResponse.body)
@@ -174,7 +172,7 @@ export class ProChoiceUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IProChoice {
-    const entity = {
+    return {
       ...new ProChoice(),
       id: this.editForm.get(['id']).value,
       location: this.editForm.get(['location']).value,
@@ -185,11 +183,10 @@ export class ProChoiceUpdateComponent implements OnInit {
       ratingId: this.editForm.get(['ratingId']).value,
       customerId: this.editForm.get(['customerId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProChoice>>) {
-    result.subscribe((res: HttpResponse<IProChoice>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

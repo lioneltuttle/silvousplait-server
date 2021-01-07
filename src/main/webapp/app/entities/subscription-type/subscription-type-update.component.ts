@@ -11,7 +11,6 @@ import { SubscriptionTypeService } from './subscription-type.service';
   templateUrl: './subscription-type-update.component.html'
 })
 export class SubscriptionTypeUpdateComponent implements OnInit {
-  subscriptionType: ISubscriptionType;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -29,7 +28,6 @@ export class SubscriptionTypeUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ subscriptionType }) => {
       this.updateForm(subscriptionType);
-      this.subscriptionType = subscriptionType;
     });
   }
 
@@ -55,16 +53,15 @@ export class SubscriptionTypeUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ISubscriptionType {
-    const entity = {
+    return {
       ...new SubscriptionType(),
       id: this.editForm.get(['id']).value,
       type: this.editForm.get(['type']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISubscriptionType>>) {
-    result.subscribe((res: HttpResponse<ISubscriptionType>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

@@ -81,6 +81,7 @@ public class ProRequestResource {
     /**
      * {@code GET  /pro-requests} : get all the proRequests.
      *
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of proRequests in body.
      */
     @GetMapping("/pro-requests")

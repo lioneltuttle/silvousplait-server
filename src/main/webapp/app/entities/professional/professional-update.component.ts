@@ -18,7 +18,6 @@ import { CompanyLocationService } from 'app/entities/company-location';
   templateUrl: './professional-update.component.html'
 })
 export class ProfessionalUpdateComponent implements OnInit {
-  professional: IProfessional;
   isSaving: boolean;
 
   details: IProfessionalDetails[];
@@ -50,7 +49,6 @@ export class ProfessionalUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ professional }) => {
       this.updateForm(professional);
-      this.professional = professional;
     });
     this.professionalDetailsService
       .query({ filter: 'professional-is-null' })
@@ -60,11 +58,11 @@ export class ProfessionalUpdateComponent implements OnInit {
       )
       .subscribe(
         (res: IProfessionalDetails[]) => {
-          if (!this.professional.detailsId) {
+          if (!this.editForm.get('detailsId').value) {
             this.details = res;
           } else {
             this.professionalDetailsService
-              .find(this.professional.detailsId)
+              .find(this.editForm.get('detailsId').value)
               .pipe(
                 filter((subResMayBeOk: HttpResponse<IProfessionalDetails>) => subResMayBeOk.ok),
                 map((subResponse: HttpResponse<IProfessionalDetails>) => subResponse.body)
@@ -114,7 +112,7 @@ export class ProfessionalUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IProfessional {
-    const entity = {
+    return {
       ...new Professional(),
       id: this.editForm.get(['id']).value,
       firstName: this.editForm.get(['firstName']).value,
@@ -125,11 +123,10 @@ export class ProfessionalUpdateComponent implements OnInit {
       detailsId: this.editForm.get(['detailsId']).value,
       locationId: this.editForm.get(['locationId']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProfessional>>) {
-    result.subscribe((res: HttpResponse<IProfessional>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

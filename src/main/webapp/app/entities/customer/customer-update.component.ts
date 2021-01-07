@@ -11,7 +11,6 @@ import { CustomerService } from './customer.service';
   templateUrl: './customer-update.component.html'
 })
 export class CustomerUpdateComponent implements OnInit {
-  customer: ICustomer;
   isSaving: boolean;
 
   editForm = this.fb.group({
@@ -29,7 +28,6 @@ export class CustomerUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ customer }) => {
       this.updateForm(customer);
-      this.customer = customer;
     });
   }
 
@@ -59,7 +57,7 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   private createFromForm(): ICustomer {
-    const entity = {
+    return {
       ...new Customer(),
       id: this.editForm.get(['id']).value,
       firstName: this.editForm.get(['firstName']).value,
@@ -68,11 +66,10 @@ export class CustomerUpdateComponent implements OnInit {
       phoneNumber: this.editForm.get(['phoneNumber']).value,
       location: this.editForm.get(['location']).value
     };
-    return entity;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ICustomer>>) {
-    result.subscribe((res: HttpResponse<ICustomer>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
   }
 
   protected onSaveSuccess() {

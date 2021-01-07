@@ -4,7 +4,8 @@
       "home": {
         "title": "Professionals",
         "createLabel": "Create a new Professional",
-        "createOrEditLabel": "Create or edit a Professional"
+        "createOrEditLabel": "Create or edit a Professional",
+        "notFound": "No Professionals found"
       },
       "created": "A new Professional is created with identifier {{ param }}",
       "updated": "A Professional is updated with identifier {{ param }}",

@@ -33,13 +33,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link HitResource} REST controller.
+ * Integration tests for the {@link HitResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class HitResourceIT {
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final Boolean DEFAULT_ANSWERED = false;
     private static final Boolean UPDATED_ANSWERED = true;
@@ -265,7 +266,7 @@ public class HitResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Hit> hitList = hitRepository.findAll();
         assertThat(hitList).hasSize(databaseSizeBeforeDelete - 1);
     }

@@ -1,0 +1,11 @@
+id;date;message;event
+1;2019-09-05;Grocery;END
+2;2019-09-04;engage;CANCEL
+3;2019-09-05;Bypass;START
+4;2019-09-05;New Taiwan Dollar Zimbabwe parse;SEND
+5;2019-09-04;Ergonomic Falls;SEND
+6;2019-09-05;white SMTP;CANCEL
+7;2019-09-05;Kyrgyz Republic transmit;RESEND
+8;2019-09-04;Refined redundant;START
+9;2019-09-05;Credit Card Account transmitter cyan;PAID
+10;2019-09-04;Home Loan Account withdrawal;CANCEL

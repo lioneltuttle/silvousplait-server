@@ -1,6 +1,4 @@
 package com.svp.domain;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import com.svp.domain.enumeration.ProfessionalEvent;
 
@@ -28,7 +25,7 @@ public class ProfessionalAudit implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "jhi_date")
+    @Column(name = "date")
     private LocalDate date;
 
     @Column(name = "message")

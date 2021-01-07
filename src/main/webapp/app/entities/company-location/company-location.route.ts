@@ -17,7 +17,7 @@ export class CompanyLocationResolve implements Resolve<ICompanyLocation> {
   constructor(private service: CompanyLocationService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICompanyLocation> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<CompanyLocation>) => response.ok),

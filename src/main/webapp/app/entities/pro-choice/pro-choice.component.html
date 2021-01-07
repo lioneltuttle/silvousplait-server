@@ -4,13 +4,16 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pro-choice" [routerLink]="['/pro-choice/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="silvousplaitApp.proChoice.home.createLabel">
-            Create new Pro Choice
+            Create a new Pro Choice
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="proChoices">
+    <div class="alert alert-warning" *ngIf="proChoices?.length === 0">
+        <span jhiTranslate="silvousplaitApp.proChoice.home.notFound">No proChoices found</span>
+    </div>
+    <div class="table-responsive" *ngIf="proChoices?.length > 0">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -33,22 +36,22 @@
                 <td>{{proChoice.date | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="proChoice.choiceId">
-                        <a [routerLink]="['../professional', proChoice.choiceId , 'view' ]" >{{proChoice.choiceId}}</a>
+                        <a [routerLink]="['/professional', proChoice.choiceId , 'view' ]" >{{proChoice.choiceId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="proChoice.requestId">
-                        <a [routerLink]="['../pro-request', proChoice.requestId , 'view' ]" >{{proChoice.requestId}}</a>
+                        <a [routerLink]="['/pro-request', proChoice.requestId , 'view' ]" >{{proChoice.requestId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="proChoice.ratingId">
-                        <a [routerLink]="['../rating', proChoice.ratingId , 'view' ]" >{{proChoice.ratingId}}</a>
+                        <a [routerLink]="['/rating', proChoice.ratingId , 'view' ]" >{{proChoice.ratingId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="proChoice.customerId">
-                        <a [routerLink]="['../customer', proChoice.customerId , 'view' ]" >{{proChoice.customerId}}</a>
+                        <a [routerLink]="['/customer', proChoice.customerId , 'view' ]" >{{proChoice.customerId}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -66,7 +69,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'pro-choice', { outlets: { popup: proChoice.id + '/delete'} }]"
+                                [routerLink]="['/pro-choice', { outlets: { popup: proChoice.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

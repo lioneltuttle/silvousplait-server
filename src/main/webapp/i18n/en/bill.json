@@ -4,7 +4,8 @@
       "home": {
         "title": "Bills",
         "createLabel": "Create a new Bill",
-        "createOrEditLabel": "Create or edit a Bill"
+        "createOrEditLabel": "Create or edit a Bill",
+        "notFound": "No Bills found"
       },
       "created": "A new Bill is created with identifier {{ param }}",
       "updated": "A Bill is updated with identifier {{ param }}",

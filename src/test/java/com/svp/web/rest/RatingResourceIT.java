@@ -33,16 +33,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link RatingResource} REST controller.
+ * Integration tests for the {@link RatingResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class RatingResourceIT {
 
     private static final Double DEFAULT_VALUE = 1D;
     private static final Double UPDATED_VALUE = 2D;
+    private static final Double SMALLER_VALUE = 1D - 1D;
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
     private static final String UPDATED_COMMENT = "BBBBBBBBBB";
@@ -265,7 +267,7 @@ public class RatingResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Rating> ratingList = ratingRepository.findAll();
         assertThat(ratingList).hasSize(databaseSizeBeforeDelete - 1);
     }

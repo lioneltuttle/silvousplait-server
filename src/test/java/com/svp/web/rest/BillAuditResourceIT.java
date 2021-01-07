@@ -34,13 +34,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.svp.domain.enumeration.BillEvent;
 /**
- * Integration tests for the {@Link BillAuditResource} REST controller.
+ * Integration tests for the {@link BillAuditResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class BillAuditResourceIT {
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final String DEFAULT_MESSAGE = "AAAAAAAAAA";
     private static final String UPDATED_MESSAGE = "BBBBBBBBBB";
@@ -266,7 +267,7 @@ public class BillAuditResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<BillAudit> billAuditList = billAuditRepository.findAll();
         assertThat(billAuditList).hasSize(databaseSizeBeforeDelete - 1);
     }

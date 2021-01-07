@@ -31,22 +31,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Integration tests for the {@Link SummaryResource} REST controller.
+ * Integration tests for the {@link SummaryResource} REST controller.
  */
 @SpringBootTest(classes = SilvousplaitApp.class)
 public class SummaryResourceIT {
 
     private static final Integer DEFAULT_HITS = 1;
     private static final Integer UPDATED_HITS = 2;
+    private static final Integer SMALLER_HITS = 1 - 1;
 
     private static final Integer DEFAULT_MISSED = 1;
     private static final Integer UPDATED_MISSED = 2;
+    private static final Integer SMALLER_MISSED = 1 - 1;
 
     private static final Double DEFAULT_CURRENT_BILL = 1D;
     private static final Double UPDATED_CURRENT_BILL = 2D;
+    private static final Double SMALLER_CURRENT_BILL = 1D - 1D;
 
     private static final Double DEFAULT_RATING = 1D;
     private static final Double UPDATED_RATING = 2D;
+    private static final Double SMALLER_RATING = 1D - 1D;
 
     @Autowired
     private SummaryRepository summaryRepository;
@@ -273,7 +277,7 @@ public class SummaryResourceIT {
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isNoContent());
 
-        // Validate the database is empty
+        // Validate the database contains one less item
         List<Summary> summaryList = summaryRepository.findAll();
         assertThat(summaryList).hasSize(databaseSizeBeforeDelete - 1);
     }

@@ -4,7 +4,7 @@
       "packageName": "com.svp",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "6.0.1",
+    "jhipsterVersion": "6.2.0",
     "applicationType": "monolith",
     "baseName": "silvousplait",
     "packageName": "com.svp",
@@ -28,17 +28,14 @@
     "clientThemeVariant": "light",
     "useSass": true,
     "clientPackageManager": "npm",
-    "testFrameworks": [
-      "cucumber"
-    ],
+    "testFrameworks": ["cucumber"],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": [
-      "en"
-    ]
+    "languages": ["en"],
+    "blueprints": []
   }
 }

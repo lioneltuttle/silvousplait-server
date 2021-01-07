@@ -4,7 +4,8 @@
       "home": {
         "title": "Pro Choices",
         "createLabel": "Create a new Pro Choice",
-        "createOrEditLabel": "Create or edit a Pro Choice"
+        "createOrEditLabel": "Create or edit a Pro Choice",
+        "notFound": "No Pro Choices found"
       },
       "created": "A new Pro Choice is created with identifier {{ param }}",
       "updated": "A Pro Choice is updated with identifier {{ param }}",

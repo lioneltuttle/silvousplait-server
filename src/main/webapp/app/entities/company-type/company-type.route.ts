@@ -17,7 +17,7 @@ export class CompanyTypeResolve implements Resolve<ICompanyType> {
   constructor(private service: CompanyTypeService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICompanyType> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<CompanyType>) => response.ok),
