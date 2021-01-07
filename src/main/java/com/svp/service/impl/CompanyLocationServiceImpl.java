@@ -87,4 +87,22 @@ public class CompanyLocationServiceImpl implements CompanyLocationService {
         log.debug("Request to delete CompanyLocation : {}", id);
         companyLocationRepository.deleteById(id);
     }
+
+    @Override
+    public List<CompanyLocationDTO> findAllFromLocation(Double lat, Double lng) {
+        //set to 2 kms but must change by town
+        //Paris 2km but others, 10km is ok
+        log.debug("findAllFromLocation with lat:"+lat+ "   long:"+lng);
+        List<CompanyLocation> compLoc = companyLocationRepository.findByLocationAndDistance(lat, lng, 2);
+        return compLoc.stream().map(companyLocationMapper :: toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CompanyLocationDTO> findAllFromLocationAndType(Double lat, Double lng, long type) {
+        //set to 2 kms but must change by town
+        //Paris 2km but others, 10km is ok
+        List<CompanyLocation> compLoc = companyLocationRepository.findByLocationAndDistanceAndType(lat, lng, 2, type);
+        return compLoc.stream().map(companyLocationMapper :: toDto).collect(Collectors.toList());
+    }
+
 }

@@ -31,7 +31,7 @@ public class Company implements Serializable {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "professional")
+    @OneToMany(mappedBy = "company")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<CompanyLocation> locations = new HashSet<>();
 
@@ -89,13 +89,13 @@ public class Company implements Serializable {
 
     public Company addLocations(CompanyLocation companyLocation) {
         this.locations.add(companyLocation);
-        companyLocation.setProfessional(this);
+        companyLocation.setCompany(this);
         return this;
     }
 
     public Company removeLocations(CompanyLocation companyLocation) {
         this.locations.remove(companyLocation);
-        companyLocation.setProfessional(null);
+        companyLocation.setCompany(null);
         return this;
     }
 

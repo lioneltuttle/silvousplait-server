@@ -1,13 +1,12 @@
 package com.svp.service.impl;
 
-import com.svp.service.CompanyTypeService;
 import com.svp.domain.CompanyType;
 import com.svp.repository.CompanyTypeRepository;
+import com.svp.service.CompanyTypeService;
 import com.svp.service.dto.CompanyTypeDTO;
 import com.svp.service.mapper.CompanyTypeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

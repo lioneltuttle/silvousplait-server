@@ -1,7 +1,6 @@
 package com.svp.web.rest;
 
 import com.svp.service.AuditEventService;
-
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.springframework.boot.actuate.audit.AuditEvent;

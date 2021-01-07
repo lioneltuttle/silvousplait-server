@@ -1,6 +1,7 @@
 package com.svp.service;
 
 import com.svp.service.dto.CompanyLocationDTO;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,4 +41,8 @@ public interface CompanyLocationService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<CompanyLocationDTO> findAllFromLocation(@PathVariable Double lat, @PathVariable Double lng);
+
+    List<CompanyLocationDTO> findAllFromLocationAndType(@PathVariable Double lat, @PathVariable Double lng, long type);
 }

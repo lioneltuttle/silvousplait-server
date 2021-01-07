@@ -1,7 +1,6 @@
 package com.svp.config;
 
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.springframework.boot.SpringApplication;
 
 import java.util.*;

@@ -1,11 +1,9 @@
 package com.svp.web.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.svp.security.jwt.JWTFilter;
 import com.svp.security.jwt.TokenProvider;
 import com.svp.web.rest.vm.LoginVM;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

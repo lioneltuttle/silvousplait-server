@@ -1,13 +1,12 @@
 package com.svp.service.impl;
 
-import com.svp.service.SubscriptionTypeService;
 import com.svp.domain.SubscriptionType;
 import com.svp.repository.SubscriptionTypeRepository;
+import com.svp.service.SubscriptionTypeService;
 import com.svp.service.dto.SubscriptionTypeDTO;
 import com.svp.service.mapper.SubscriptionTypeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

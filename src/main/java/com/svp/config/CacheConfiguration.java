@@ -1,17 +1,15 @@
 package com.svp.config;
 
-import java.time.Duration;
-
+import io.github.jhipster.config.JHipsterProperties;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
-
 import org.hibernate.cache.jcache.ConfigSettings;
-import io.github.jhipster.config.JHipsterProperties;
-
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
+
+import java.time.Duration;
 
 @Configuration
 @EnableCaching

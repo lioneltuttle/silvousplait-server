@@ -1,8 +1,7 @@
 package com.svp.domain;
 
-import com.svp.config.Constants;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.svp.config.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;

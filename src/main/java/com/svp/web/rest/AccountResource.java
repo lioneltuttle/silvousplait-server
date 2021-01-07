@@ -11,7 +11,6 @@ import com.svp.service.dto.UserDTO;
 import com.svp.web.rest.errors.*;
 import com.svp.web.rest.vm.KeyAndPasswordVM;
 import com.svp.web.rest.vm.ManagedUserVM;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,10 @@
 package com.svp.service.dto;
-import java.time.LocalDate;
-import java.io.Serializable;
-import java.util.Objects;
+
 import com.svp.domain.enumeration.ProfessionalEvent;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.svp.domain.ProfessionalAudit} entity.

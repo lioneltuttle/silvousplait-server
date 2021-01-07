@@ -27,13 +27,19 @@ public class CompanyLocation implements Serializable {
     @Column(name = "adresse")
     private String adresse;
 
+    @Column(name = "lat")
+    private Double lat;
+
+    @Column(name = "lng")
+    private Double lng;
+
     @OneToMany(mappedBy = "location")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Professional> professionals = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JsonIgnoreProperties("locations")
-    private Company professional;
+    private Company company;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -55,6 +61,32 @@ public class CompanyLocation implements Serializable {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public CompanyLocation lat(Double lat) {
+        this.lat = lat;
+        return this;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public CompanyLocation lng(Double lng) {
+        this.lng = lng;
+        return this;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
     }
 
     public Set<Professional> getProfessionals() {
@@ -82,17 +114,17 @@ public class CompanyLocation implements Serializable {
         this.professionals = professionals;
     }
 
-    public Company getProfessional() {
-        return professional;
+    public Company getCompany() {
+        return company;
     }
 
-    public CompanyLocation professional(Company company) {
-        this.professional = company;
+    public CompanyLocation company(Company company) {
+        this.company = company;
         return this;
     }
 
-    public void setProfessional(Company company) {
-        this.professional = company;
+    public void setCompany(Company company) {
+        this.company = company;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -117,6 +149,8 @@ public class CompanyLocation implements Serializable {
         return "CompanyLocation{" +
             "id=" + getId() +
             ", adresse='" + getAdresse() + "'" +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
             "}";
     }
 }

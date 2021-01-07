@@ -1,13 +1,12 @@
 package com.svp.service.impl;
 
-import com.svp.service.SummaryService;
 import com.svp.domain.Summary;
 import com.svp.repository.SummaryRepository;
+import com.svp.service.SummaryService;
 import com.svp.service.dto.SummaryDTO;
 import com.svp.service.mapper.SummaryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

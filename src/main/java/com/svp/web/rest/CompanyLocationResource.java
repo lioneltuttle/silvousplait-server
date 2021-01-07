@@ -115,4 +115,16 @@ public class CompanyLocationResource {
         companyLocationService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/company-locations-from")
+    public List<CompanyLocationDTO> findAllFromLocation(@RequestParam(value = "lat") Double lat, @RequestParam(value = "lng") Double lng){
+        log.debug("REST request to find All From Location : {}", lat, lng);
+        return companyLocationService.findAllFromLocation(lat,lng);
+    }
+    @GetMapping("/company-locations-fromType")
+    public List<CompanyLocationDTO> findAllFromLocationAndType(@RequestParam(value = "lat") Double lat, @RequestParam(value = "lng") Double lng, @RequestParam(value = "companyType") long type ){
+        log.debug("REST request to find All From Location : {} {} {}", lat,lng,type);
+        return companyLocationService.findAllFromLocationAndType(lat,lng, type);
+    }
+
 }

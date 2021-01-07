@@ -11,8 +11,11 @@ public class CompanyLocationDTO implements Serializable {
 
     private String adresse;
 
+    private Double lat;
 
-    private Long professionalId;
+    private Double lng;
+
+    private CompanyDTO company;
 
     public Long getId() {
         return id;
@@ -30,12 +33,28 @@ public class CompanyLocationDTO implements Serializable {
         this.adresse = adresse;
     }
 
-    public Long getProfessionalId() {
-        return professionalId;
+    public Double getLat() {
+        return lat;
     }
 
-    public void setProfessionalId(Long companyId) {
-        this.professionalId = companyId;
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
     }
 
     @Override
@@ -64,7 +83,9 @@ public class CompanyLocationDTO implements Serializable {
         return "CompanyLocationDTO{" +
             "id=" + getId() +
             ", adresse='" + getAdresse() + "'" +
-            ", professional=" + getProfessionalId() +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
+            ", company=" + getCompany() +
             "}";
     }
 }

@@ -2,7 +2,6 @@ package com.svp.service.mapper;
 
 import com.svp.domain.*;
 import com.svp.service.dto.HitDTO;
-
 import org.mapstruct.*;
 
 /**

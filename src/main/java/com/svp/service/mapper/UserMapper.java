@@ -3,7 +3,6 @@ package com.svp.service.mapper;
 import com.svp.domain.Authority;
 import com.svp.domain.User;
 import com.svp.service.dto.UserDTO;
-
 import org.springframework.stereotype.Service;
 
 import java.util.*;

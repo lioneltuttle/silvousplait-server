@@ -1,13 +1,12 @@
 package com.svp.service.impl;
 
-import com.svp.service.RatingService;
 import com.svp.domain.Rating;
 import com.svp.repository.RatingRepository;
+import com.svp.service.RatingService;
 import com.svp.service.dto.RatingDTO;
 import com.svp.service.mapper.RatingMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

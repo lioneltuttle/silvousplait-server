@@ -10,7 +10,6 @@ import com.svp.security.SecurityUtils;
 import com.svp.service.dto.UserDTO;
 import com.svp.service.util.RandomUtil;
 import com.svp.web.rest.errors.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;

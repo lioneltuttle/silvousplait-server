@@ -1,13 +1,12 @@
 package com.svp.service.impl;
 
-import com.svp.service.ProfessionalService;
 import com.svp.domain.Professional;
 import com.svp.repository.ProfessionalRepository;
+import com.svp.service.ProfessionalService;
 import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.mapper.ProfessionalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

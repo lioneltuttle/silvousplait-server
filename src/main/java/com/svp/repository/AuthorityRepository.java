@@ -1,7 +1,6 @@
 package com.svp.repository;
 
 import com.svp.domain.Authority;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

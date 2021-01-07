@@ -1,14 +1,12 @@
 package com.svp.service.dto;
 
 import com.svp.config.Constants;
-
 import com.svp.domain.Authority;
 import com.svp.domain.User;
 
+import javax.validation.constraints.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
-import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;

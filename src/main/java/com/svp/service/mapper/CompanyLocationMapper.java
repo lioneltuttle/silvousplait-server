@@ -11,12 +11,12 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface CompanyLocationMapper extends EntityMapper<CompanyLocationDTO, CompanyLocation> {
 
-    @Mapping(source = "professional.id", target = "professionalId")
+    @Mapping(source = "company", target = "company")
     CompanyLocationDTO toDto(CompanyLocation companyLocation);
 
     @Mapping(target = "professionals", ignore = true)
     @Mapping(target = "removeProfessionals", ignore = true)
-    @Mapping(source = "professionalId", target = "professional")
+    @Mapping(source = "company", target = "company")
     CompanyLocation toEntity(CompanyLocationDTO companyLocationDTO);
 
     default CompanyLocation fromId(Long id) {
