@@ -195,3 +195,18 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [protractor]: https://angular.github.io/protractor/
 [leaflet]: http://leafletjs.com/
 [definitelytyped]: http://definitelytyped.org/
+
+##pour modifier la sécurité (pages sans JWT°): SecurityConfiguration
+
+## h2 db console: http://localhost:8080/h2-console
+
+###### pour Heroku:
+
+# D'abord verifier que graddle est installé
+
+npm i gradle
+#ensuite lancer ca, ca build et ca déploie avec un heroku.yaml
+jhipster heroku
+#heroku deploy:jar target/gamejhipster-0.0.1-SNAPSHOT.jar --app gamification-server
+#et pour les logs:
+heroku logs --tail
