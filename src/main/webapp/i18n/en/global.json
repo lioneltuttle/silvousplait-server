@@ -22,6 +22,7 @@
         "billAudit": "Bill Audit",
         "hit": "Hit",
         "summary": "Summary",
+        "professionalProfileImage": "Professional Profile Image",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -60,6 +60,7 @@ public class CacheConfiguration {
             createCache(cm, com.svp.domain.BillAudit.class.getName());
             createCache(cm, com.svp.domain.Hit.class.getName());
             createCache(cm, com.svp.domain.Summary.class.getName());
+            createCache(cm, com.svp.domain.ProfessionalProfileImage.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

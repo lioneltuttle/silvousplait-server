@@ -207,6 +207,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 npm i gradle
 #ensuite lancer ca, ca build et ca déploie avec un heroku.yaml
 jhipster heroku
-#heroku deploy:jar target/gamejhipster-0.0.1-SNAPSHOT.jar --app gamification-server
+
+####
+
+mvnw package
+heroku deploy:jar -a silvousplait-server -jar target\silvousplait-0.0.1-SNAPSHOT.jar
 #et pour les logs:
-heroku logs --tail
+heroku logs --tail -a silvousplait-server
