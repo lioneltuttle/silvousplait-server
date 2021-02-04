@@ -1,0 +1,24 @@
+{
+    "name": "ProfessionalProfileImage",
+    "fields": [
+        {
+            "fieldName": "proId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20210126220341",
+    "entityTableName": "professional_profile_image",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

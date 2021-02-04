@@ -1,0 +1,23 @@
+{
+  "silvousplaitApp": {
+    "professionalProfileImage": {
+      "home": {
+        "title": "Professional Profile Images",
+        "createLabel": "Create a new Professional Profile Image",
+        "createOrEditLabel": "Create or edit a Professional Profile Image",
+        "notFound": "No Professional Profile Images found"
+      },
+      "created": "A new Professional Profile Image is created with identifier {{ param }}",
+      "updated": "A Professional Profile Image is updated with identifier {{ param }}",
+      "deleted": "A Professional Profile Image is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Professional Profile Image {{ id }}?"
+      },
+      "detail": {
+        "title": "Professional Profile Image"
+      },
+      "proId": "Pro Id",
+      "image": "Image"
+    }
+  }
+}
