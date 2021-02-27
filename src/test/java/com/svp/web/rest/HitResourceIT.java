@@ -3,9 +3,13 @@ package com.svp.web.rest;
 import com.svp.SilvousplaitApp;
 import com.svp.domain.Hit;
 import com.svp.repository.HitRepository;
+import com.svp.repository.ProfessionalRepository;
 import com.svp.service.HitService;
+import com.svp.service.ProfessionalService;
 import com.svp.service.dto.HitDTO;
+import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.mapper.HitMapper;
+import com.svp.service.mapper.ProfessionalMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +26,7 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -57,6 +62,12 @@ public class HitResourceIT {
     private HitService hitService;
 
     @Autowired
+    private ProfessionalMapper professionalMapper;
+
+    @Autowired
+    private ProfessionalService professionalService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -78,7 +89,7 @@ public class HitResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final HitResource hitResource = new HitResource(hitService);
+        final HitResource hitResource = new HitResource(hitService, professionalMapper);
         this.restHitMockMvc = MockMvcBuilders.standaloneSetup(hitResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -268,6 +279,29 @@ public class HitResourceIT {
         // Validate the database contains one less item
         List<Hit> hitList = hitRepository.findAll();
         assertThat(hitList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void testFindFromProDates() throws Exception{
+
+        ProfessionalDTO proDto = new ProfessionalDTO();
+        proDto =  professionalService.save(proDto);
+
+        HitDTO dto = hitMapper.toDto(hit);
+        dto.setProfessionalId(proDto.getId());
+        LocalDate date = YearMonth.now().minusMonths(2).atDay(1);
+        dto.setDate(date);
+        dto = hitService.save(dto);
+
+        // Get the hit
+        restHitMockMvc.perform(get("/api/hits/pro/{id}", proDto.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(dto.getId().intValue())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(date.toString())))
+            .andExpect(jsonPath("$.[*].answered").value(hasItem(DEFAULT_ANSWERED)))
+            .andExpect(jsonPath("$.[*].transformed").value(hasItem(DEFAULT_TRANSFORMED)));
     }
 
     @Test

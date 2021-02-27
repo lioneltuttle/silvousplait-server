@@ -1,7 +1,10 @@
 package com.svp.web.rest;
 
+import com.svp.domain.Professional;
 import com.svp.service.HitService;
+import com.svp.service.ProfessionalService;
 import com.svp.service.dto.HitDTO;
+import com.svp.service.mapper.ProfessionalMapper;
 import com.svp.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +31,18 @@ public class HitResource {
     private final Logger log = LoggerFactory.getLogger(HitResource.class);
 
     private static final String ENTITY_NAME = "hit";
+    private static final int NB_MONTH_RECAP = 3;
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final HitService hitService;
+    private ProfessionalService professionalService;
+    private ProfessionalMapper professionalMapper;
 
-    public HitResource(HitService hitService) {
+    public HitResource(HitService hitService, ProfessionalMapper professionalMapper) {
         this.hitService = hitService;
+        this.professionalMapper = professionalMapper;
     }
 
     /**
@@ -112,5 +121,11 @@ public class HitResource {
         log.debug("REST request to delete Hit : {}", id);
         hitService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/hits/pro/{proId}")
+    public List<HitDTO> getLastsHits(@PathVariable Long proId){
+        Professional pro = professionalMapper.fromId(proId);
+        return hitService.findBetweenDatesForPro(pro, YearMonth.now().minusMonths(NB_MONTH_RECAP).atDay(1), LocalDate.now());
     }
 }

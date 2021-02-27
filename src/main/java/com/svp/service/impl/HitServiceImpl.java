@@ -1,8 +1,11 @@
 package com.svp.service.impl;
 
 import com.svp.domain.Hit;
+import com.svp.domain.Professional;
 import com.svp.repository.HitRepository;
+import com.svp.repository.ProfessionalRepository;
 import com.svp.service.HitService;
+import com.svp.service.ProfessionalService;
 import com.svp.service.dto.HitDTO;
 import com.svp.service.mapper.HitMapper;
 import org.slf4j.Logger;
@@ -10,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +30,8 @@ public class HitServiceImpl implements HitService {
     private final Logger log = LoggerFactory.getLogger(HitServiceImpl.class);
 
     private final HitRepository hitRepository;
+
+    private ProfessionalRepository professionalRepository;
 
     private final HitMapper hitMapper;
 
@@ -85,5 +92,23 @@ public class HitServiceImpl implements HitService {
     public void delete(Long id) {
         log.debug("Request to delete Hit : {}", id);
         hitRepository.deleteById(id);
+    }
+
+    @Override
+    public List<HitDTO> findAll(Professional pro) {
+        return hitRepository.findByProfessional(pro).stream().map(hitMapper::toDto).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<HitDTO> findBetweenDatesForPro(Professional pro, LocalDate from, LocalDate to) {
+        return hitRepository.findByProfessionalAndDateBetween(pro, from, to).stream().map(hitMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HitDTO> findAllBetweenDates(LocalDate from, LocalDate to) {
+        List<Hit> hits = hitRepository.findByDateBetween(from, to);
+        List<HitDTO> dtos = hits.stream().map(hitMapper::toDto).collect(Collectors.toList());
+        return dtos;
     }
 }
