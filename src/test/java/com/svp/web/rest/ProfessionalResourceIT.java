@@ -7,6 +7,7 @@ import com.svp.service.ProfessionalService;
 import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.mapper.ProfessionalMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -52,6 +53,31 @@ public class ProfessionalResourceIT {
 
     private static final Boolean DEFAULT_ACTIVE = false;
     private static final Boolean UPDATED_ACTIVE = true;
+
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_LAT = 1D;
+    private static final Double UPDATED_LAT = 2D;
+    private static final Double SMALLER_LAT = 1D - 1D;
+
+    private static final Double DEFAULT_LNG = 1D;
+    private static final Double UPDATED_LNG = 2D;
+    private static final Double SMALLER_LNG = 1D - 1D;
+
+    private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
+
+    private static final Double DEFAULT_HOURLY_RATE = 1D;
+    private static final Double UPDATED_HOURLY_RATE = 2D;
+    private static final Double SMALLER_HOURLY_RATE = 1D - 1D;
+
+    private static final Boolean DEFAULT_ON_MOBILITY = false;
+    private static final Boolean UPDATED_ON_MOBILITY = true;
+
+    private static final Long DEFAULT_USER_ID = 1L;
+    private static final Long UPDATED_USER_ID = 2L;
+    private static final Long SMALLER_USER_ID = 1L - 1L;
 
     @Autowired
     private ProfessionalRepository professionalRepository;
@@ -105,7 +131,14 @@ public class ProfessionalResourceIT {
             .lastName(DEFAULT_LAST_NAME)
             .creationDate(DEFAULT_CREATION_DATE)
             .up(DEFAULT_UP)
-            .active(DEFAULT_ACTIVE);
+            .active(DEFAULT_ACTIVE)
+            .address(DEFAULT_ADDRESS)
+            .lat(DEFAULT_LAT)
+            .lng(DEFAULT_LNG)
+            .phoneNumber(DEFAULT_PHONE_NUMBER)
+            .hourlyRate(DEFAULT_HOURLY_RATE)
+            .onMobility(DEFAULT_ON_MOBILITY)
+            .userId(DEFAULT_USER_ID);
         return professional;
     }
     /**
@@ -120,7 +153,14 @@ public class ProfessionalResourceIT {
             .lastName(UPDATED_LAST_NAME)
             .creationDate(UPDATED_CREATION_DATE)
             .up(UPDATED_UP)
-            .active(UPDATED_ACTIVE);
+            .active(UPDATED_ACTIVE)
+            .address(UPDATED_ADDRESS)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG)
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .hourlyRate(UPDATED_HOURLY_RATE)
+            .onMobility(UPDATED_ON_MOBILITY)
+            .userId(UPDATED_USER_ID);
         return professional;
     }
 
@@ -150,6 +190,13 @@ public class ProfessionalResourceIT {
         assertThat(testProfessional.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testProfessional.isUp()).isEqualTo(DEFAULT_UP);
         assertThat(testProfessional.isActive()).isEqualTo(DEFAULT_ACTIVE);
+        assertThat(testProfessional.getAddress()).isEqualTo(DEFAULT_ADDRESS);
+        assertThat(testProfessional.getLat()).isEqualTo(DEFAULT_LAT);
+        assertThat(testProfessional.getLng()).isEqualTo(DEFAULT_LNG);
+        assertThat(testProfessional.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testProfessional.getHourlyRate()).isEqualTo(DEFAULT_HOURLY_RATE);
+        assertThat(testProfessional.isOnMobility()).isEqualTo(DEFAULT_ON_MOBILITY);
+        assertThat(testProfessional.getUserId()).isEqualTo(DEFAULT_USER_ID);
     }
 
     @Test
@@ -188,9 +235,16 @@ public class ProfessionalResourceIT {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].up").value(hasItem(DEFAULT_UP.booleanValue())))
-            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())))
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].hourlyRate").value(hasItem(DEFAULT_HOURLY_RATE.doubleValue())))
+            .andExpect(jsonPath("$.[*].onMobility").value(hasItem(DEFAULT_ON_MOBILITY.booleanValue())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.intValue())));
     }
-
+    
     @Test
     @Transactional
     public void getProfessional() throws Exception {
@@ -206,7 +260,14 @@ public class ProfessionalResourceIT {
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
             .andExpect(jsonPath("$.up").value(DEFAULT_UP.booleanValue()))
-            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
+            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.doubleValue()))
+            .andExpect(jsonPath("$.lng").value(DEFAULT_LNG.doubleValue()))
+            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.toString()))
+            .andExpect(jsonPath("$.hourlyRate").value(DEFAULT_HOURLY_RATE.doubleValue()))
+            .andExpect(jsonPath("$.onMobility").value(DEFAULT_ON_MOBILITY.booleanValue()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.intValue()));
     }
 
     @Test
@@ -234,7 +295,14 @@ public class ProfessionalResourceIT {
             .lastName(UPDATED_LAST_NAME)
             .creationDate(UPDATED_CREATION_DATE)
             .up(UPDATED_UP)
-            .active(UPDATED_ACTIVE);
+            .active(UPDATED_ACTIVE)
+            .address(UPDATED_ADDRESS)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG)
+            .phoneNumber(UPDATED_PHONE_NUMBER)
+            .hourlyRate(UPDATED_HOURLY_RATE)
+            .onMobility(UPDATED_ON_MOBILITY)
+            .userId(UPDATED_USER_ID);
         ProfessionalDTO professionalDTO = professionalMapper.toDto(updatedProfessional);
 
         restProfessionalMockMvc.perform(put("/api/professionals")
@@ -251,6 +319,13 @@ public class ProfessionalResourceIT {
         assertThat(testProfessional.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testProfessional.isUp()).isEqualTo(UPDATED_UP);
         assertThat(testProfessional.isActive()).isEqualTo(UPDATED_ACTIVE);
+        assertThat(testProfessional.getAddress()).isEqualTo(UPDATED_ADDRESS);
+        assertThat(testProfessional.getLat()).isEqualTo(UPDATED_LAT);
+        assertThat(testProfessional.getLng()).isEqualTo(UPDATED_LNG);
+        assertThat(testProfessional.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testProfessional.getHourlyRate()).isEqualTo(UPDATED_HOURLY_RATE);
+        assertThat(testProfessional.isOnMobility()).isEqualTo(UPDATED_ON_MOBILITY);
+        assertThat(testProfessional.getUserId()).isEqualTo(UPDATED_USER_ID);
     }
 
     @Test

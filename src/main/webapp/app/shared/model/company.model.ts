@@ -1,11 +1,11 @@
 import { Moment } from 'moment';
-import { ICompanyLocation } from 'app/shared/model/company-location.model';
+import { IProfessional } from 'app/shared/model/professional.model';
 
 export interface ICompany {
   id?: number;
   name?: string;
   creationDate?: Moment;
-  locations?: ICompanyLocation[];
+  professionals?: IProfessional[];
   companyTypeId?: number;
   subscriptionTypeId?: number;
 }
@@ -15,7 +15,7 @@ export class Company implements ICompany {
     public id?: number,
     public name?: string,
     public creationDate?: Moment,
-    public locations?: ICompanyLocation[],
+    public professionals?: IProfessional[],
     public companyTypeId?: number,
     public subscriptionTypeId?: number
   ) {}

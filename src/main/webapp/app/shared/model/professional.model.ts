@@ -7,8 +7,14 @@ export interface IProfessional {
   creationDate?: Moment;
   up?: boolean;
   active?: boolean;
-  detailsId?: number;
-  locationId?: number;
+  address?: string;
+  lat?: number;
+  lng?: number;
+  phoneNumber?: string;
+  hourlyRate?: number;
+  onMobility?: boolean;
+  userId?: number;
+  companyId?: number;
 }
 
 export class Professional implements IProfessional {
@@ -19,10 +25,17 @@ export class Professional implements IProfessional {
     public creationDate?: Moment,
     public up?: boolean,
     public active?: boolean,
-    public detailsId?: number,
-    public locationId?: number
+    public address?: string,
+    public lat?: number,
+    public lng?: number,
+    public phoneNumber?: string,
+    public hourlyRate?: number,
+    public onMobility?: boolean,
+    public userId?: number,
+    public companyId?: number
   ) {
     this.up = this.up || false;
     this.active = this.active || false;
+    this.onMobility = this.onMobility || false;
   }
 }

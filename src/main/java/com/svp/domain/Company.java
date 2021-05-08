@@ -33,7 +33,7 @@ public class Company implements Serializable {
 
     @OneToMany(mappedBy = "company")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<CompanyLocation> locations = new HashSet<>();
+    private Set<Professional> professionals = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("companies")
@@ -78,29 +78,29 @@ public class Company implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public Set<CompanyLocation> getLocations() {
-        return locations;
+    public Set<Professional> getProfessionals() {
+        return professionals;
     }
 
-    public Company locations(Set<CompanyLocation> companyLocations) {
-        this.locations = companyLocations;
+    public Company professionals(Set<Professional> professionals) {
+        this.professionals = professionals;
         return this;
     }
 
-    public Company addLocations(CompanyLocation companyLocation) {
-        this.locations.add(companyLocation);
-        companyLocation.setCompany(this);
+    public Company addProfessionals(Professional professional) {
+        this.professionals.add(professional);
+        professional.setCompany(this);
         return this;
     }
 
-    public Company removeLocations(CompanyLocation companyLocation) {
-        this.locations.remove(companyLocation);
-        companyLocation.setCompany(null);
+    public Company removeProfessionals(Professional professional) {
+        this.professionals.remove(professional);
+        professional.setCompany(null);
         return this;
     }
 
-    public void setLocations(Set<CompanyLocation> companyLocations) {
-        this.locations = companyLocations;
+    public void setProfessionals(Set<Professional> professionals) {
+        this.professionals = professionals;
     }
 
     public CompanyType getCompanyType() {

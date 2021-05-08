@@ -27,7 +27,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Professional(0, 'AAAAAAA', 'AAAAAAA', currentDate, false, false);
+      elemDefault = new Professional(0, 'AAAAAAA', 'AAAAAAA', currentDate, false, false, 'AAAAAAA', 0, 0, 'AAAAAAA', 0, false, 0);
     });
 
     describe('Service methods', () => {
@@ -78,7 +78,14 @@ describe('Service Tests', () => {
             lastName: 'BBBBBB',
             creationDate: currentDate.format(DATE_FORMAT),
             up: true,
-            active: true
+            active: true,
+            address: 'BBBBBB',
+            lat: 1,
+            lng: 1,
+            phoneNumber: 'BBBBBB',
+            hourlyRate: 1,
+            onMobility: true,
+            userId: 1
           },
           elemDefault
         );
@@ -105,7 +112,14 @@ describe('Service Tests', () => {
             lastName: 'BBBBBB',
             creationDate: currentDate.format(DATE_FORMAT),
             up: true,
-            active: true
+            active: true,
+            address: 'BBBBBB',
+            lat: 1,
+            lng: 1,
+            phoneNumber: 'BBBBBB',
+            hourlyRate: 1,
+            onMobility: true,
+            userId: 1
           },
           elemDefault
         );

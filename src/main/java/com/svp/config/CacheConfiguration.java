@@ -49,9 +49,6 @@ public class CacheConfiguration {
             createCache(cm, com.svp.domain.Customer.class.getName() + ".choices");
             createCache(cm, com.svp.domain.CompanyType.class.getName());
             createCache(cm, com.svp.domain.SubscriptionType.class.getName());
-            createCache(cm, com.svp.domain.ProfessionalDetails.class.getName());
-            createCache(cm, com.svp.domain.CompanyLocation.class.getName());
-            createCache(cm, com.svp.domain.CompanyLocation.class.getName() + ".professionals");
             createCache(cm, com.svp.domain.ProRequest.class.getName());
             createCache(cm, com.svp.domain.ProChoice.class.getName());
             createCache(cm, com.svp.domain.Rating.class.getName());
@@ -61,6 +58,7 @@ public class CacheConfiguration {
             createCache(cm, com.svp.domain.Hit.class.getName());
             createCache(cm, com.svp.domain.Summary.class.getName());
             createCache(cm, com.svp.domain.ProfessionalProfileImage.class.getName());
+            createCache(cm, com.svp.domain.Company.class.getName() + ".professionals");
             // jhipster-needle-ehcache-add-entry
         };
     }

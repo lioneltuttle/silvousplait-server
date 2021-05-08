@@ -9,11 +9,18 @@ entity Professional {
     creationDate LocalDate
     up Boolean
     active Boolean
+    address String
+    lat Double
+    lng Double
+    phoneNumber String
+	hourlyRate Double
+    onMobility Boolean
+  	userId Long
 }
 
 entity Customer {
 	firstName String
-    lastName String
+    lastName String 
     deviceRegistrationId String
     phoneNumber String
     location String
@@ -25,18 +32,6 @@ entity CompanyType{
 
 entity SubscriptionType{
 	type String
-}
-
-entity ProfessionalDetails{
-	phoneNumber String
-	hourlyRate Double
-    onMobility Boolean
-}
-
-entity CompanyLocation{
-	adresse String
-    lat Double
-    lng Double
 }
 
 entity ProRequest{
@@ -120,17 +115,13 @@ relationship ManyToOne {
 relationship OneToMany {
 	Customer{requests} to ProRequest{customer}
     Customer{choices} to ProChoice{customer}
-    Company{locations} to CompanyLocation{company}
-    CompanyLocation{professionals} to Professional{location}
-    
-    
+    Company{professionals} to Professional{company}  
 }
 
 relationship OneToOne {
 	ProChoice{choice} to Professional
     ProChoice{request} to ProRequest
     ProChoice{rating} to Rating
-    Professional{details} to ProfessionalDetails
 }
 
 // Set pagination options

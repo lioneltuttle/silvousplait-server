@@ -1,8 +1,9 @@
 package com.svp.web.rest;
 
 import com.svp.service.ProfessionalService;
-import com.svp.service.dto.ProfessionalDTO;
 import com.svp.web.rest.errors.BadRequestAlertException;
+import com.svp.service.dto.ProfessionalDTO;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,7 @@ import java.util.Optional;
  * REST controller for managing {@link com.svp.domain.Professional}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/pro")
 public class ProfessionalResource {
 
     private final Logger log = LoggerFactory.getLogger(ProfessionalResource.class);
@@ -68,7 +70,9 @@ public class ProfessionalResource {
     public ResponseEntity<ProfessionalDTO> updateProfessional(@RequestBody ProfessionalDTO professionalDTO) throws URISyntaxException {
         log.debug("REST request to update Professional : {}", professionalDTO);
         if (professionalDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+            log.warn("Professional not created yet, creating it");
+            createProfessional(professionalDTO);
+            //throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         ProfessionalDTO result = professionalService.save(professionalDTO);
         return ResponseEntity.ok()
@@ -98,6 +102,19 @@ public class ProfessionalResource {
     public ResponseEntity<ProfessionalDTO> getProfessional(@PathVariable Long id) {
         log.debug("REST request to get Professional : {}", id);
         Optional<ProfessionalDTO> professionalDTO = professionalService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(professionalDTO);
+    }
+
+    /**
+     * {@code GET  /professionals/:id} : get the "id" professional.
+     *
+     * @param userId the id of the professionalDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the professionalDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/professionals/user/{userId}")
+    public ResponseEntity<ProfessionalDTO> getProfessionalByUserId(@PathVariable Long userId) {
+        log.debug("REST request to get Professional : {}", userId);
+        Optional<ProfessionalDTO> professionalDTO = professionalService.findFromUserId(userId);
         return ResponseUtil.wrapOrNotFound(professionalDTO);
     }
 

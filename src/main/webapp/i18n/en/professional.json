@@ -21,8 +21,14 @@
       "creationDate": "Creation Date",
       "up": "Up",
       "active": "Active",
-      "details": "Details",
-      "location": "Location"
+      "address": "Address",
+      "lat": "Lat",
+      "lng": "Lng",
+      "phoneNumber": "Phone Number",
+      "hourlyRate": "Hourly Rate",
+      "onMobility": "On Mobility",
+      "userId": "User Id",
+      "company": "Company"
     }
   }
 }

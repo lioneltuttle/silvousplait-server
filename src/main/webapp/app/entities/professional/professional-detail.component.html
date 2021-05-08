@@ -25,16 +25,38 @@
                 <dd>
                     <span>{{professional.active}}</span>
                 </dd>
-                <dt><span jhiTranslate="silvousplaitApp.professional.details">Details</span></dt>
+                <dt><span jhiTranslate="silvousplaitApp.professional.address">Address</span></dt>
                 <dd>
-                    <div *ngIf="professional.detailsId">
-                        <a [routerLink]="['/professional-details', professional.detailsId, 'view']">{{professional.detailsId}}</a>
-                    </div>
+                    <span>{{professional.address}}</span>
                 </dd>
-                <dt><span jhiTranslate="silvousplaitApp.professional.location">Location</span></dt>
+                <dt><span jhiTranslate="silvousplaitApp.professional.lat">Lat</span></dt>
                 <dd>
-                    <div *ngIf="professional.locationId">
-                        <a [routerLink]="['/company-location', professional.locationId, 'view']">{{professional.locationId}}</a>
+                    <span>{{professional.lat}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.lng">Lng</span></dt>
+                <dd>
+                    <span>{{professional.lng}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{professional.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.hourlyRate">Hourly Rate</span></dt>
+                <dd>
+                    <span>{{professional.hourlyRate}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.onMobility">On Mobility</span></dt>
+                <dd>
+                    <span>{{professional.onMobility}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.userId">User Id</span></dt>
+                <dd>
+                    <span>{{professional.userId}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.professional.company">Company</span></dt>
+                <dd>
+                    <div *ngIf="professional.companyId">
+                        <a [routerLink]="['/company', professional.companyId, 'view']">{{professional.companyId}}</a>
                     </div>
                 </dd>
             </dl>

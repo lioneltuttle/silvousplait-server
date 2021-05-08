@@ -1,7 +1,6 @@
 package com.svp.service.dto;
-
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -21,10 +20,22 @@ public class ProfessionalDTO implements Serializable {
 
     private Boolean active;
 
+    private String address;
 
-    private Long detailsId;
+    private Double lat;
 
-    private Long locationId;
+    private Double lng;
+
+    private String phoneNumber;
+
+    private Double hourlyRate;
+
+    private Boolean onMobility;
+
+    private Long userId;
+
+
+    private Long companyId;
 
     public Long getId() {
         return id;
@@ -74,20 +85,68 @@ public class ProfessionalDTO implements Serializable {
         this.active = active;
     }
 
-    public Long getDetailsId() {
-        return detailsId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDetailsId(Long professionalDetailsId) {
-        this.detailsId = professionalDetailsId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Long getLocationId() {
-        return locationId;
+    public Double getLat() {
+        return lat;
     }
 
-    public void setLocationId(Long companyLocationId) {
-        this.locationId = companyLocationId;
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(Double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+    public Boolean isOnMobility() {
+        return onMobility;
+    }
+
+    public void setOnMobility(Boolean onMobility) {
+        this.onMobility = onMobility;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     @Override
@@ -120,8 +179,14 @@ public class ProfessionalDTO implements Serializable {
             ", creationDate='" + getCreationDate() + "'" +
             ", up='" + isUp() + "'" +
             ", active='" + isActive() + "'" +
-            ", details=" + getDetailsId() +
-            ", location=" + getLocationId() +
+            ", address='" + getAddress() + "'" +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", hourlyRate=" + getHourlyRate() +
+            ", onMobility='" + isOnMobility() + "'" +
+            ", userId=" + getUserId() +
+            ", company=" + getCompanyId() +
             "}";
     }
 }

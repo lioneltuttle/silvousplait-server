@@ -8,10 +8,8 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IProfessional, Professional } from 'app/shared/model/professional.model';
 import { ProfessionalService } from './professional.service';
-import { IProfessionalDetails } from 'app/shared/model/professional-details.model';
-import { ProfessionalDetailsService } from 'app/entities/professional-details';
-import { ICompanyLocation } from 'app/shared/model/company-location.model';
-import { CompanyLocationService } from 'app/entities/company-location';
+import { ICompany } from 'app/shared/model/company.model';
+import { CompanyService } from 'app/entities/company';
 
 @Component({
   selector: 'jhi-professional-update',
@@ -20,9 +18,7 @@ import { CompanyLocationService } from 'app/entities/company-location';
 export class ProfessionalUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  details: IProfessionalDetails[];
-
-  companylocations: ICompanyLocation[];
+  companies: ICompany[];
   creationDateDp: any;
 
   editForm = this.fb.group({
@@ -32,15 +28,20 @@ export class ProfessionalUpdateComponent implements OnInit {
     creationDate: [],
     up: [],
     active: [],
-    detailsId: [],
-    locationId: []
+    address: [],
+    lat: [],
+    lng: [],
+    phoneNumber: [],
+    hourlyRate: [],
+    onMobility: [],
+    userId: [],
+    companyId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected professionalService: ProfessionalService,
-    protected professionalDetailsService: ProfessionalDetailsService,
-    protected companyLocationService: CompanyLocationService,
+    protected companyService: CompanyService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,38 +51,13 @@ export class ProfessionalUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ professional }) => {
       this.updateForm(professional);
     });
-    this.professionalDetailsService
-      .query({ filter: 'professional-is-null' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<IProfessionalDetails[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IProfessionalDetails[]>) => response.body)
-      )
-      .subscribe(
-        (res: IProfessionalDetails[]) => {
-          if (!this.editForm.get('detailsId').value) {
-            this.details = res;
-          } else {
-            this.professionalDetailsService
-              .find(this.editForm.get('detailsId').value)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<IProfessionalDetails>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IProfessionalDetails>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: IProfessionalDetails) => (this.details = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    this.companyLocationService
+    this.companyService
       .query()
       .pipe(
-        filter((mayBeOk: HttpResponse<ICompanyLocation[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ICompanyLocation[]>) => response.body)
+        filter((mayBeOk: HttpResponse<ICompany[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ICompany[]>) => response.body)
       )
-      .subscribe((res: ICompanyLocation[]) => (this.companylocations = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe((res: ICompany[]) => (this.companies = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(professional: IProfessional) {
@@ -92,8 +68,14 @@ export class ProfessionalUpdateComponent implements OnInit {
       creationDate: professional.creationDate,
       up: professional.up,
       active: professional.active,
-      detailsId: professional.detailsId,
-      locationId: professional.locationId
+      address: professional.address,
+      lat: professional.lat,
+      lng: professional.lng,
+      phoneNumber: professional.phoneNumber,
+      hourlyRate: professional.hourlyRate,
+      onMobility: professional.onMobility,
+      userId: professional.userId,
+      companyId: professional.companyId
     });
   }
 
@@ -120,8 +102,14 @@ export class ProfessionalUpdateComponent implements OnInit {
       creationDate: this.editForm.get(['creationDate']).value,
       up: this.editForm.get(['up']).value,
       active: this.editForm.get(['active']).value,
-      detailsId: this.editForm.get(['detailsId']).value,
-      locationId: this.editForm.get(['locationId']).value
+      address: this.editForm.get(['address']).value,
+      lat: this.editForm.get(['lat']).value,
+      lng: this.editForm.get(['lng']).value,
+      phoneNumber: this.editForm.get(['phoneNumber']).value,
+      hourlyRate: this.editForm.get(['hourlyRate']).value,
+      onMobility: this.editForm.get(['onMobility']).value,
+      userId: this.editForm.get(['userId']).value,
+      companyId: this.editForm.get(['companyId']).value
     };
   }
 
@@ -141,11 +129,7 @@ export class ProfessionalUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackProfessionalDetailsById(index: number, item: IProfessionalDetails) {
-    return item.id;
-  }
-
-  trackCompanyLocationById(index: number, item: ICompanyLocation) {
+  trackCompanyById(index: number, item: ICompany) {
     return item.id;
   }
 }

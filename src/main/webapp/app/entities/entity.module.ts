@@ -25,14 +25,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: './subscription-type/subscription-type.module#SilvousplaitSubscriptionTypeModule'
       },
       {
-        path: 'professional-details',
-        loadChildren: './professional-details/professional-details.module#SilvousplaitProfessionalDetailsModule'
-      },
-      {
-        path: 'company-location',
-        loadChildren: './company-location/company-location.module#SilvousplaitCompanyLocationModule'
-      },
-      {
         path: 'pro-request',
         loadChildren: './pro-request/pro-request.module#SilvousplaitProRequestModule'
       },

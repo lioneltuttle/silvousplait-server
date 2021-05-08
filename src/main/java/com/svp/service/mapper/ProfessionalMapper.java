@@ -2,20 +2,19 @@ package com.svp.service.mapper;
 
 import com.svp.domain.*;
 import com.svp.service.dto.ProfessionalDTO;
+
 import org.mapstruct.*;
 
 /**
  * Mapper for the entity {@link Professional} and its DTO {@link ProfessionalDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ProfessionalDetailsMapper.class, CompanyLocationMapper.class})
+@Mapper(componentModel = "spring", uses = {CompanyMapper.class})
 public interface ProfessionalMapper extends EntityMapper<ProfessionalDTO, Professional> {
 
-    @Mapping(source = "details.id", target = "detailsId")
-    @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "company.id", target = "companyId")
     ProfessionalDTO toDto(Professional professional);
 
-    @Mapping(source = "detailsId", target = "details")
-    @Mapping(source = "locationId", target = "location")
+    @Mapping(source = "companyId", target = "company")
     Professional toEntity(ProfessionalDTO professionalDTO);
 
     default Professional fromId(Long id) {

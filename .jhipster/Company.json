@@ -13,9 +13,9 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "companyLocation",
+            "otherEntityName": "professional",
             "otherEntityRelationshipName": "company",
-            "relationshipName": "locations"
+            "relationshipName": "professionals"
         },
         {
             "relationshipType": "many-to-one",

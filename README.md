@@ -214,3 +214,7 @@ mvnw package
 heroku deploy:jar -a silvousplait-server -jar target\silvousplait-0.0.1-SNAPSHOT.jar
 #et pour les logs:
 heroku logs --tail -a silvousplait-server
+
+#### update entites avec jdl studio
+
+jhipster import-jdl jhipster-jdl.jdl

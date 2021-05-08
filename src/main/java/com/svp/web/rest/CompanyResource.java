@@ -1,15 +1,16 @@
 package com.svp.web.rest;
 
 import com.svp.service.CompanyService;
-import com.svp.web.rest.errors.BadRequestAlertException;
 import com.svp.service.dto.CompanyDTO;
 
+import com.svp.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -22,7 +23,7 @@ import java.util.Optional;
  * REST controller for managing {@link com.svp.domain.Company}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/pro")
 public class CompanyResource {
 
     private final Logger log = LoggerFactory.getLogger(CompanyResource.class);
@@ -45,6 +46,7 @@ public class CompanyResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new companyDTO, or with status {@code 400 (Bad Request)} if the company has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @PreAuthorize("hasAuthority('ROLE_PROFESSIONAL')")
     @PostMapping("/companies")
     public ResponseEntity<CompanyDTO> createCompany(@RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         log.debug("REST request to save Company : {}", companyDTO);

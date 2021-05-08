@@ -1,12 +1,13 @@
 package com.svp.service.impl;
 
+import com.svp.service.ProfessionalService;
 import com.svp.domain.Professional;
 import com.svp.repository.ProfessionalRepository;
-import com.svp.service.ProfessionalService;
 import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.mapper.ProfessionalMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,6 +76,21 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         return professionalRepository.findById(id)
             .map(professionalMapper::toDto);
     }
+
+    /**
+     * Get one professional by User id.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<ProfessionalDTO> findFromUserId(Long userId) {
+        log.debug("Request to get Professional by user id : {}", userId);
+        return professionalRepository.findByUserId(userId)
+            .map(professionalMapper::toDto);
+    }
+
 
     /**
      * Delete the professional by id.

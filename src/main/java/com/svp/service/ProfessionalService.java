@@ -34,6 +34,8 @@ public interface ProfessionalService {
      */
     Optional<ProfessionalDTO> findOne(Long id);
 
+    Optional<ProfessionalDTO> findFromUserId(Long userId);
+
     /**
      * Delete the "id" professional.
      *

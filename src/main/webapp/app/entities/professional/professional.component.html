@@ -23,8 +23,14 @@
             <th><span jhiTranslate="silvousplaitApp.professional.creationDate">Creation Date</span></th>
             <th><span jhiTranslate="silvousplaitApp.professional.up">Up</span></th>
             <th><span jhiTranslate="silvousplaitApp.professional.active">Active</span></th>
-            <th><span jhiTranslate="silvousplaitApp.professional.details">Details</span></th>
-            <th><span jhiTranslate="silvousplaitApp.professional.location">Location</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.address">Address</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.lat">Lat</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.lng">Lng</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.phoneNumber">Phone Number</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.hourlyRate">Hourly Rate</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.onMobility">On Mobility</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.userId">User Id</span></th>
+            <th><span jhiTranslate="silvousplaitApp.professional.company">Company</span></th>
             <th></th>
             </tr>
             </thead>
@@ -36,14 +42,16 @@
                 <td>{{professional.creationDate | date:'mediumDate'}}</td>
                 <td>{{professional.up}}</td>
                 <td>{{professional.active}}</td>
+                <td>{{professional.address}}</td>
+                <td>{{professional.lat}}</td>
+                <td>{{professional.lng}}</td>
+                <td>{{professional.phoneNumber}}</td>
+                <td>{{professional.hourlyRate}}</td>
+                <td>{{professional.onMobility}}</td>
+                <td>{{professional.userId}}</td>
                 <td>
-                    <div *ngIf="professional.detailsId">
-                        <a [routerLink]="['/professional-details', professional.detailsId , 'view' ]" >{{professional.detailsId}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="professional.locationId">
-                        <a [routerLink]="['/company-location', professional.locationId , 'view' ]" >{{professional.locationId}}</a>
+                    <div *ngIf="professional.companyId">
+                        <a [routerLink]="['/company', professional.companyId , 'view' ]" >{{professional.companyId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

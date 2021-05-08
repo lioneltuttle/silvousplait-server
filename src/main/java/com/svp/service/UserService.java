@@ -7,6 +7,7 @@ import com.svp.repository.AuthorityRepository;
 import com.svp.repository.UserRepository;
 import com.svp.security.AuthoritiesConstants;
 import com.svp.security.SecurityUtils;
+import com.svp.service.dto.ProfessionalDTO;
 import com.svp.service.dto.UserDTO;
 import com.svp.service.util.RandomUtil;
 import com.svp.web.rest.errors.*;
@@ -42,11 +43,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final ProfessionalService proService;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager,ProfessionalService proService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.proService =proService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -160,6 +164,14 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
+
+        //create professionnal if PRO  :)
+        if(userDTO.getAuthorities().contains("ROLE_PROFESSIONAL")){
+            ProfessionalDTO proDTO = new ProfessionalDTO();
+             proDTO.setUserId(user.getId());
+            proService.save(proDTO);
+        }
+
         return user;
     }
 

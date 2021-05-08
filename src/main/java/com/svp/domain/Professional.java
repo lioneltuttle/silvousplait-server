@@ -1,10 +1,10 @@
 package com.svp.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -38,13 +38,30 @@ public class Professional implements Serializable {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ProfessionalDetails details;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "lat")
+    private Double lat;
+
+    @Column(name = "lng")
+    private Double lng;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "hourly_rate")
+    private Double hourlyRate;
+
+    @Column(name = "on_mobility")
+    private Boolean onMobility;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     @ManyToOne
     @JsonIgnoreProperties("professionals")
-    private CompanyLocation location;
+    private Company company;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -120,30 +137,108 @@ public class Professional implements Serializable {
         this.active = active;
     }
 
-    public ProfessionalDetails getDetails() {
-        return details;
+    public String getAddress() {
+        return address;
     }
 
-    public Professional details(ProfessionalDetails professionalDetails) {
-        this.details = professionalDetails;
+    public Professional address(String address) {
+        this.address = address;
         return this;
     }
 
-    public void setDetails(ProfessionalDetails professionalDetails) {
-        this.details = professionalDetails;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public CompanyLocation getLocation() {
-        return location;
+    public Double getLat() {
+        return lat;
     }
 
-    public Professional location(CompanyLocation companyLocation) {
-        this.location = companyLocation;
+    public Professional lat(Double lat) {
+        this.lat = lat;
         return this;
     }
 
-    public void setLocation(CompanyLocation companyLocation) {
-        this.location = companyLocation;
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public Professional lng(Double lng) {
+        this.lng = lng;
+        return this;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Professional phoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public Professional hourlyRate(Double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+        return this;
+    }
+
+    public void setHourlyRate(Double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+    public Boolean isOnMobility() {
+        return onMobility;
+    }
+
+    public Professional onMobility(Boolean onMobility) {
+        this.onMobility = onMobility;
+        return this;
+    }
+
+    public void setOnMobility(Boolean onMobility) {
+        this.onMobility = onMobility;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Professional userId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public Professional company(Company company) {
+        this.company = company;
+        return this;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -172,6 +267,13 @@ public class Professional implements Serializable {
             ", creationDate='" + getCreationDate() + "'" +
             ", up='" + isUp() + "'" +
             ", active='" + isActive() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
+            ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", hourlyRate=" + getHourlyRate() +
+            ", onMobility='" + isOnMobility() + "'" +
+            ", userId=" + getUserId() +
             "}";
     }
 }

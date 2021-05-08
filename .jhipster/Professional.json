@@ -20,22 +20,42 @@
         {
             "fieldName": "active",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hourlyRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "onMobility",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "Long"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "professionalDetails",
-            "otherEntityRelationshipName": "professional",
-            "relationshipName": "details",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "many-to-one",
-            "otherEntityName": "companyLocation",
+            "otherEntityName": "company",
             "otherEntityRelationshipName": "professionals",
-            "relationshipName": "location",
+            "relationshipName": "company",
             "otherEntityField": "id"
         }
     ],
