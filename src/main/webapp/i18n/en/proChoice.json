@@ -17,8 +17,11 @@
         "title": "Pro Choice"
       },
       "location": "Location",
+      "lat": "Lat",
+      "lng": "Lng",
       "deviceRegistrationId": "Device Registration Id",
       "date": "Date",
+      "comeOver": "Come Over",
       "choice": "Choice",
       "request": "Request",
       "rating": "Rating",

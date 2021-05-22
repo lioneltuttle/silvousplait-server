@@ -28,8 +28,11 @@ export class ProRequestUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     location: [],
+    lat: [],
+    lng: [],
     deviceRegistrationId: [],
     date: [],
+    comeOver: [],
     companyTypeId: [],
     customerId: []
   });
@@ -68,8 +71,11 @@ export class ProRequestUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: proRequest.id,
       location: proRequest.location,
+      lat: proRequest.lat,
+      lng: proRequest.lng,
       deviceRegistrationId: proRequest.deviceRegistrationId,
       date: proRequest.date,
+      comeOver: proRequest.comeOver,
       companyTypeId: proRequest.companyTypeId,
       customerId: proRequest.customerId
     });
@@ -94,8 +100,11 @@ export class ProRequestUpdateComponent implements OnInit {
       ...new ProRequest(),
       id: this.editForm.get(['id']).value,
       location: this.editForm.get(['location']).value,
+      lat: this.editForm.get(['lat']).value,
+      lng: this.editForm.get(['lng']).value,
       deviceRegistrationId: this.editForm.get(['deviceRegistrationId']).value,
       date: this.editForm.get(['date']).value,
+      comeOver: this.editForm.get(['comeOver']).value,
       companyTypeId: this.editForm.get(['companyTypeId']).value,
       customerId: this.editForm.get(['customerId']).value
     };

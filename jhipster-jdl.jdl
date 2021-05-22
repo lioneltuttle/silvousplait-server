@@ -36,14 +36,24 @@ entity SubscriptionType{
 
 entity ProRequest{
 	location String
+    lat Double
+    lng Double
     deviceRegistrationId String
     date LocalDate
+    comeOver Boolean
+}
+
+entity ProResponse{
+	accept Boolean
 }
 
 entity ProChoice{
 	location String
+    lat Double
+    lng Double
     deviceRegistrationId String
     date LocalDate
+    comeOver Boolean
 }
 
 entity Rating{
@@ -110,6 +120,7 @@ relationship ManyToOne {
     Bill{company} to Company
     Hit{professional} to Professional
     Hit{customer} to Customer
+    ProResponse{request} to ProRequest
 }
 
 relationship OneToMany {

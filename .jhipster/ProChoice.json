@@ -6,12 +6,24 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "lat",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lng",
+            "fieldType": "Double"
+        },
+        {
             "fieldName": "deviceRegistrationId",
             "fieldType": "String"
         },
         {
             "fieldName": "date",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "comeOver",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [

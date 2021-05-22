@@ -23,6 +23,7 @@
         "hit": "Hit",
         "summary": "Summary",
         "professionalProfileImage": "Professional Profile Image",
+        "proResponse": "Pro Response",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -19,8 +19,11 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.location">Location</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proChoice.lat">Lat</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proChoice.lng">Lng</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.deviceRegistrationId">Device Registration Id</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.date">Date</span></th>
+            <th><span jhiTranslate="silvousplaitApp.proChoice.comeOver">Come Over</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.choice">Choice</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.request">Request</span></th>
             <th><span jhiTranslate="silvousplaitApp.proChoice.rating">Rating</span></th>
@@ -32,8 +35,11 @@
             <tr *ngFor="let proChoice of proChoices ;trackBy: trackId">
                 <td><a [routerLink]="['/pro-choice', proChoice.id, 'view' ]">{{proChoice.id}}</a></td>
                 <td>{{proChoice.location}}</td>
+                <td>{{proChoice.lat}}</td>
+                <td>{{proChoice.lng}}</td>
                 <td>{{proChoice.deviceRegistrationId}}</td>
                 <td>{{proChoice.date | date:'mediumDate'}}</td>
+                <td>{{proChoice.comeOver}}</td>
                 <td>
                     <div *ngIf="proChoice.choiceId">
                         <a [routerLink]="['/professional', proChoice.choiceId , 'view' ]" >{{proChoice.choiceId}}</a>

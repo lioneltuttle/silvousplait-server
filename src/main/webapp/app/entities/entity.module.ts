@@ -64,6 +64,10 @@ import { RouterModule } from '@angular/router';
         path: 'professional-profile-image',
         loadChildren: () =>
           import('./professional-profile-image/professional-profile-image.module').then(m => m.SilvousplaitProfessionalProfileImageModule)
+      },
+      {
+        path: 'pro-response',
+        loadChildren: () => import('./pro-response/pro-response.module').then(m => m.SilvousplaitProResponseModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

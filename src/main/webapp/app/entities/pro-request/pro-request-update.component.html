@@ -15,6 +15,16 @@
                            formControlName="location"/>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.proRequest.lat" for="field_lat">Lat</label>
+                    <input type="number" class="form-control" name="lat" id="field_lat"
+                           formControlName="lat"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.proRequest.lng" for="field_lng">Lng</label>
+                    <input type="number" class="form-control" name="lng" id="field_lng"
+                           formControlName="lng"/>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="silvousplaitApp.proRequest.deviceRegistrationId" for="field_deviceRegistrationId">Device Registration Id</label>
                     <input type="text" class="form-control" name="deviceRegistrationId" id="field_deviceRegistrationId"
                            formControlName="deviceRegistrationId"/>
@@ -27,6 +37,11 @@
                             <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="silvousplaitApp.proRequest.comeOver" for="field_comeOver">Come Over</label>
+                    <input type="checkbox" class="form-control" name="comeOver" id="field_comeOver"
+                           formControlName="comeOver"/>
                 </div>
 
                 <div class="form-group">

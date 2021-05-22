@@ -1,7 +1,6 @@
 package com.svp.service.dto;
-
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -13,9 +12,15 @@ public class ProChoiceDTO implements Serializable {
 
     private String location;
 
+    private Double lat;
+
+    private Double lng;
+
     private String deviceRegistrationId;
 
     private LocalDate date;
+
+    private Boolean comeOver;
 
 
     private Long choiceId;
@@ -42,6 +47,22 @@ public class ProChoiceDTO implements Serializable {
         this.location = location;
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
     public String getDeviceRegistrationId() {
         return deviceRegistrationId;
     }
@@ -56,6 +77,14 @@ public class ProChoiceDTO implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Boolean isComeOver() {
+        return comeOver;
+    }
+
+    public void setComeOver(Boolean comeOver) {
+        this.comeOver = comeOver;
     }
 
     public Long getChoiceId() {
@@ -116,8 +145,11 @@ public class ProChoiceDTO implements Serializable {
         return "ProChoiceDTO{" +
             "id=" + getId() +
             ", location='" + getLocation() + "'" +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
             ", deviceRegistrationId='" + getDeviceRegistrationId() + "'" +
             ", date='" + getDate() + "'" +
+            ", comeOver='" + isComeOver() + "'" +
             ", choice=" + getChoiceId() +
             ", request=" + getRequestId() +
             ", rating=" + getRatingId() +

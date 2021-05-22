@@ -1,10 +1,10 @@
 package com.svp.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -26,11 +26,20 @@ public class ProRequest implements Serializable {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "lat")
+    private Double lat;
+
+    @Column(name = "lng")
+    private Double lng;
+
     @Column(name = "device_registration_id")
     private String deviceRegistrationId;
 
     @Column(name = "date")
     private LocalDate date;
+
+    @Column(name = "come_over")
+    private Boolean comeOver;
 
     @ManyToOne
     @JsonIgnoreProperties("proRequests")
@@ -62,6 +71,32 @@ public class ProRequest implements Serializable {
         this.location = location;
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public ProRequest lat(Double lat) {
+        this.lat = lat;
+        return this;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public ProRequest lng(Double lng) {
+        this.lng = lng;
+        return this;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
     public String getDeviceRegistrationId() {
         return deviceRegistrationId;
     }
@@ -86,6 +121,19 @@ public class ProRequest implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Boolean isComeOver() {
+        return comeOver;
+    }
+
+    public ProRequest comeOver(Boolean comeOver) {
+        this.comeOver = comeOver;
+        return this;
+    }
+
+    public void setComeOver(Boolean comeOver) {
+        this.comeOver = comeOver;
     }
 
     public CompanyType getCompanyType() {
@@ -136,8 +184,11 @@ public class ProRequest implements Serializable {
         return "ProRequest{" +
             "id=" + getId() +
             ", location='" + getLocation() + "'" +
+            ", lat=" + getLat() +
+            ", lng=" + getLng() +
             ", deviceRegistrationId='" + getDeviceRegistrationId() + "'" +
             ", date='" + getDate() + "'" +
+            ", comeOver='" + isComeOver() + "'" +
             "}";
     }
 }

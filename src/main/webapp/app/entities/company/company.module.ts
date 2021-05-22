@@ -6,7 +6,6 @@ import { JhiLanguageHelper } from 'app/core';
 import { SilvousplaitSharedModule } from 'app/shared';
 import {
   CompanyComponent,
-  CompanyDetailComponent,
   CompanyUpdateComponent,
   CompanyDeletePopupComponent,
   CompanyDeleteDialogComponent,
@@ -18,13 +17,7 @@ const ENTITY_STATES = [...companyRoute, ...companyPopupRoute];
 
 @NgModule({
   imports: [SilvousplaitSharedModule, RouterModule.forChild(ENTITY_STATES)],
-  declarations: [
-    CompanyComponent,
-    CompanyDetailComponent,
-    CompanyUpdateComponent,
-    CompanyDeleteDialogComponent,
-    CompanyDeletePopupComponent
-  ],
+  declarations: [CompanyComponent, CompanyUpdateComponent, CompanyDeleteDialogComponent, CompanyDeletePopupComponent],
   entryComponents: [CompanyComponent, CompanyUpdateComponent, CompanyDeleteDialogComponent, CompanyDeletePopupComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

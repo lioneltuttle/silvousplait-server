@@ -27,7 +27,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new ProRequest(0, 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new ProRequest(0, 'AAAAAAA', 0, 0, 'AAAAAAA', currentDate, false);
     });
 
     describe('Service methods', () => {
@@ -75,8 +75,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             location: 'BBBBBB',
+            lat: 1,
+            lng: 1,
             deviceRegistrationId: 'BBBBBB',
-            date: currentDate.format(DATE_FORMAT)
+            date: currentDate.format(DATE_FORMAT),
+            comeOver: true
           },
           elemDefault
         );
@@ -100,8 +103,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             location: 'BBBBBB',
+            lat: 1,
+            lng: 1,
             deviceRegistrationId: 'BBBBBB',
-            date: currentDate.format(DATE_FORMAT)
+            date: currentDate.format(DATE_FORMAT),
+            comeOver: true
           },
           elemDefault
         );

@@ -7,7 +7,6 @@ import { filter, map } from 'rxjs/operators';
 import { Company } from 'app/shared/model/company.model';
 import { CompanyService } from './company.service';
 import { CompanyComponent } from './company.component';
-import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyUpdateComponent } from './company-update.component';
 import { CompanyDeletePopupComponent } from './company-delete-dialog.component';
 import { ICompany } from 'app/shared/model/company.model';
@@ -32,18 +31,6 @@ export const companyRoute: Routes = [
   {
     path: '',
     component: CompanyComponent,
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'silvousplaitApp.company.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/view',
-    component: CompanyDetailComponent,
-    resolve: {
-      company: CompanyResolve
-    },
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'silvousplaitApp.company.home.title'

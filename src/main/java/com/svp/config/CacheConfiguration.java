@@ -59,6 +59,7 @@ public class CacheConfiguration {
             createCache(cm, com.svp.domain.Summary.class.getName());
             createCache(cm, com.svp.domain.ProfessionalProfileImage.class.getName());
             createCache(cm, com.svp.domain.Company.class.getName() + ".professionals");
+            createCache(cm, com.svp.domain.ProResponse.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

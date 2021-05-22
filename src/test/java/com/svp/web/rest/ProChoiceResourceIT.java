@@ -7,6 +7,7 @@ import com.svp.service.ProChoiceService;
 import com.svp.service.dto.ProChoiceDTO;
 import com.svp.service.mapper.ProChoiceMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -40,12 +41,23 @@ public class ProChoiceResourceIT {
     private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
     private static final String UPDATED_LOCATION = "BBBBBBBBBB";
 
+    private static final Double DEFAULT_LAT = 1D;
+    private static final Double UPDATED_LAT = 2D;
+    private static final Double SMALLER_LAT = 1D - 1D;
+
+    private static final Double DEFAULT_LNG = 1D;
+    private static final Double UPDATED_LNG = 2D;
+    private static final Double SMALLER_LNG = 1D - 1D;
+
     private static final String DEFAULT_DEVICE_REGISTRATION_ID = "AAAAAAAAAA";
     private static final String UPDATED_DEVICE_REGISTRATION_ID = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
+
+    private static final Boolean DEFAULT_COME_OVER = false;
+    private static final Boolean UPDATED_COME_OVER = true;
 
     @Autowired
     private ProChoiceRepository proChoiceRepository;
@@ -96,8 +108,11 @@ public class ProChoiceResourceIT {
     public static ProChoice createEntity(EntityManager em) {
         ProChoice proChoice = new ProChoice()
             .location(DEFAULT_LOCATION)
+            .lat(DEFAULT_LAT)
+            .lng(DEFAULT_LNG)
             .deviceRegistrationId(DEFAULT_DEVICE_REGISTRATION_ID)
-            .date(DEFAULT_DATE);
+            .date(DEFAULT_DATE)
+            .comeOver(DEFAULT_COME_OVER);
         return proChoice;
     }
     /**
@@ -109,8 +124,11 @@ public class ProChoiceResourceIT {
     public static ProChoice createUpdatedEntity(EntityManager em) {
         ProChoice proChoice = new ProChoice()
             .location(UPDATED_LOCATION)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG)
             .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .comeOver(UPDATED_COME_OVER);
         return proChoice;
     }
 
@@ -136,8 +154,11 @@ public class ProChoiceResourceIT {
         assertThat(proChoiceList).hasSize(databaseSizeBeforeCreate + 1);
         ProChoice testProChoice = proChoiceList.get(proChoiceList.size() - 1);
         assertThat(testProChoice.getLocation()).isEqualTo(DEFAULT_LOCATION);
+        assertThat(testProChoice.getLat()).isEqualTo(DEFAULT_LAT);
+        assertThat(testProChoice.getLng()).isEqualTo(DEFAULT_LNG);
         assertThat(testProChoice.getDeviceRegistrationId()).isEqualTo(DEFAULT_DEVICE_REGISTRATION_ID);
         assertThat(testProChoice.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testProChoice.isComeOver()).isEqualTo(DEFAULT_COME_OVER);
     }
 
     @Test
@@ -173,10 +194,13 @@ public class ProChoiceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(proChoice.getId().intValue())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.doubleValue())))
+            .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG.doubleValue())))
             .andExpect(jsonPath("$.[*].deviceRegistrationId").value(hasItem(DEFAULT_DEVICE_REGISTRATION_ID.toString())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].comeOver").value(hasItem(DEFAULT_COME_OVER.booleanValue())));
     }
-
+    
     @Test
     @Transactional
     public void getProChoice() throws Exception {
@@ -189,8 +213,11 @@ public class ProChoiceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(proChoice.getId().intValue()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
+            .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.doubleValue()))
+            .andExpect(jsonPath("$.lng").value(DEFAULT_LNG.doubleValue()))
             .andExpect(jsonPath("$.deviceRegistrationId").value(DEFAULT_DEVICE_REGISTRATION_ID.toString()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.comeOver").value(DEFAULT_COME_OVER.booleanValue()));
     }
 
     @Test
@@ -215,8 +242,11 @@ public class ProChoiceResourceIT {
         em.detach(updatedProChoice);
         updatedProChoice
             .location(UPDATED_LOCATION)
+            .lat(UPDATED_LAT)
+            .lng(UPDATED_LNG)
             .deviceRegistrationId(UPDATED_DEVICE_REGISTRATION_ID)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .comeOver(UPDATED_COME_OVER);
         ProChoiceDTO proChoiceDTO = proChoiceMapper.toDto(updatedProChoice);
 
         restProChoiceMockMvc.perform(put("/api/pro-choices")
@@ -229,8 +259,11 @@ public class ProChoiceResourceIT {
         assertThat(proChoiceList).hasSize(databaseSizeBeforeUpdate);
         ProChoice testProChoice = proChoiceList.get(proChoiceList.size() - 1);
         assertThat(testProChoice.getLocation()).isEqualTo(UPDATED_LOCATION);
+        assertThat(testProChoice.getLat()).isEqualTo(UPDATED_LAT);
+        assertThat(testProChoice.getLng()).isEqualTo(UPDATED_LNG);
         assertThat(testProChoice.getDeviceRegistrationId()).isEqualTo(UPDATED_DEVICE_REGISTRATION_ID);
         assertThat(testProChoice.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testProChoice.isComeOver()).isEqualTo(UPDATED_COME_OVER);
     }
 
     @Test

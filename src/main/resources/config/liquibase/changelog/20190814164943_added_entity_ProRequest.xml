@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
     <!--
@@ -17,11 +19,23 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="lat" type="double">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lng" type="double">
+                <constraints nullable="true" />
+            </column>
+
             <column name="device_registration_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
             <column name="date" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="come_over" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -58,8 +72,11 @@
                   tableName="pro_request">
             <column name="id" type="numeric"/>
             <column name="location" type="string"/>
+            <column name="lat" type="numeric"/>
+            <column name="lng" type="numeric"/>
             <column name="device_registration_id" type="string"/>
             <column name="date" type="date"/>
+            <column name="come_over" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

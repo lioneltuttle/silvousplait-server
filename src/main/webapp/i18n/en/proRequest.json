@@ -17,8 +17,11 @@
         "title": "Pro Request"
       },
       "location": "Location",
+      "lat": "Lat",
+      "lng": "Lng",
       "deviceRegistrationId": "Device Registration Id",
       "date": "Date",
+      "comeOver": "Come Over",
       "companyType": "Company Type",
       "customer": "Customer"
     }
