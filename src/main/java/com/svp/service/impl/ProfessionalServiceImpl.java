@@ -80,7 +80,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     /**
      * Get one professional by User id.
      *
-     * @param id the id of the entity.
+     * @param userId the id of the entity.
      * @return the entity.
      */
     @Override
@@ -101,5 +101,15 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     public void delete(Long id) {
         log.debug("Request to delete Professional : {}", id);
         professionalRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProfessionalDTO> findAllFromLocation(Double lat, Double lng) {
+        return professionalRepository.findByLocationAndDistance(lat, lng, 2).stream().map(professionalMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<ProfessionalDTO> findAllFromLocationAndType(Double lat, Double lng, long type) {
+        return professionalRepository.findByLocationAndDistanceAndType(lat, lng, 2, type).stream().map(professionalMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 }

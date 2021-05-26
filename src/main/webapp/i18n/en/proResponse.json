@@ -1,0 +1,23 @@
+{
+  "silvousplaitApp": {
+    "proResponse": {
+      "home": {
+        "title": "Pro Responses",
+        "createLabel": "Create a new Pro Response",
+        "createOrEditLabel": "Create or edit a Pro Response",
+        "notFound": "No Pro Responses found"
+      },
+      "created": "A new Pro Response is created with identifier {{ param }}",
+      "updated": "A Pro Response is updated with identifier {{ param }}",
+      "deleted": "A Pro Response is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pro Response {{ id }}?"
+      },
+      "detail": {
+        "title": "Pro Response"
+      },
+      "accept": "Accept",
+      "request": "Request"
+    }
+  }
+}

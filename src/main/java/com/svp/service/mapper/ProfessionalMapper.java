@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface ProfessionalMapper extends EntityMapper<ProfessionalDTO, Professional> {
 
     @Mapping(source = "company.id", target = "companyId")
+    @Mapping(source = "company.companyType.id", target = "companyTypeId")
     ProfessionalDTO toDto(Professional professional);
 
     @Mapping(source = "companyId", target = "company")

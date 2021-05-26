@@ -1,0 +1,27 @@
+{
+    "name": "ProResponse",
+    "fields": [
+        {
+            "fieldName": "accept",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "proRequest",
+            "otherEntityRelationshipName": "proResponse",
+            "relationshipName": "request",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20210519234731",
+    "entityTableName": "pro_response",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

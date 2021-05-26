@@ -1,6 +1,8 @@
 package com.svp.web.rest;
 
 import com.svp.service.ProRequestService;
+import com.svp.service.ProfessionalService;
+import com.svp.service.dto.ProfessionalDTO;
 import com.svp.web.rest.errors.BadRequestAlertException;
 import com.svp.service.dto.ProRequestDTO;
 
@@ -33,9 +35,11 @@ public class ProRequestResource {
     private String applicationName;
 
     private final ProRequestService proRequestService;
+    private final ProfessionalService professionalService;
 
-    public ProRequestResource(ProRequestService proRequestService) {
+    public ProRequestResource(ProRequestService proRequestService, ProfessionalService professionalService) {
         this.proRequestService = proRequestService;
+        this.professionalService = professionalService;
     }
 
     /**
@@ -114,5 +118,16 @@ public class ProRequestResource {
         log.debug("REST request to delete ProRequest : {}", id);
         proRequestService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/professional-locations-from")
+    public List<ProfessionalDTO> findAllFromLocation(@RequestParam(value = "lat") Double lat, @RequestParam(value = "lng") Double lng){
+        log.debug("REST request to find All From Location : {}", lat, lng);
+        return professionalService.findAllFromLocation(lat,lng);
+    }
+    @GetMapping("/professional-locations-fromType")
+    public List<ProfessionalDTO> findAllFromLocationAndType(@RequestParam(value = "lat") Double lat, @RequestParam(value = "lng") Double lng, @RequestParam(value = "companyType") long type ){
+        log.debug("REST request to find All From Location : {} {} {}", lat,lng,type);
+        return professionalService.findAllFromLocationAndType(lat,lng, type);
     }
 }

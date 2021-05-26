@@ -34,8 +34,9 @@ public class ProfessionalDTO implements Serializable {
 
     private Long userId;
 
-
     private Long companyId;
+
+    private Long companyTypeId;
 
     public Long getId() {
         return id;
@@ -147,6 +148,14 @@ public class ProfessionalDTO implements Serializable {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public Long getCompanyTypeId() {
+        return companyTypeId;
+    }
+
+    public void setCompanyTypeId(Long companyTypeId) {
+        this.companyTypeId = companyTypeId;
     }
 
     @Override

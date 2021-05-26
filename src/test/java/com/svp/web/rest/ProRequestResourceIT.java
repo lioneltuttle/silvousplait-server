@@ -4,6 +4,7 @@ import com.svp.SilvousplaitApp;
 import com.svp.domain.ProRequest;
 import com.svp.repository.ProRequestRepository;
 import com.svp.service.ProRequestService;
+import com.svp.service.ProfessionalService;
 import com.svp.service.dto.ProRequestDTO;
 import com.svp.service.mapper.ProRequestMapper;
 import com.svp.web.rest.errors.ExceptionTranslator;
@@ -69,6 +70,9 @@ public class ProRequestResourceIT {
     private ProRequestService proRequestService;
 
     @Autowired
+    private ProfessionalService professionalService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -90,7 +94,7 @@ public class ProRequestResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProRequestResource proRequestResource = new ProRequestResource(proRequestService);
+        final ProRequestResource proRequestResource = new ProRequestResource(proRequestService, professionalService);
         this.restProRequestMockMvc = MockMvcBuilders.standaloneSetup(proRequestResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -200,7 +204,7 @@ public class ProRequestResourceIT {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].comeOver").value(hasItem(DEFAULT_COME_OVER.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getProRequest() throws Exception {

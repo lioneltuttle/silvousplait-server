@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="proResponse">
+            <h2><span jhiTranslate="silvousplaitApp.proResponse.detail.title">Pro Response</span> {{proResponse.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="silvousplaitApp.proResponse.accept">Accept</span></dt>
+                <dd>
+                    <span>{{proResponse.accept}}</span>
+                </dd>
+                <dt><span jhiTranslate="silvousplaitApp.proResponse.request">Request</span></dt>
+                <dd>
+                    <div *ngIf="proResponse.requestId">
+                        <a [routerLink]="['/pro-request', proResponse.requestId, 'view']">{{proResponse.requestId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pro-response', proResponse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

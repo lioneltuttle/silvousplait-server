@@ -42,4 +42,8 @@ public interface ProfessionalService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<ProfessionalDTO> findAllFromLocation(Double lat, Double lng);
+
+    List<ProfessionalDTO> findAllFromLocationAndType(Double  lat, Double lng, long type);
 }
