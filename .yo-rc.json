@@ -37,7 +37,7 @@
     "nativeLanguage": "en",
     "languages": ["en"],
     "blueprints": [],
-    "herokuAppName": "silvousplait-server",
-    "herokuDeployType": "git"
+    "herokuDeployType": "git",
+    "herokuAppName": "silvousplait-server"
   }
 }

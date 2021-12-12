@@ -112,4 +112,9 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     public List<ProfessionalDTO> findAllFromLocationAndType(Double lat, Double lng, long type) {
         return professionalRepository.findByLocationAndDistanceAndType(lat, lng, 2, type).stream().map(professionalMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    public List<Long> findIdsFromLocationAndType(Double lat, Double lng, long type) {
+        return professionalRepository.findIdsByLocationAndDistanceAndType(lat, lng, 2, type);
+    }
 }

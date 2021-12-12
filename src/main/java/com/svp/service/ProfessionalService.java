@@ -46,4 +46,6 @@ public interface ProfessionalService {
     List<ProfessionalDTO> findAllFromLocation(Double lat, Double lng);
 
     List<ProfessionalDTO> findAllFromLocationAndType(Double  lat, Double lng, long type);
+
+    List<Long> findIdsFromLocationAndType(Double  lat, Double lng, long type);
 }

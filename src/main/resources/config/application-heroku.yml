@@ -12,7 +12,7 @@
 
 eureka:
   instance:
-    hostname: gamification-server.herokuapp.com
+    hostname: silvousplait-server.herokuapp.com
     non-secure-port: 80
     prefer-ip-address: false
 

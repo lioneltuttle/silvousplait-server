@@ -25,4 +25,7 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
     @Query("SELECT m FROM Professional m WHERE "+HAVERSINE_PART+" < :distance and m.company.companyType.id = :type")
     public List<Professional> findByLocationAndDistanceAndType(@Param("latitude") final double latitude, @Param("longitude") final double longitude, @Param("distance") final double distance, @Param("type") final long type);
 
+    @Query("SELECT m.id FROM Professional m WHERE "+HAVERSINE_PART+" < :distance and m.company.companyType.id = :type")
+    public List<Long> findIdsByLocationAndDistanceAndType(@Param("latitude") final double latitude, @Param("longitude") final double longitude, @Param("distance") final double distance, @Param("type") final long type);
+
 }
