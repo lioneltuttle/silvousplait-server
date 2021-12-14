@@ -206,6 +206,7 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 
 npm i gradle
 #ensuite lancer ca, ca build et ca déploie avec un heroku.yaml
+#mvn package
 jhipster heroku
 
 ####
