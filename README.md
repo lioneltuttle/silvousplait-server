@@ -196,25 +196,38 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [leaflet]: http://leafletjs.com/
 [definitelytyped]: http://definitelytyped.org/
 
-##pour modifier la sécurité (pages sans JWT°): SecurityConfiguration
+#CONF
 
-## h2 db console: http://localhost:8080/h2-console
+###pour modifier la sécurité (pages sans JWT°): SecurityConfiguration
 
-###### pour Heroku:
+### h2 db console: http://localhost:8080/h2-console
 
-# D'abord verifier que graddle est installé
+# pour Heroku:
+
+## D'abord verifier que graddle est installé et heroku cli aussi (autoriser les scripts powershell admin puis set-executionpolicy unrestricted)
 
 npm i gradle
+npm install -g heroku
+heroku plugins:install java
+(
+heroku login
+heroku plugins:install buildpack-registry
+heroku plugins:install buildpacks
+)
+
 #ensuite lancer ca, ca build et ca déploie avec un heroku.yaml
+
+mvn package
 jhipster heroku
 
-####
+#### Si ca ne marche pas, tenter ca:
 
 mvnw package
 heroku deploy:jar -a silvousplait-server -jar target\silvousplait-0.0.1-SNAPSHOT.jar
+
 #et pour les logs:
 heroku logs --tail -a silvousplait-server
 
-#### update entites avec jdl studio
+## update entites avec jdl studio
 
 jhipster import-jdl jhipster-jdl.jdl
