@@ -231,3 +231,5 @@ heroku logs --tail -a silvousplait-server
 ## update entites avec jdl studio
 
 jhipster import-jdl jhipster-jdl.jdl
+
+A tester le vrai deployement
