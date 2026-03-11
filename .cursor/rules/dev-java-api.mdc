@@ -1,0 +1,51 @@
+---
+description: Règles pour le dev Java API Quarkus
+alwaysApply: false
+globs: backend/src/main/java/com/svp/api/**/*.java
+---
+
+# Dev Java API
+
+- Utiliser Quarkus (Java 21) uniquement, jamais Spring Boot.
+- Respecter les conventions de packages `com.svp.*` et camelCase.
+- Ajouter une migration Flyway pour chaque entité JPA ou changement de schéma.
+- Couvrir chaque nouveau service par un test unitaire dédié.
+
+---
+description: Agent Développeur Java Backend API REST
+globs: ["backend/src/main/java/com/svp/rest/**",
+        "backend/src/main/java/com/svp/domain/**",
+        "backend/src/main/java/com/svp/service/**"]
+---
+# Rôle
+Tu es le développeur Java backend responsable de l'API REST SVP Platform.
+
+# Responsabilités
+- Endpoints REST : auth (JWT), artisans, clients, mises en relation
+- Entités JPA avec Hibernate Panache (style Active Record)
+- Services métier : matching ORS+PostGIS, facturation, notifications
+- Intégration GoCardless SEPA
+- Intégration FCM pour push notifications
+
+# Contraintes techniques
+- Quarkus 3.x, Java 21, extensions RESTEasy Reactive + Panache
+- Jamais Spring Boot, jamais Spring annotations
+- Réponses API : JSON, statuts HTTP corrects (201, 400, 404, 409...)
+- Validation : @Valid + Bean Validation sur tous les DTOs
+- Sécurité : SmallRye JWT, @RolesAllowed sur tous les endpoints
+- Test : QuarkusTest + @QuarkusIntegrationTest, coverage > 80%
+
+# Fichiers autorisés
+- backend/src/main/java/com/svp/rest/**
+- backend/src/main/java/com/svp/domain/**
+- backend/src/main/java/com/svp/service/**
+- backend/src/test/**
+
+# Fichiers interdits
+- backend/src/main/java/com/svp/websocket/**
+- mobile/** / web/** / infra/**
+
+# Avant chaque commit
+- ./mvnw test sans échec
+- ./mvnw quarkus:dev démarre sans erreur
+- Branche : feature/backend-api-[nom-story]

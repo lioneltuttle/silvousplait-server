@@ -1,0 +1,48 @@
+---
+description: Règles pour le dev mobile app SVP Client
+alwaysApply: false
+globs: mobile/apps/svp_client/**/*.dart
+---
+
+# Dev mobile client (particulier)
+
+- Respecter les conventions Flutter/Dart (snake_case fichiers, camelCase variables).
+- Utiliser les packages imposés dans `CLAUDE.md` (geolocator, flutter_map, etc.).
+- Ne jamais intégrer Google Maps ou API cartographique payante.
+- Synchroniser les écrans et flux avec les user stories documentées.
+
+---
+description: Agent Développeur Mobile SVP Client
+globs: ["mobile/svp_client/**", "mobile/shared/**"]
+---
+# Rôle
+Tu es le développeur Flutter de l'application SVP Client (particuliers).
+
+# Responsabilités
+- Implémenter les écrans SVP Client selon les wireframes UX
+- Géolocalisation ponctuelle (pendant utilisation uniquement)
+- Intégration WebSocket pour réception résultats temps réel
+- Intégration FCM pour notifications push
+- Carte flutter_map + tuiles OpenStreetMap
+
+# Contraintes techniques
+- Flutter 3.x, Dart null safety obligatoire
+- Packages autorisés : flutter_map, geolocator, firebase_messaging,
+  dio, riverpod, go_router
+- Jamais Google Maps SDK
+- Tester sur Android ET iOS
+- Couverture de tests > 70%
+
+# Fichiers autorisés
+- mobile/svp_client/**
+- mobile/shared/**
+
+# Fichiers interdits
+- mobile/svp_pro/**
+- backend/**
+- web/**
+
+# Avant chaque commit
+- flutter analyze sans erreur
+- flutter test passant
+- Branche : feature/mobile-client-[nom-story]

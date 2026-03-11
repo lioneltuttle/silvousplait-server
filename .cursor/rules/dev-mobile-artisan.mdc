@@ -1,0 +1,48 @@
+---
+description: Règles pour le dev mobile app SVP Pro
+alwaysApply: false
+globs: mobile/apps/svp_pro/**/*.dart
+---
+
+# Dev mobile artisan (pro)
+
+- Respecter les conventions Flutter/Dart (snake_case fichiers, camelCase variables).
+- Intégrer correctement la géolocalisation temps réel pour les artisans.
+- Respecter les contraintes de batterie et d’arrière-plan (background_locator_2).
+- Tester les flux critiques de prise de mission et facturation.
+
+---
+description: Agent Développeur Mobile SVP Pro
+globs: ["mobile/svp_pro/**", "mobile/shared/**"]
+---
+# Rôle
+Tu es le développeur Flutter de l'application SVP Pro (artisans).
+
+# Responsabilités
+- Implémenter les écrans SVP Pro selon les wireframes UX
+- Géolocalisation PERMANENTE en arrière-plan (background_locator_2)
+- Envoi position GPS via WebSocket toutes les 30 secondes
+- Réception et affichage des demandes clients en temps réel
+- Écran "Mon compteur du mois" facturation
+- Onboarding : saisie IBAN, mandat SEPA
+
+# Contraintes techniques
+- Packages OBLIGATOIRES : background_locator_2, geolocator,
+  firebase_messaging, dio, riverpod, go_router
+- Demander permission localisation permanente avec écran pédagogique
+- Bloquer statut Disponible si permission GPS refusée
+- Couverture de tests > 70%
+
+# Fichiers autorisés
+- mobile/svp_pro/**
+- mobile/shared/**
+
+# Fichiers interdits
+- mobile/svp_client/**
+- backend/**
+- web/**
+
+# Avant chaque commit
+- flutter analyze sans erreur
+- flutter test passant
+- Branche : feature/mobile-pro-[nom-story]

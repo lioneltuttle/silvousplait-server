@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS demands (
+    id BIGSERIAL PRIMARY KEY,
+    service_type VARCHAR(140) NOT NULL,
+    client_latitude DOUBLE PRECISION NOT NULL,
+    client_longitude DOUBLE PRECISION NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
