@@ -1,19 +1,11 @@
 ## Blocages
 
-### 2026-03-11 â€” Docker daemon non dÃ©marrÃ©
+*Dernière revue : 2026-03-24.*
 
-- **SymptÃ´me**: `docker compose ... up -d` â†’ `docker daemon is not running` (pipe `//./pipe/docker_engine` introuvable).
-- **Impact**: impossible de valider le `docker-compose` Sprint 0.
-- **Action**: dÃ©marrer Docker Desktop, puis relancer :
+Aucun blocage technique ouvert n’est consigné pour le dépôt à cette date.
 
-```bash
-docker compose -f infra/docker-compose.yml up -d
-docker compose -f infra/docker-compose.yml ps
-```
+Les sujets suivants **ne sont plus des blocages** côté code (contournements ou correctifs en place) :
 
-### 2026-03-11 â€” GitHub CLI non installable (annulation install)
+- Démarrage backend Quarkus : wrapper Maven corrigé (`.mvn/wrapper/maven-wrapper.properties`) et script `backend/run-quarkus-dev.bat` (JDK 21 en priorité).
 
-- **SymptÃ´me**: `winget install GitHub.cli` se termine par `1602 (install cancelled)`.
-- **Impact**: impossible de crÃ©er milestones et issues automatiquement via CLI.
-- **Action**: installer `gh` (UAC Ã  accepter) ou crÃ©er les issues via lâ€™UI GitHub.
-
+Pour toute nouvelle impédance (spec, dépendance, CI, env), documenter ici avec date, symptôme, impact et action / propriétaire.
