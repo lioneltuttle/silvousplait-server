@@ -1,0 +1,22 @@
+{
+  "ors": {
+    "engine": {
+      "profile_default": "driving-car"
+    },
+    "services": {
+      "isochrones": {
+        "enabled": true
+      },
+      "routing": {
+        "enabled": true
+      },
+      "health": {
+        "enabled": true
+      }
+    },
+    "logging": {
+      "level": "INFO"
+    }
+  }
+}
+

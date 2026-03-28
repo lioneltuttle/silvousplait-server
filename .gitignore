@@ -1,3 +1,60 @@
+# ---- Java / Maven / Quarkus ----
+target/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ---- Node / Angular ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+package-lock.json
+dist/
+.angular/
+
+# ---- Flutter / Dart ----
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+build/
+.idea/
+.vscode/
+
+# Flutter generated
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+android/.gradle/
+android/app/build/
+android/local.properties
+
+# ---- General IDE ----
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---- Environment / secrets ----
+.env
+.env.*
+*.keystore
+*.jks
 ######################
 # Project Specific
 ######################

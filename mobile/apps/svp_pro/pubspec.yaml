@@ -1,0 +1,25 @@
+name: svp_pro
+description: Application pro (artisans) pour SVP Platform.
+version: 0.1.0
+publish_to: "none"
+
+resolution: workspace
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  geolocator: ^13.0.0
+  background_locator_2: ^2.0.0
+  flutter_map: ^7.0.0
+  firebase_messaging: ^15.0.0
+  web_socket_channel: ^2.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

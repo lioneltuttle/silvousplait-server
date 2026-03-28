@@ -1,0 +1,23 @@
+name: svp_mobile
+description: Monorepo Flutter pour SVP Platform (apps client et pro).
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+workspace:
+  members:
+    - apps/svp_client
+    - apps/svp_pro
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

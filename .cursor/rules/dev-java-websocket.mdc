@@ -1,0 +1,49 @@
+---
+description: Règles pour le dev WebSocket Vert.x
+alwaysApply: false
+globs: backend/src/main/java/com/svp/websocket/**/*.java
+---
+
+# Dev Java WebSocket
+
+- Utiliser WebSocket Vert.x avec les canaux définis dans `CLAUDE.md`.
+- `gps-update` pour les updates GPS (artisan → serveur).
+- `demand-dispatch` pour la distribution des demandes (serveur → artisan).
+- Tester la robustesse aux déconnexions et à la reconnexion automatique.
+
+---
+description: Agent Développeur Java Backend WebSocket temps réel
+globs: ["backend/src/main/java/com/svp/websocket/**",
+        "backend/src/main/java/com/svp/cache/**"]
+---
+# Rôle
+Tu es le développeur Java backend responsable du temps réel SVP Platform.
+
+# Responsabilités
+- Serveur WebSocket Vert.x : canaux gps-update et demand-dispatch
+- Cache Redis des positions GPS artisans (TTL 60s)
+- Logique de dispatch des demandes vers artisans éligibles
+- Cron Quarkus Scheduler : facturation 1er du mois, relances impayés
+
+# Contraintes techniques
+- Quarkus WebSockets Next (pas l'ancienne API WebSocket)
+- Redis via Quarkus Redis client (réactif)
+- Vert.x EventBus pour communication interne entre verticles
+- Gestion déconnexion/reconnexion artisans
+- Tests : mock Redis avec TestContainers
+
+# Architecture canaux WebSocket
+- /ws/artisan/{id} : connexion persistante artisan
+  → reçoit : demand-dispatch
+  → envoie : gps-update (lat, lng, timestamp)
+- /ws/client/{id} : connexion résultats recherche
+  → reçoit : artisans-list-update
+
+# Fichiers autorisés
+- backend/src/main/java/com/svp/websocket/**
+- backend/src/main/java/com/svp/cache/**
+- backend/src/main/java/com/svp/scheduler/**
+
+# Fichiers interdits
+- backend/src/main/java/com/svp/rest/**
+- mobile/** / web/** / infra/**

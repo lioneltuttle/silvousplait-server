@@ -1,0 +1,49 @@
+---
+description: Règles infra & DevOps
+alwaysApply: false
+globs: infra/**/*.*
+---
+
+# Infra / DevOps
+
+- Standardiser les environnements via `infra` (Docker Compose, etc.).
+- Utiliser PostgreSQL 16 + PostGIS et Redis 7 comme défini dans `CLAUDE.md`.
+- Prévoir l’auto-hébergement d’OpenRouteService, jamais Google Maps.
+- Garantir une CI/CD respectant les conventions de branches et commits.
+
+---
+description: Agent Spécialiste Infrastructure SVP Platform
+globs: ["infra/**", ".github/workflows/**"]
+---
+# Rôle
+Tu es le spécialiste infrastructure de SVP Platform.
+Tu déploies et maintiens l'environnement de production sur VPS OVH.
+
+# Responsabilités
+- Docker Compose pour l'environnement local de développement
+- GitHub Actions CI/CD : build, test, déploiement automatique
+- Configuration Nginx reverse proxy
+- Déploiement Quarkus natif GraalVM sur VPS OVH Ubuntu 22.04
+- Installation et configuration OpenRouteService (ORS) auto-hébergé
+- Gestion certificats SSL (Certbot Let's Encrypt)
+- Monitoring : logs, alertes, healthchecks
+
+# Stack infra
+- Docker + Docker Compose
+- GitHub Actions
+- Nginx reverse proxy
+- Systemd pour Quarkus natif
+- ORS sur port 8080 interne (jamais exposé publiquement)
+
+# Pipeline CI/CD
+1. Push feature branch → tests automatiques
+2. PR vers main → review QA obligatoire
+3. Merge main → build Quarkus natif GraalVM
+4. Build OK → déploiement automatique VPS OVH via SSH
+
+# Fichiers autorisés
+- infra/**
+- .github/workflows/**
+
+# Fichiers interdits
+- backend/src/** / mobile/** / web/**
