@@ -1,6 +1,8 @@
 package com.svp.websocket;
 
 import io.quarkus.logging.Log;
+import io.quarkus.websockets.next.OnClose;
+import io.quarkus.websockets.next.OnOpen;
 import io.quarkus.websockets.next.OnTextMessage;
 import io.quarkus.websockets.next.Session;
 import io.quarkus.websockets.next.WebSocket;
@@ -18,6 +20,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DemandDispatchSocket {
 
     private final Map<String, Session> sessionsById = new ConcurrentHashMap<>();
+
+    @OnOpen
+    public void onOpen(Session session) {
+        Log.infof("demand-dispatch WebSocket ouvert session=%s", session.id());
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        sessionsById.remove(session.id());
+        Log.infof("demand-dispatch WebSocket fermé session=%s", session.id());
+    }
 
     @OnTextMessage
     public void onSubscribe(String payload, Session session) {

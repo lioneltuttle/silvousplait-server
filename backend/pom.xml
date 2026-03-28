@@ -82,6 +82,12 @@
             <artifactId>quarkus-redis-client</artifactId>
         </dependency>
 
+        <!-- Health (/q/health, readiness) -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-health</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>io.quarkus</groupId>

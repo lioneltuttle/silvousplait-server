@@ -44,6 +44,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
           <strong>Disponible</strong> tant que les informations ne sont pas complètes.
         </p>
       </section>
+
+      <section class="card">
+        <h2>Back-office — factures &amp; litiges (aperçu)</h2>
+        <p>Consultation des factures mensuelles et des litiges ouverts (maquette S3-4).</p>
+        <ul class="bo-list">
+          <li>Facture 2026-03 — 45,00 € HT — <span class="tag">Payée</span></li>
+          <li>Litige #12 — contestation montant — <span class="tag tag-warn">En cours</span></li>
+        </ul>
+        <p class="hint">Branchement API facturation / litiges prévu au sprint suivant.</p>
+      </section>
     </main>
   `,
   styles: [
@@ -51,9 +61,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
       .shell {
         min-height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         padding: 2rem;
+        gap: 1.5rem;
         background: #f3f4f6;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
           sans-serif;
@@ -137,6 +149,24 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
         margin-top: 1.25rem;
         font-size: 0.85rem;
         color: #4b5563;
+      }
+
+      .bo-list {
+        margin: 0.5rem 0 0;
+        padding-left: 1.25rem;
+      }
+
+      .tag {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.45rem;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .tag-warn {
+        background: #fef3c7;
+        color: #92400e;
       }
     `,
   ],

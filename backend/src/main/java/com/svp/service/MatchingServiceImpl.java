@@ -1,7 +1,7 @@
 package com.svp.service;
 
-import com.svp.domain.Demand;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,11 +10,24 @@ import java.util.List;
 @ApplicationScoped
 public class MatchingServiceImpl implements MatchingService {
 
+    @Inject
+    IsochroneProvider isochroneProvider;
+
+    @Inject
+    SpatialProfessionalRepository spatialProfessionalRepository;
+
     @Override
     public List<MatchedArtisan> findAndRankForDemand(Demand demand) {
-        // Sprint 1 : implémentation minimale, sans appel réel ORS/PostGIS.
-        // Cette méthode sera branchée plus tard sur la base artisans + ORS.
-        return List.of();
+        String wkt = isochroneProvider.buildIsochronePolygonWkt(
+                demand.getClientLongitude(),
+                demand.getClientLatitude());
+        List<SpatialProfessionalRepository.CandidateRow> candidates = spatialProfessionalRepository
+                .findAvailableInPolygon(demand.getServiceType(), wkt, demand.getClientLongitude(), demand.getClientLatitude());
+        if (candidates.isEmpty()) {
+            return List.of();
+        }
+        double maxDist = candidates.stream().mapToDouble(SpatialProfessionalRepository.CandidateRow::distanceMeters).max().orElse(1.0);
+        return MatchingRanker.rankCandidates(candidates, maxDist);
     }
 
     /**
@@ -39,14 +52,5 @@ public class MatchingServiceImpl implements MatchingService {
         return copy;
     }
 
-    private double clamp(double value) {
-        if (value < 0.0) {
-            return 0.0;
-        }
-        if (value > 1.0) {
-            return 1.0;
-        }
-        return value;
-    }
 }
 

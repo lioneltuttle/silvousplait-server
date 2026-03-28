@@ -1,10 +1,13 @@
 package com.svp.api;
 
 import com.svp.domain.Demand;
-import com.svp.domain.DemandRepository;
+import com.svp.infra.persistence.DemandRepository;
+import com.svp.infra.persistence.FcmTokenRepository;
+import com.svp.notification.PushNotificationService;
 import com.svp.service.MatchingService;
 import com.svp.websocket.DemandDispatchSocket;
 import jakarta.inject.Inject;
+import org.jboss.logging.Logger;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +23,8 @@ import jakarta.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class DemandResource {
 
+    private static final Logger LOG = Logger.getLogger(DemandResource.class);
+
     @Inject
     DemandRepository demandRepository;
 
@@ -28,6 +33,12 @@ public class DemandResource {
 
     @Inject
     DemandDispatchSocket demandDispatchSocket;
+
+    @Inject
+    FcmTokenRepository fcmTokenRepository;
+
+    @Inject
+    PushNotificationService pushNotificationService;
 
     public record DemandRequest(
             @NotBlank String serviceType,
@@ -49,6 +60,8 @@ public class DemandResource {
 
         demandRepository.persist(demand);
 
+        LOG.infof("Dispatch démarré pour la demande id=%d (service=%s)", demand.getId(), demand.getServiceType());
+
         // Déclenchement du matching (pour l'instant, implémentation minimale).
         var matched = matchingService.findAndRankForDemand(demand);
 
@@ -57,6 +70,13 @@ public class DemandResource {
             String message = "Nouvelle demande: %s (#%d)".formatted(demand.getServiceType(), demand.getId());
             demandDispatchSocket.sendDemandToAll(message);
         }
+
+        fcmTokenRepository.listAll().stream()
+                .findFirst()
+                .ifPresent(t -> pushNotificationService.sendToToken(
+                        t.getToken(),
+                        "Nouvelle demande SVP",
+                        demand.getServiceType() + " (#" + demand.getId() + ")"));
 
         return Response
                 .status(Response.Status.CREATED)

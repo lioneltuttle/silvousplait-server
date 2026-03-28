@@ -22,7 +22,7 @@ class SvpProApp extends StatelessWidget {
 }
 
 class _AvailabilityPage extends StatefulWidget {
-  const _AvailabilityPage({super.key});
+  const _AvailabilityPage();
 
   @override
   State<_AvailabilityPage> createState() => _AvailabilityPageState();
@@ -139,6 +139,18 @@ class _AvailabilityPageState extends State<_AvailabilityPage> {
             Card(
               child: ListTile(
                 title: Text(_lastDemand ?? 'Aucune demande pour le moment'),
+                subtitle: _lastDemand != null
+                    ? const Text('Appuyez pour le détail')
+                    : null,
+                onTap: _lastDemand == null
+                    ? null
+                    : () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => _DemandDetailPage(raw: _lastDemand!),
+                          ),
+                        );
+                      },
               ),
             ),
           ],
@@ -148,8 +160,47 @@ class _AvailabilityPageState extends State<_AvailabilityPage> {
   }
 }
 
+class _DemandDetailPage extends StatelessWidget {
+  const _DemandDetailPage({required this.raw});
+
+  final String raw;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Détail demande'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Message reçu',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            SelectableText(raw),
+            const SizedBox(height: 24),
+            Text(
+              'Informations (Sprint 1)',
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Type de prestation et zone : extrait du message dispatché par le backend. '
+              'Les flux WebSocket / FCM complets arriveront aux sprints suivants.',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _MonthlyCounterPage extends StatelessWidget {
-  const _MonthlyCounterPage({super.key});
+  const _MonthlyCounterPage();
 
   @override
   Widget build(BuildContext context) {

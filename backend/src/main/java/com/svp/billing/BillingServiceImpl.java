@@ -1,5 +1,6 @@
 package com.svp.billing;
 
+import com.svp.infra.persistence.BillingInteractionRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

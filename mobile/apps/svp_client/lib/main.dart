@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() {
   runApp(const SvpClientApp());
@@ -22,7 +25,7 @@ class SvpClientApp extends StatelessWidget {
 }
 
 class _SearchPage extends StatefulWidget {
-  const _SearchPage({super.key});
+  const _SearchPage();
 
   @override
   State<_SearchPage> createState() => _SearchPageState();
@@ -40,14 +43,49 @@ class _SearchPageState extends State<_SearchPage> {
     ),
   );
 
+  final MapController _mapController = MapController();
+
   bool _loading = false;
   final List<String> _results = <String>[];
+  double? _lat;
+  double? _lon;
+
+  static const double _defaultLat = 48.8566;
+  static const double _defaultLon = 2.3522;
 
   @override
   void dispose() {
     _serviceController.dispose();
     _addressController.dispose();
     super.dispose();
+  }
+
+  Future<void> _useGps() async {
+    var perm = await Geolocator.checkPermission();
+    if (perm == LocationPermission.denied) {
+      perm = await Geolocator.requestPermission();
+    }
+    if (perm == LocationPermission.deniedForever || perm == LocationPermission.denied) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Permission de localisation refusée.')),
+      );
+      return;
+    }
+    final pos = await Geolocator.getCurrentPosition();
+    setState(() {
+      _lat = pos.latitude;
+      _lon = pos.longitude;
+    });
+    _mapController.move(LatLng(pos.latitude, pos.longitude), 14);
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Position GPS appliquée sur la carte.')),
+    );
   }
 
   Future<void> _onLaunchSearch() async {
@@ -59,19 +97,21 @@ class _SearchPageState extends State<_SearchPage> {
       return;
     }
 
+    final lat = _lat ?? _defaultLat;
+    final lon = _lon ?? _defaultLon;
+
     setState(() {
       _loading = true;
       _results.clear();
     });
 
     try {
-      // TODO: remplacer les coordonnées statiques par la vraie position (geolocator).
       final response = await _dio.post<Map<String, dynamic>>(
         '/api/demands',
         data: <String, dynamic>{
           'serviceType': service,
-          'clientLatitude': 48.8566,
-          'clientLongitude': 2.3522,
+          'clientLatitude': lat,
+          'clientLongitude': lon,
         },
       );
 
@@ -80,7 +120,6 @@ class _SearchPageState extends State<_SearchPage> {
         SnackBar(content: Text('Demande envoyée (id=$id)')),
       );
 
-      // Simulation d'arrivée progressive des artisans pendant 60s.
       _simulateResults(service);
     } on DioException catch (e) {
       final status = e.response?.statusCode;
@@ -106,8 +145,23 @@ class _SearchPageState extends State<_SearchPage> {
     }
   }
 
+  Future<void> _simulateResults(String service) async {
+    const artisans = <String>['Artisan proximité A', 'Artisan proximité B', 'Artisan proximité C'];
+    for (final name in artisans) {
+      await Future<void>.delayed(const Duration(seconds: 2));
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _results.add('$name — $service');
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final center = LatLng(_lat ?? _defaultLat, _lon ?? _defaultLon);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('SVP Client'),
@@ -141,18 +195,40 @@ class _SearchPageState extends State<_SearchPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                onPressed: () {
-                  // TODO: intégration geolocator pour récupérer la position GPS ponctuelle.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Récupération de la position (mock pour l’instant)'),
-                    ),
-                  );
-                },
+                onPressed: _loading ? null : _useGps,
                 child: const Text('Utiliser ma position actuelle'),
               ),
             ),
-            const Spacer(),
+            SizedBox(
+              height: 180,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    initialCenter: center,
+                    initialZoom: 13,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.svp.client',
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          width: 40,
+                          height: 40,
+                          point: center,
+                          child: const Icon(Icons.location_pin, color: Colors.red, size: 40),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
                 itemCount: _results.length,
@@ -183,5 +259,3 @@ class _SearchPageState extends State<_SearchPage> {
     );
   }
 }
-
-
